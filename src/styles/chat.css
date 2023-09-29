@@ -1,0 +1,27 @@
+li {
+    margin-bottom: 1rem;
+    &.message-user {
+        position: relative;
+        text-align: right;
+        background: #60739f;
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 1rem;
+        border-bottom-right-radius: 0;
+        width: fit-content;
+        max-width: 80%;
+        margin-left: auto;
+    }
+
+    &.message-bot {
+        position: relative;
+        text-align: left;
+        background: #e5e5e5;
+        padding: 0.5rem 1rem;
+        border-radius: 1rem;
+        border-bottom-left-radius: 0;
+        width: fit-content;
+        max-width: 80%;
+        margin-right: auto;
+    }
+}

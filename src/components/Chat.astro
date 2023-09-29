@@ -1,191 +1,223 @@
 ---
-
+import "@styles/chat.css"
 ---
 
-<section id="chat">
+<button id="chat-toggle" class="btn btn-primary">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
+    </svg>
+</button>
 
-    <div id="chat-button">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#fff" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-    </div>
+<section id="chat" data-active="false">
+    <header>
+        <h2>Recipe Assistant</h2>
+    </header>
 
-    <div id="chat-window" data-state="closed">
-        <div id="chat-window-history">
-            <!-- Inject history -->
-        </div>
+    <div id="chat-window">
+        <ul id="chat-window-history">
+            <!-- <li class="message-user">
+                Hello!
+            </li>
+            <li class="message-bot">
+                Hello World!
+            </li> -->
+        </ul>
 
-        <div class="container">
-            <div id="chat-window-input">
-                <input type="text" id="chat-window-input-text" placeholder="Type your message here...">
-                <button id="chat-window-input-send">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="#60739f" viewBox="0 0 24 24" stroke-width="1.5" stroke="#fff" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
-                    </svg>
-                </button>
-            </div>
+        <div id="chat-window-input">
+            <input type="text" placeholder="Type your message here..." />
+            <button id="chat-window-send">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+                </svg>
+            </button>
         </div>
     </div>
 
 </section>
 
-<script>
-
-    // Handle chat window
-    const chat = document.getElementById('chat') || null;
-    const chatWindow = document.getElementById('chat-window') || null;
-    const chatWindowClose = document.getElementById('chat-window-close') || null;
-    const chatWindowInput = document.getElementById('chat-window-input') || null;
-    const chatWindowInputText = document.getElementById('chat-window-input-text') || null;
-    const chatWindowInputSend = document.getElementById('chat-window-input-send') || null;
-    const chatWindowHistory = document.getElementById('chat-window-history') || null;
-
-    // Handle chat window input
-    if (chatWindowInput && chatWindowInputText && chatWindowInputSend) {
-        chatWindowInputText.addEventListener('keyup', (e) => {
-            if (e.keyCode === 13) {
-                chatWindowInputSend.click();
-            }
-        });
-        chatWindowInputSend.addEventListener('click', () => {
-            const messageInput = chatWindowInputText as HTMLInputElement;
-            const message = messageInput.value;
-            if (message) {
-                const messageElement = document.createElement('div');
-                messageElement.classList.add('message');
-                messageElement.classList.add('message-sent');
-                messageElement.innerHTML = `
-                    <div class="message-content">
-                        <div class="message-text">${message}</div>
-                    </div>
-                `;
-
-                chatWindowHistory ? chatWindowHistory.appendChild(messageElement) : console.error('chatWindowHistory is null');
-                messageInput.value = '';
-            }
-        });
-    }
-
-    // Handle chat window open/close (use data attribute to toggle)
-    if (chat && chatWindow) {
-        chat.addEventListener('click', () => {
-            const state = chatWindow.dataset.state;
-            if (state === 'closed') {
-                chatWindow.dataset.state = 'open';
-            } else {
-                chatWindow.dataset.state = 'closed';
-            }
-        });
-    }
-</script>
-
 <style lang="scss" scoped>
 
     #chat {
         position: fixed;
-        bottom: calc(1rem + 5px);
-        right: calc(1rem + 5px);
-        width: 50px;
-        height: 50px;
+        bottom: calc(2rem + 60px);
+        right: 1rem;
+        min-width: 420px;
+        width: 33vw;
+        border-radius: 1rem;
         background-color: #60739f;
-        border: 1px solid #ccc;
-        border-radius: 0.5rem;
-        box-shadow: 0 0 5px #ccc;
-        cursor: pointer;
-        display: grid;
-        place-items: center;
-        z-index: 100;
-
-        &-close {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 45px;
-            height: 45px;
-            background: #60739f;
-            border-radius: 0.5rem;
-            margin: 0.5rem;
-            display: grid;
-            place-items: center;
-            cursor: pointer;
-            border: 2px solid white;
-            z-index: 1;
+        box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+        transition: all 0.3s ease-in-out;
+        &[data-active="false"] {
+            transform: translateY(100%);
+            opacity: 0;
+            pointer-events: none;
         }
 
-        .container {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            height: 60px;
-            background-color: #60739f;
-            z-index: 0;
-            border-bottom-left-radius: 0.5rem;
-            border-bottom-right-radius: 0.5rem;
-            box-shadow: 0 0 5px #ccc;
+        &[data-active="true"] {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
         }
 
-        &-window {
-            display: none;
-
+        &-toggle {
             position: fixed;
             bottom: 1rem;
             right: 1rem;
-            width: 33vw;
-            height: calc(90vh - 0.5rem);
+            height: 60px;
+            width: 60px;
+            border-radius: 100%;
+            display: grid;
+            place-items: center;
+            background-color: #60739f;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease-in-out;
+            &:hover {
+                opacity: 0.8;
+            }
+        }
+
+        header {
+            padding: 1rem 0;
+            background-color: #60739f;
+            border-top-left-radius: 1rem;
+            border-top-right-radius: 1rem;
+            font-weight: bold;
+            text-align: center;
+            display: grid;
+            place-items: center;
+            h2 {
+                font-size: 1.3rem;
+                color: white;
+                margin: 0;
+            }
+        }
+
+        &-window {
+            height: calc(80vh - 4rem);
             background: #fff;
-            border-radius: 0.5rem;
-            box-shadow: 0 0 5px #ccc;
-            transform: all 0.5s ease-in-out;
-            z-index: 101;
+            padding: 1rem;
 
             &-history {
+                list-style: none;
+                padding: 0;
+                margin: 0;
                 height: calc(100% - 3rem);
-                padding: 1rem;
-                box-sizing: border-box;
+                overflow-y: scroll;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+                &::-webkit-scrollbar {
+                    width: 0;
+                    height: 0;
+                }
+                li {
+                    margin-bottom: 1rem;
+                    &.message-user {
+                        position: relative;
+                        text-align: right;
+                        background: #60739f;
+                        color: white;
+                        padding: 0.5rem 1rem;
+                        border-radius: 1rem;
+                        border-bottom-right-radius: 0;
+                        width: fit-content;
+                        max-width: 80%;
+                        margin-left: auto;
+                    }
+
+                    &.message-bot {
+                        position: relative;
+                        text-align: left;
+                        background: #e5e5e5;
+                        padding: 0.5rem 1rem;
+                        border-radius: 1rem;
+                        border-bottom-left-radius: 0;
+                        width: fit-content;
+                        max-width: 80%;
+                        margin-right: auto;
+                    }
+                }
             }
 
             &-input {
-                position: absolute;
-                bottom: 0;
-                width: calc(100% - 55px);
-                height: 60px;
-                padding: 0.5rem;
-                box-sizing: border-box;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                background: #60739f;
-                border-radius: 0.5rem;
-                border-top-left-radius: 0;
-                border-top-right-radius: 0;
-
-                &-text {
-                    width: 100%;
-                    height: 100%;
+                input {
+                    flex: 1;
+                    padding: 0.5rem 0.75rem;
+                    border: 1px solid #ccc;
                     border-radius: 0.5rem;
-                    padding: 0.5rem;
-                    box-sizing: border-box;
+                    margin-right: 1rem;
                     font-size: 1rem;
-                    border-top-right-radius: 0;
-                    border-bottom-right-radius: 0;
-                    outline: none;
-                    border: none;
                 }
-
-                &-send {
-                    height: 100%;
-                    padding: 0.5rem;
-                    box-sizing: border-box;
-                    font-size: 1rem;
+                button {
+                    padding: 0.5rem 0.75rem;
+                    border-radius: 0.5rem;
+                    border: none;
+                    background-color: #60739f;
+                    color: white;
+                    font-weight: bold;
                     cursor: pointer;
-                    border-radius: 0;
-                    border-top-right-radius: 0.5rem;
-                    border-bottom-right-radius: 0.5rem;
-                    background: #fff;
                 }
             }
+
         }
     }
 
 </style>
+
+<script>
+    const chat = document.querySelector('#chat') as HTMLDivElement;
+    const chatToggle = document.querySelector('#chat-toggle') as HTMLButtonElement;
+    const chatWindow = document.querySelector('#chat-window') as HTMLDivElement;
+    const chatWindowHistory = document.querySelector('#chat-window-history') as HTMLUListElement;
+    const chatWindowInput = document.querySelector('#chat-window-input') as HTMLDivElement;
+    const chatWindowSend = document.querySelector('#chat-window-send') as HTMLButtonElement;
+    const chatWindowInputText = document.querySelector('#chat-window-input input') as HTMLInputElement;
+
+    // Handle toggle chat
+    if(chatToggle && chat) {
+        chatToggle.addEventListener('click', () => {
+            const active = chat.getAttribute('data-active');
+            active === 'true' ? chat.setAttribute('data-active', 'false') : chat.setAttribute('data-active', 'true');
+        });
+    }
+
+    // Handle send message
+    if(chatWindowSend && chatWindowInputText && chatWindowHistory) {
+        chatWindowSend.addEventListener('click', () => {
+            const message = chatWindowInputText.value;
+            if (message) {
+
+                // Send message to bot
+                chatWindowHistory.innerHTML += `
+                    <li class="message-user">
+                        ${message}
+                    </li>
+                `;
+                chatWindowInputText.value = '';
+            }
+        });
+
+        chatWindowInputText.addEventListener('keyup', (e) => {
+            if (e.key === 'Enter') {
+                const message = chatWindowInputText.value;
+                if (message) {
+                    chatWindowHistory.innerHTML += `
+                        <li class="message-user">
+                            ${message}
+                        </li>
+                    `;
+                    chatWindowInputText.value = '';
+                }
+            }
+        });
+    }
+</script>
 
