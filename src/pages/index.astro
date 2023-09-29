@@ -1,0 +1,26 @@
+---
+import BaseHead from '@components/BaseHead.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+import Chat from '@components/Chat.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header title={SITE_TITLE} />
+		<main>
+			<h1>Hello!</h1>
+			<p>
+				Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolore, facere similique itaque modi sed adipisci recusandae asperiores voluptatum excepturi, iste sint fugiat, cum harum esse eos beatae possimus vero temporibus. Ut modi reprehenderit voluptatum officia! Consectetur aliquam corporis sunt necessitatibus unde ex officiis, eius eveniet at reiciendis, dolorum et velit?
+			</p>
+
+			<Chat />
+		</main>
+		<Footer />
+	</body>
+</html>

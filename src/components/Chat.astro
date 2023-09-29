@@ -1,0 +1,191 @@
+---
+
+---
+
+<section id="chat">
+
+    <div id="chat-button">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#fff" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+    </div>
+
+    <div id="chat-window" data-state="closed">
+        <div id="chat-window-history">
+            <!-- Inject history -->
+        </div>
+
+        <div class="container">
+            <div id="chat-window-input">
+                <input type="text" id="chat-window-input-text" placeholder="Type your message here...">
+                <button id="chat-window-input-send">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="#60739f" viewBox="0 0 24 24" stroke-width="1.5" stroke="#fff" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<script>
+
+    // Handle chat window
+    const chat = document.getElementById('chat') || null;
+    const chatWindow = document.getElementById('chat-window') || null;
+    const chatWindowClose = document.getElementById('chat-window-close') || null;
+    const chatWindowInput = document.getElementById('chat-window-input') || null;
+    const chatWindowInputText = document.getElementById('chat-window-input-text') || null;
+    const chatWindowInputSend = document.getElementById('chat-window-input-send') || null;
+    const chatWindowHistory = document.getElementById('chat-window-history') || null;
+
+    // Handle chat window input
+    if (chatWindowInput && chatWindowInputText && chatWindowInputSend) {
+        chatWindowInputText.addEventListener('keyup', (e) => {
+            if (e.keyCode === 13) {
+                chatWindowInputSend.click();
+            }
+        });
+        chatWindowInputSend.addEventListener('click', () => {
+            const messageInput = chatWindowInputText as HTMLInputElement;
+            const message = messageInput.value;
+            if (message) {
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('message');
+                messageElement.classList.add('message-sent');
+                messageElement.innerHTML = `
+                    <div class="message-content">
+                        <div class="message-text">${message}</div>
+                    </div>
+                `;
+
+                chatWindowHistory ? chatWindowHistory.appendChild(messageElement) : console.error('chatWindowHistory is null');
+                messageInput.value = '';
+            }
+        });
+    }
+
+    // Handle chat window open/close (use data attribute to toggle)
+    if (chat && chatWindow) {
+        chat.addEventListener('click', () => {
+            const state = chatWindow.dataset.state;
+            if (state === 'closed') {
+                chatWindow.dataset.state = 'open';
+            } else {
+                chatWindow.dataset.state = 'closed';
+            }
+        });
+    }
+</script>
+
+<style lang="scss" scoped>
+
+    #chat {
+        position: fixed;
+        bottom: calc(1rem + 5px);
+        right: calc(1rem + 5px);
+        width: 50px;
+        height: 50px;
+        background-color: #60739f;
+        border: 1px solid #ccc;
+        border-radius: 0.5rem;
+        box-shadow: 0 0 5px #ccc;
+        cursor: pointer;
+        display: grid;
+        place-items: center;
+        z-index: 100;
+
+        &-close {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 45px;
+            height: 45px;
+            background: #60739f;
+            border-radius: 0.5rem;
+            margin: 0.5rem;
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+            border: 2px solid white;
+            z-index: 1;
+        }
+
+        .container {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 60px;
+            background-color: #60739f;
+            z-index: 0;
+            border-bottom-left-radius: 0.5rem;
+            border-bottom-right-radius: 0.5rem;
+            box-shadow: 0 0 5px #ccc;
+        }
+
+        &-window {
+            display: none;
+
+            position: fixed;
+            bottom: 1rem;
+            right: 1rem;
+            width: 33vw;
+            height: calc(90vh - 0.5rem);
+            background: #fff;
+            border-radius: 0.5rem;
+            box-shadow: 0 0 5px #ccc;
+            transform: all 0.5s ease-in-out;
+            z-index: 101;
+
+            &-history {
+                height: calc(100% - 3rem);
+                padding: 1rem;
+                box-sizing: border-box;
+            }
+
+            &-input {
+                position: absolute;
+                bottom: 0;
+                width: calc(100% - 55px);
+                height: 60px;
+                padding: 0.5rem;
+                box-sizing: border-box;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background: #60739f;
+                border-radius: 0.5rem;
+                border-top-left-radius: 0;
+                border-top-right-radius: 0;
+
+                &-text {
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 0.5rem;
+                    padding: 0.5rem;
+                    box-sizing: border-box;
+                    font-size: 1rem;
+                    border-top-right-radius: 0;
+                    border-bottom-right-radius: 0;
+                    outline: none;
+                    border: none;
+                }
+
+                &-send {
+                    height: 100%;
+                    padding: 0.5rem;
+                    box-sizing: border-box;
+                    font-size: 1rem;
+                    cursor: pointer;
+                    border-radius: 0;
+                    border-top-right-radius: 0.5rem;
+                    border-bottom-right-radius: 0.5rem;
+                    background: #fff;
+                }
+            }
+        }
+    }
+
+</style>
+
