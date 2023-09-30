@@ -15,12 +15,10 @@ import "@styles/chat.css"
 
     <div id="chat-window">
         <ul id="chat-window-history">
-            <!-- <li class="message-user">
-                Hello!
-            </li>
+            <!-- Fill -->
             <li class="message-bot">
-                Hello World!
-            </li> -->
+                Hello, I'm your recipe assistant. How can I help you?
+            </li>
         </ul>
 
         <div id="chat-window-input">
@@ -102,44 +100,25 @@ import "@styles/chat.css"
             height: calc(80vh - 4rem);
             background: #fff;
             padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
 
             &-history {
                 list-style: none;
                 padding: 0;
                 margin: 0;
-                height: calc(100% - 3rem);
+                height: calc(100% - 3.75rem);
+                border-radius: 0.5rem;
                 overflow-y: scroll;
-                scrollbar-width: none;
-                -ms-overflow-style: none;
                 &::-webkit-scrollbar {
-                    width: 0;
-                    height: 0;
-                }
-                li {
-                    margin-bottom: 1rem;
-                    &.message-user {
-                        position: relative;
-                        text-align: right;
+                    width: 8px;
+                    height: 90%;
+                    border-radius: 1rem;
+                    background: #e9e9e9;
+                    &-thumb {
                         background: #60739f;
-                        color: white;
-                        padding: 0.5rem 1rem;
                         border-radius: 1rem;
-                        border-bottom-right-radius: 0;
-                        width: fit-content;
-                        max-width: 80%;
-                        margin-left: auto;
-                    }
-
-                    &.message-bot {
-                        position: relative;
-                        text-align: left;
-                        background: #e5e5e5;
-                        padding: 0.5rem 1rem;
-                        border-radius: 1rem;
-                        border-bottom-left-radius: 0;
-                        width: fit-content;
-                        max-width: 80%;
-                        margin-right: auto;
                     }
                 }
             }
@@ -173,6 +152,8 @@ import "@styles/chat.css"
 </style>
 
 <script>
+    import OpenAI from 'openai';
+
     const chat = document.querySelector('#chat') as HTMLDivElement;
     const chatToggle = document.querySelector('#chat-toggle') as HTMLButtonElement;
     const chatWindow = document.querySelector('#chat-window') as HTMLDivElement;
@@ -180,6 +161,86 @@ import "@styles/chat.css"
     const chatWindowInput = document.querySelector('#chat-window-input') as HTMLDivElement;
     const chatWindowSend = document.querySelector('#chat-window-send') as HTMLButtonElement;
     const chatWindowInputText = document.querySelector('#chat-window-input input') as HTMLInputElement;
+
+    // Handle send message
+    const handleSendMessage = async() => {
+        const message = chatWindowInputText.value;
+        if (message) {
+
+            // Send message to bot
+            chatWindowHistory.innerHTML += `
+                <li class="message-user">
+                    ${message}
+                </li>
+            `;
+            chatWindowInputText.value = '';
+            chatWindowInputText.setAttribute('disabled', 'true');
+
+            // Create a loading message
+            const loadingMessage = document.createElement('li');
+            loadingMessage.classList.add('message-bot');
+            loadingMessage.innerHTML = `
+                <div class="loading">
+                    <div class="loading-dot"></div>
+                    <div class="loading-dot"></div>
+                    <div class="loading-dot"></div>
+                </div>
+            `;
+            chatWindowHistory.appendChild(loadingMessage);
+
+            // Handle response
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    loadingMessage.remove();
+                    chatWindowInputText.removeAttribute('disabled');
+                    resolve(handleResponse().then((response) => {
+                        chatWindowHistory.innerHTML += `
+                            <li class="message-bot">
+                                ${response}
+                            </li>
+                        `;
+                    }));
+                }, 1000);
+            });
+
+        }
+    }
+
+    // Handle chat response
+    const handleResponse = async() => {
+        const openai = new OpenAI({
+            apiKey: import.meta.env.PUBLIC_OPENAI,
+            dangerouslyAllowBrowser: true
+        })
+
+        // Get all messages in history
+        const messages = chatWindowHistory.querySelectorAll('li') as NodeListOf<HTMLLIElement>;
+        const messagesList = [] as any;
+
+        // Loop through messages and add to list
+        messages.forEach((message) => {
+            messagesList.push({
+                role: message.classList.contains('message-user') ? 'user' : 'assistant',
+                content: message.innerText
+            });
+        });
+
+        const response = await openai.chat.completions.create({
+            model: 'gpt-3.5-turbo',
+            messages: [
+                {
+                    role: 'system',
+                    content: 'The following is a conversation with an AI assistant. The assistant is an expert cook with 15 years of experience and won multiple awards internationally. The assistant is helpful, creative, clever, and very friendly.'
+                },
+                ...messagesList
+            ],
+            max_tokens: 100,
+        });
+
+        console.log(response.choices[0].message.content);
+        const responseMessage = response.choices[0].message.content;
+        return responseMessage;
+    }
 
     // Handle toggle chat
     if(chatToggle && chat) {
@@ -192,32 +253,15 @@ import "@styles/chat.css"
     // Handle send message
     if(chatWindowSend && chatWindowInputText && chatWindowHistory) {
         chatWindowSend.addEventListener('click', () => {
-            const message = chatWindowInputText.value;
-            if (message) {
-
-                // Send message to bot
-                chatWindowHistory.innerHTML += `
-                    <li class="message-user">
-                        ${message}
-                    </li>
-                `;
-                chatWindowInputText.value = '';
-            }
+            handleSendMessage();
         });
 
         chatWindowInputText.addEventListener('keyup', (e) => {
             if (e.key === 'Enter') {
-                const message = chatWindowInputText.value;
-                if (message) {
-                    chatWindowHistory.innerHTML += `
-                        <li class="message-user">
-                            ${message}
-                        </li>
-                    `;
-                    chatWindowInputText.value = '';
-                }
+                handleSendMessage();
             }
         });
     }
+
 </script>
 

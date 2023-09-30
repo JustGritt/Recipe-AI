@@ -1,27 +1,63 @@
-li {
-    margin-bottom: 1rem;
-    &.message-user {
-        position: relative;
-        text-align: right;
-        background: #60739f;
-        color: white;
-        padding: 0.5rem 1rem;
-        border-radius: 1rem;
-        border-bottom-right-radius: 0;
-        width: fit-content;
-        max-width: 80%;
-        margin-left: auto;
-    }
+#chat li {
+    list-style: none;
+    margin: 1rem 0;
+}
 
-    &.message-bot {
-        position: relative;
-        text-align: left;
-        background: #e5e5e5;
-        padding: 0.5rem 1rem;
-        border-radius: 1rem;
-        border-bottom-left-radius: 0;
-        width: fit-content;
-        max-width: 80%;
-        margin-right: auto;
+#chat .message-user {
+    position: relative;
+    text-align: right;
+    background: #60739f;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    border-bottom-right-radius: 0;
+    width: fit-content;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: 0.5rem;
+    color: white;
+}
+
+#chat .message-bot {
+    position: relative;
+    text-align: left;
+    background: #e5e5e5;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    border-bottom-left-radius: 0;
+    width: fit-content;
+    max-width: 80%;
+    margin-right: auto;
+}
+
+/* Create an animation for loading dots */
+.loading-dot {
+    width: .5rem;
+    height: .5rem;
+    background: #60739f;
+    border-radius: 50%;
+    display: inline-block;
+
+    animation: loading 1.5s infinite;
+    animation-delay: 0.1s;
+}
+
+.loading-dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.loading-dot:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+/* Animation of loading dots */
+@keyframes loading {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-0.5rem);
+    }
+    100% {
+        transform: translateY(0);
     }
 }
