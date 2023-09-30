@@ -152,8 +152,6 @@ import "@styles/chat.css"
 </style>
 
 <script>
-    import OpenAI from 'openai';
-
     const chat = document.querySelector('#chat') as HTMLDivElement;
     const chatToggle = document.querySelector('#chat-toggle') as HTMLButtonElement;
     const chatWindow = document.querySelector('#chat-window') as HTMLDivElement;
@@ -162,30 +160,40 @@ import "@styles/chat.css"
     const chatWindowSend = document.querySelector('#chat-window-send') as HTMLButtonElement;
     const chatWindowInputText = document.querySelector('#chat-window-input input') as HTMLInputElement;
 
+    // Create message
+    const createMessage = (role: string, content: string) => {
+        const message = document.createElement('li');
+        message.classList.add(`message-${role}`);
+        message.innerText = content;
+        return message;
+    }
+
+    // Create loading message
+    const createLoadingMessage = () => {
+        const loadingMessage = document.createElement('li');
+        loadingMessage.classList.add('message-bot');
+        loadingMessage.innerHTML = `
+            <div class="loading">
+                <div class="loading-dot"></div>
+                <div class="loading-dot"></div>
+                <div class="loading-dot"></div>
+            </div>
+        `;
+        return loadingMessage;
+    }
+
     // Handle send message
     const handleSendMessage = async() => {
         const message = chatWindowInputText.value;
         if (message) {
 
-            // Send message to bot
-            chatWindowHistory.innerHTML += `
-                <li class="message-user">
-                    ${message}
-                </li>
-            `;
+            // Add message to history
+            chatWindowHistory.appendChild(createMessage('user', message));
             chatWindowInputText.value = '';
             chatWindowInputText.setAttribute('disabled', 'true');
 
             // Create a loading message
-            const loadingMessage = document.createElement('li');
-            loadingMessage.classList.add('message-bot');
-            loadingMessage.innerHTML = `
-                <div class="loading">
-                    <div class="loading-dot"></div>
-                    <div class="loading-dot"></div>
-                    <div class="loading-dot"></div>
-                </div>
-            `;
+            const loadingMessage = createLoadingMessage();
             chatWindowHistory.appendChild(loadingMessage);
 
             // Handle response
@@ -194,24 +202,19 @@ import "@styles/chat.css"
                     loadingMessage.remove();
                     chatWindowInputText.removeAttribute('disabled');
                     resolve(handleResponse().then((response) => {
-                        chatWindowHistory.innerHTML += `
-                            <li class="message-bot">
-                                ${response}
-                            </li>
-                        `;
+                        if (response) {
+                            chatWindowHistory.appendChild(createMessage('bot', response));
+                        } else {
+                            reject('I am sorry, I did not understand that.');
+                        }
                     }));
-                }, 1000);
+                }, 3000);
             });
-
         }
     }
 
     // Handle chat response
     const handleResponse = async() => {
-        const openai = new OpenAI({
-            apiKey: import.meta.env.PUBLIC_OPENAI,
-            dangerouslyAllowBrowser: true
-        })
 
         // Get all messages in history
         const messages = chatWindowHistory.querySelectorAll('li') as NodeListOf<HTMLLIElement>;
@@ -225,21 +228,30 @@ import "@styles/chat.css"
             });
         });
 
-        const response = await openai.chat.completions.create({
-            model: 'gpt-3.5-turbo',
-            messages: [
-                {
-                    role: 'system',
-                    content: 'The following is a conversation with an AI assistant. The assistant is an expert cook with 15 years of experience and won multiple awards internationally. The assistant is helpful, creative, clever, and very friendly.'
-                },
-                ...messagesList
-            ],
-            max_tokens: 100,
+        const response = await fetch(import.meta.env.PUBLIC_API_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${import.meta.env.PUBLIC_OPENAI}`
+            },
+            body: JSON.stringify({
+                model: 'gpt-3.5-turbo',
+                messages: [
+                    {
+                        role: 'system',
+                        content: 'The following is a conversation with an AI assistant. The assistant is an expert cook with 15 years of experience and won multiple awards internationally. The assistant is helpful, creative, clever, and very friendly.'
+                    },
+                    ...messagesList
+                ],
+                max_tokens: 100,
+                stream: false
+            })
         });
 
-        console.log(response.choices[0].message.content);
-        const responseMessage = response.choices[0].message.content;
-        return responseMessage;
+        const responseMessage = await response.json()
+        chatWindowHistory.appendChild(createMessage('bot', responseMessage.choices[0].message.content));
+
+        return;
     }
 
     // Handle toggle chat
