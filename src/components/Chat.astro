@@ -2,18 +2,19 @@
 import "@styles/chat.css"
 ---
 
-<button id="chat-toggle" class="btn btn-primary">
+<button id="chat-toggle" class="fixed right-0 bottom-0 w-16 h-16 rounded-full bg-[#60739f] dark:bg-gray-800 shadow-lg flex items-center justify-center text-white font-bold cursor-pointer transition-all duration-300 ease-in-out">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
         <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
     </svg>
 </button>
 
-<section id="chat" data-active="false">
-    <header>
-        <h2>Recipe Assistant</h2>
+<section id="chat" class="fixed bottom-0 right-0 min-w-[420px] w-[33vw] rounded-[1rem] bg-[#60739f] dark:bg-gray-800 shadow-lg overflow-hidden transition-all duration-300 ease-in-out" data-active="false">
+
+    <header class="p-4 bg-[#60739f] dark:bg-gray-800 border-b border-[#60739f] dark:border-gray-800 text-white text-center py-4 px-0">
+        <h2 class="text-xl text-white font-bold m-0">Recipe Assistant</h2>
     </header>
 
-    <div id="chat-window">
+    <div id="chat-window" class="flex flex-col justify-between p-4 bg-white dark:bg-slate-600">
         <ul id="chat-window-history">
             <!-- Fill -->
             <li class="message-bot">
@@ -21,9 +22,10 @@ import "@styles/chat.css"
             </li>
         </ul>
 
-        <div id="chat-window-input">
-            <input type="text" placeholder="Type your message here..." />
-            <button id="chat-window-send">
+        <div id="chat-window-input" class="flex items-center">
+            <input type="text" class="p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1  block w-full mr-4 text-base dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-600 dark:focus:border-gray-400" placeholder="Type a message..." />
+
+            <button id="chat-window-send" class="p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none block sm:text-sm bg-[#60739f] text-white dark:bg-gray-800 dark:text-white dark:border-gray-800">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
                 </svg>
@@ -35,20 +37,10 @@ import "@styles/chat.css"
 
 <style lang="scss" scoped>
 
-
-
     #chat {
-
-        position: fixed;
         bottom: calc(2rem + 60px);
         right: 1rem;
-        min-width: 420px;
-        width: 33vw;
-        border-radius: 1rem;
-        background-color: #60739f;
-        box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
-        overflow: hidden;
-        transition: all 0.3s ease-in-out;
+
         &[data-active="false"] {
             transform: translateY(100%);
             opacity: 0;
@@ -62,51 +54,15 @@ import "@styles/chat.css"
         }
 
         &-toggle {
-            position: fixed;
             bottom: 1rem;
             right: 1rem;
-            height: 60px;
-            width: 60px;
-            border-radius: 100%;
-            display: grid;
-            place-items: center;
-            background-color: #60739f;
-            color: white;
-            padding: 0.5rem 1rem;
-            border: none;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease-in-out;
             &:hover {
                 opacity: 0.8;
             }
         }
 
-        header {
-            padding: 1rem 0;
-            background-color: #60739f;
-            border-top-left-radius: 1rem;
-            border-top-right-radius: 1rem;
-            font-weight: bold;
-            text-align: center;
-            display: grid;
-            place-items: center;
-            h2 {
-                font-size: 1.3rem;
-                color: white;
-                margin: 0;
-            }
-        }
-
         &-window {
             height: calc(80vh - 4rem);
-            background: #fff;
-            padding: 1rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-
             &-history {
                 list-style: none;
                 padding: 0;
@@ -115,42 +71,7 @@ import "@styles/chat.css"
                 border-radius: 0.5rem;
                 overflow-y: scroll;
                 scroll-behavior: smooth;
-                &::-webkit-scrollbar {
-                    width: 8px;
-                    height: 90%;
-                    border-radius: 1rem;
-                    background: #e9e9e9;
-                    transition: all 0.3s ease-in-out;
-                    &-thumb {
-                        background: #60739f;
-                        border-radius: 1rem;
-                    }
-                }
             }
-
-            &-input {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                input {
-                    flex: 1;
-                    padding: 0.5rem 0.75rem;
-                    border: 1px solid #ccc;
-                    border-radius: 0.5rem;
-                    margin-right: 1rem;
-                    font-size: 1rem;
-                }
-                button {
-                    padding: 0.5rem 0.75rem;
-                    border-radius: 0.5rem;
-                    border: none;
-                    background-color: #60739f;
-                    color: white;
-                    font-weight: bold;
-                    cursor: pointer;
-                }
-            }
-
         }
     }
 
@@ -220,7 +141,7 @@ import "@styles/chat.css"
         });
 
         // Stream response from API
-        const response = await fetch(import.meta.env.PUBLIC_API_URL, {
+        const response = await fetch(import.meta.env.PUBLIC_OPENAI_COMPLETION_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
