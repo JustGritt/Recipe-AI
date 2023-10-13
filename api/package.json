@@ -5,16 +5,26 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node server.js"
+    "dev": "node --watch server.js",
+    "seed": "node ./migrate.js",
+    "seed:all": "npx sequelize-cli db:seed:all",
+    "make:migration": "npx sequelize-cli db:migrate"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
-    "mongoose": "^7.5.3"
+    "joi": "^17.11.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^7.5.3",
+    "pg": "^8.11.3",
+    "postmark": "^3.1.1",
+    "sequelize": "^6.33.0",
+    "sqlite3": "^5.1.6"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"

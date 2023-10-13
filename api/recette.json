@@ -1,0 +1,331 @@
+{
+    "recettes": [
+      {
+        "nom": "Coq au Vin",
+        "description": "Un plat traditionnel français à base de poulet cuit au vin rouge, champignons et oignons.",
+        "ingredients": [
+          "1 coq ou poulet découpé en morceaux",
+          "750 ml de vin rouge",
+          "150 g de lardons fumés",
+          "250 g de champignons de Paris",
+          "2 oignons",
+          "2 gousses d'ail",
+          "Bouquet garni (thym, laurier)",
+          "Sel et poivre"
+        ],
+        "instructions": [
+          "Marinez le poulet dans le vin rouge pendant quelques heures.",
+          "Faites dorer les lardons dans une grande cocotte.",
+          "Ajoutez le poulet et faites-le revenir.",
+          "Ajoutez les oignons, l'ail, les champignons et le bouquet garni.",
+          "Laissez mijoter à feu doux jusqu'à ce que le poulet soit tendre.",
+          "Servez chaud avec des pommes de terre ou des pâtes."
+        ],
+        "saison": "Automne-Hiver"
+      },
+      {
+        "nom": "Ratatouille",
+        "description": "Un plat provençal à base de légumes d'été, comme les tomates, les aubergines et les courgettes.",
+        "ingredients": [
+          "2 aubergines",
+          "2 courgettes",
+          "2 poivrons rouges",
+          "4 tomates",
+          "2 oignons",
+          "2 gousses d'ail",
+          "Huile d'olive",
+          "Herbes de Provence",
+          "Sel et poivre"
+        ],
+        "instructions": [
+          "Coupez les légumes en morceaux.",
+          "Faites-les revenir dans une grande poêle avec de l'huile d'olive.",
+          "Ajoutez l'ail, les herbes de Provence, le sel et le poivre.",
+          "Laissez mijoter jusqu'à ce que les légumes soient tendres.",
+          "Servez chaud en accompagnement ou en plat principal."
+        ],
+        "saison": "Été"
+      },
+      {
+        "nom": "Bœuf Bourguignon",
+        "description": "Un plat de bœuf mijoté au vin rouge avec des légumes et des herbes aromatiques.",
+        "ingredients": [
+          "1,5 kg de bœuf à braiser (paleron, gîte)",
+          "750 ml de vin rouge (Bourgogne de préférence)",
+          "200 g de lardons fumés",
+          "250 g de champignons de Paris",
+          "3 carottes",
+          "3 oignons",
+          "2 gousses d'ail",
+          "Bouquet garni (thym, laurier)",
+          "Sel et poivre"
+        ],
+        "instructions": [
+          "Coupez la viande en morceaux et faites-la dorer dans une cocotte.",
+          "Ajoutez les lardons, les oignons, l'ail, les carottes et les champignons.",
+          "Versez le vin rouge et ajoutez le bouquet garni, le sel et le poivre.",
+          "Laissez mijoter à feu doux pendant des heures jusqu'à ce que la viande soit tendre.",
+          "Servez chaud avec des pommes de terre ou des pâtes."
+        ],
+        "saison": "Automne-Hiver"
+      },
+      {
+        "nom": "Salade Niçoise",
+        "description": "Une salade méditerranéenne composée de légumes frais, de thon, d'œufs et d'olives.",
+        "ingredients": [
+          "Laitue",
+          "Tomates",
+          "Thon en conserve",
+          "Œufs durs",
+          "Haricots verts cuits",
+          "Olives noires",
+          "Anchois (en option)",
+          "Vinaigrette à base d'huile d'olive"
+        ],
+        "instructions": [
+          "Disposez tous les ingrédients sur un plateau de service.",
+          "Assaisonnez avec la vinaigrette à base d'huile d'olive.",
+          "Servez frais comme entrée ou plat principal."
+        ],
+        "saison": "Été"
+      },
+      {
+        "nom": "Quiche Lorraine",
+        "description": "Une tarte salée française traditionnelle à base de lardons et de crème.",
+        "ingredients": [
+          "1 pâte brisée",
+          "200 g de lardons fumés",
+          "3 œufs",
+          "250 ml de crème fraîche",
+          "Noix de muscade râpée",
+          "Sel et poivre"
+        ],
+        "instructions": [
+          "Faites cuire les lardons dans une poêle jusqu'à ce qu'ils soient croustillants.",
+          "Étalez la pâte brisée dans un moule à tarte et piquez le fond avec une fourchette.",
+          "Répartissez les lardons sur le fond de tarte.",
+          "Mélangez les œufs, la crème fraîche, la noix de muscade, le sel et le poivre.",
+          "Versez ce mélange sur les lardons.",
+          "Faites cuire au four jusqu'à ce que la quiche soit dorée et ferme."
+        ],
+        "saison": "Toute l'année"
+      },
+      {
+        "nom": "Tarte Tatin",
+        "description": "Une tarte aux pommes renversée caramélisée, servie avec de la crème fraîche.",
+        "ingredients": [
+        "Pommes",
+        "Pâte feuilletée",
+        "Beurre",
+        "Sucre",
+        "Crème fraîche"
+        ],
+        "instructions": [
+        "Caramélisez les pommes avec du beurre et du sucre dans une poêle.",
+        "Disposez-les au fond d'un moule et recouvrez-les de pâte feuilletée.",
+        "Faites cuire au four jusqu'à ce que la pâte soit dorée.",
+        "Renversez la tarte avant de servir, puis accompagnez-la de crème fraîche."
+        ],
+        "saison": "Toute l'année"
+      },
+      {
+        "nom": "Cassoulet",
+        "description": "Un ragoût de haricots blancs, de viandes variées et d'épices, originaire du Sud-Ouest de la France.",
+        "ingredients": [
+        "Haricots blancs",
+        "Saucisses de Toulouse",
+        "Cuisse de canard confite",
+        "Échine de porc",
+        "Oignons",
+        "Ail",
+        "Tomates",
+        "Bouquet garni (thym, laurier)",
+        "Sel et poivre"
+        ],
+        "instructions": [
+        "Faites cuire les haricots blancs.",
+        "Faites dorer les viandes et les oignons dans une cocotte.",
+        "Ajoutez les tomates, l'ail, le bouquet garni, les haricots et les épices.",
+        "Laissez mijoter jusqu'à ce que le cassoulet soit bien chaud et parfumé."
+        ],
+        "saison": "Automne-Hiver"
+      },
+      {
+        "nom": "Crêpes",
+        "description": "Des crêpes fines et légères, parfaites pour être garnies de sucre, de Nutella ou de confiture.",
+        "ingredients": [
+        "Farine",
+        "Œufs",
+        "Lait",
+        "Sucre",
+        "Beurre",
+        "Sel"
+        ],
+        "instructions": [
+        "Mélangez la farine, les œufs, le lait, le sucre et une pincée de sel dans un bol.",
+        "Faites chauffer une poêle antiadhésive avec un peu de beurre.",
+        "Versez une petite quantité de pâte dans la poêle et faites-la tourner pour couvrir le fond.",
+        "Faites cuire des deux côtés jusqu'à ce que la crêpe soit dorée.",
+        "Garnissez-la selon vos préférences."
+        ],
+        "saison": "Toute l'année"
+      },
+      {
+        "nom": "Bouillabaisse",
+        "description": "Une soupe de poisson provençale parfumée aux épices et aux herbes.",
+        "ingredients": [
+        "Poisson de roche",
+        "Rouille",
+        "Croûtons",
+        "Huile d'olive",
+        "Tomates",
+        "Fenouil",
+        "Oignon",
+        "Safran",
+        "Thym",
+        "Laurier",
+        "Sel et poivre"
+        ],
+        "instructions": [
+        "Préparez une soupe de poisson riche en saveurs en utilisant le poisson de roche, les tomates, le fenouil, l'oignon et les épices.",
+        "Ajoutez le safran pour une belle couleur et une saveur unique.",
+        "Servez la bouillabaisse avec de la rouille (une sauce à l'ail) et des croûtons frottés à l'ail.",
+        "Accompagnez le plat d'un filet d'huile d'olive, de thym et de laurier.",
+        "Assaisonnez avec du sel et du poivre selon votre goût.",
+        "Dégustez cette soupe de poisson méditerranéenne en famille ou entre amis."
+        ],
+        "saison": "Été"
+      },
+      {
+        "nom": "Tartiflette",
+        "description": "Un gratin savoyard à base de pommes de terre, de lardons et de reblochon, parfait pour l'hiver.",
+        "ingredients": [
+        "Pommes de terre",
+        "Lardons fumés",
+        "Oignons",
+        "Reblochon",
+        "Vin blanc sec",
+        "Crème fraîche",
+        "Sel et poivre"
+        ],
+        "instructions": [
+        "Faites cuire les pommes de terre à l'eau jusqu'à ce qu'elles soient tendres.",
+        "Faites revenir les lardons et les oignons dans une poêle.",
+        "Coupez le reblochon en deux dans le sens de l'épaisseur.",
+        "Dans un plat à gratin, alternez les couches de pommes de terre, de lardons, d'oignons, de vin blanc et de crème fraîche.",
+        "Placez le reblochon sur le dessus.",
+        "Faites cuire au four jusqu'à ce que le fromage soit bien fondu et doré."
+        ],
+        "saison": "Automne-Hiver"
+      },
+      {
+        "nom": "Blanquette de Veau",
+        "description": "Un plat de veau mijoté dans une sauce crémeuse à base de bouillon, de champignons et d'oignons.",
+        "ingredients": [
+        "Viande de veau",
+        "Champignons de Paris",
+        "Oignons",
+        "Bouillon de volaille",
+        "Crème fraîche",
+        "Beurre",
+        "Farine",
+        "Citron",
+        "Sel et poivre"
+        ],
+        "instructions": [
+        "Faites dorer la viande de veau dans une cocotte avec du beurre.",
+        "Ajoutez les oignons et les champignons, puis saupoudrez de farine.",
+        "Versez le bouillon de volaille et laissez mijoter jusqu'à ce que la viande soit tendre.",
+        "Ajoutez la crème fraîche et le jus de citron pour obtenir une sauce crémeuse.",
+        "Assaisonnez avec du sel et du poivre."
+        ],
+        "saison": "Toute l'année"
+      },
+      {
+        "nom": "Quiche aux Poireaux",
+        "description": "Une quiche savoureuse à base de poireaux, de crème et de fromage.",
+        "ingredients": [
+        "Pâte brisée",
+        "Poireaux",
+        "Crème fraîche",
+        "Œufs",
+        "Fromage râpé",
+        "Beurre",
+        "Sel et poivre"
+        ],
+        "instructions": [
+        "Faites revenir les poireaux dans du beurre jusqu'à ce qu'ils soient tendres.",
+        "Étalez la pâte brisée dans un moule à tarte et piquez le fond avec une fourchette.",
+        "Mélangez les poireaux cuits avec la crème fraîche, les œufs et le fromage râpé.",
+        "Versez ce mélange sur la pâte et faites cuire au four jusqu'à ce que la quiche soit dorée et ferme.",
+        "Assaisonnez avec du sel et du poivre."
+        ],
+        "saison": "Toute l'année"
+      },
+      {
+        "nom": "Gratin Dauphinois",
+        "description": "Un gratin de pommes de terre crémeux et gratiné au four.",
+        "ingredients": [
+        "Pommes de terre",
+        "Crème fraîche",
+        "Lait",
+        "Ail",
+        "Beurre",
+        "Fromage râpé",
+        "Noix de muscade",
+        "Sel et poivre"
+        ],
+        "instructions": [
+        "Épluchez et tranchez finement les pommes de terre.",
+        "Faites chauffer la crème fraîche avec l'ail émincé, la noix de muscade, le sel et le poivre.",
+        "Beurrez un plat à gratin et alternez les couches de pommes de terre et de crème.",
+        "Saupoudrez de fromage râpé sur le dessus.",
+        "Faites cuire au four jusqu'à ce que le gratin soit doré et les pommes de terre tendres."
+        ],
+        "saison": "Toute l'année"
+      },
+      {
+        "nom": "Pissaladière",
+        "description": "Une tarte aux oignons et aux anchois, originaire de la région niçoise.",
+        "ingredients": [
+        "Pâte à pizza",
+        "Oignons",
+        "Anchois",
+        "Olives noires",
+        "Huile d'olive",
+        "Herbes de Provence",
+        "Sel et poivre"
+        ],
+        "instructions": [
+        "Étalez la pâte à pizza sur un plateau de cuisson.",
+        "Faites revenir les oignons dans de l'huile d'olive jusqu'à ce qu'ils soient tendres et dorés.",
+        "Disposez les oignons, les anchois et les olives sur la pâte.",
+        "Saupoudrez d'herbes de Provence, de sel et de poivre.",
+        "Faites cuire au four jusqu'à ce que la tarte soit dorée."
+        ],
+        "saison": "Toute l'année"
+      },
+      {
+        "nom": "Poulet Basquaise",
+        "description": "Un plat basque à base de poulet, de poivrons et de tomates, parfumé au piment d'Espelette.",
+        "ingredients": [
+        "Poulet en morceaux",
+        "Poivrons rouges et verts",
+        "Tomates",
+        "Oignons",
+        "Ail",
+        "Piment d'Espelette",
+        "Huile d'olive",
+        "Sel et poivre"
+        ],
+        "instructions": [
+        "Faites dorer le poulet dans une cocotte avec de l'huile d'olive.",
+        "Ajoutez les oignons, l'ail, les poivrons et les tomates coupés en dés.",
+        "Assaisonnez avec du piment d'Espelette, du sel et du poivre.",
+        "Laissez mijoter jusqu'à ce que le poulet soit bien cuit et que la sauce soit parfumée."
+        ],
+        "saison": "Été"
+      }
+    ]
+}
+  
