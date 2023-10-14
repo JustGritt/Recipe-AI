@@ -1,12 +1,12 @@
-GET http://localhost:5000/users
+GET http://localhost:3000/users
 
 ###
 
-GET http://localhost:5000/users/651992faf2915287ea3223d5
+GET http://localhost:3000/users/651992faf2915287ea3223d5
 
 ###
 
-POST http://localhost:5000/users/register
+POST http://localhost:3000/users/register
 Content-Type: application/json
 
 {

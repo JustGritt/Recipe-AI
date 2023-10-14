@@ -15,8 +15,10 @@ const isActive = href === pathname || href === pathname.replace(/\/$/, '');
 
 <style lang="scss" scoped>
 	a {
+		position: relative;
 		display: inline-block;
 		text-decoration: none;
+
 		&.active {
 			font-weight: bolder;
 			text-decoration: underline;

@@ -13,9 +13,9 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	</head>
 	<body>
 		<Header title={SITE_TITLE} - Register />
-		<main class="bg-white dark:bg-gray-900 w-full relative">
+		<main class="bg-white dark:bg-gray-900 w-full relative min-h-[calc(100vh-310px)]">
 
-			<div id="notification" class="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg dark:text-gray-400 dark:bg-gray-800 shadow-lg border border-gray-200 dark:border-gray-700 hidden" role="alert">
+			<div id="notification" class="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg dark:text-gray-400 dark:bg-gray-800 shadow-md border border-gray-200 dark:border-gray-700 hidden" role="alert">
 				<div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-blue-500 bg-blue-100 rounded-lg dark:bg-gray-600 dark:text-blue-200">
 					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
 						<path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
@@ -32,7 +32,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 			</div>
 
 			<div class="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0">
-				<div class="w-full bg-white rounded-lg md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 shadow-lg border border-gray-200 dark:border-gray-700">
+				<div class="w-full bg-white rounded-lg md:mt-0 lg:max-w-lg sm:max-w-md xl:p-0 dark:bg-gray-800 shadow-md border border-gray-200 dark:border-gray-700">
 					<div class="p-6 space-y-4 md:space-y-6 sm:p-8">
 						<h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
 							Create a RecipeAI account
@@ -41,7 +41,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 						<form id="registration-form" class="space-y-4 md:space-y-6" action="POST">
 							<div>
 								<label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
-								<input type="text" name="username" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-gray-600 focus:border-gray-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="john@doe.com" required="">
+								<input type="text" name="username" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-gray-600 focus:border-gray-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Johnoe" required="" >
 							</div>
 							<div>
 								<label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email address</label>
@@ -110,8 +110,10 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 			password: (document.getElementById('password') as HTMLInputElement).value
 		};
 
+		console.log(formData);
+
 		// Send the form data to the API
-		const response = await fetch(`${import.meta.env.PUBLIC_API_URL}/register`, {
+		const response = await fetch(`${import.meta.env.PUBLIC_API_URL}/users/register`, {
 			method: 'POST',
 			body: JSON.stringify(formData),
 		});
