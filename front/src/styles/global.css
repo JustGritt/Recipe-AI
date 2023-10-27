@@ -4,6 +4,8 @@
 	License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
  */
 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Nunito:wght@400;700&family=Quicksand:wght@400;700&display=swap');
+
 :root {
 	--accent: #60739f;
 	--accent-dark: #000d8a;
@@ -48,7 +50,7 @@ body {
     overflow: auto;
 }
 body {
-	font-family: 'Atkinson', sans-serif;
+	font-family: 'Atkinson', 'Quicksand', 'Nunito', 'Montserrat', sans-serif;
 	margin: 0;
 	padding: 0;
 	text-align: left;
@@ -169,4 +171,19 @@ hr {
 	clip-path: inset(50%);
 	/* added line to stop words getting smushed together (as they go onto seperate lines and some screen readers do not understand line feeds as a space */
 	white-space: nowrap;
+}
+
+/* Handle scrollbar */
+::-webkit-scrollbar {
+	width: 8px;
+}
+::-webkit-scrollbar-track {
+	background: rgb(var(--gray-light));
+}
+::-webkit-scrollbar-thumb {
+	background: rgb(var(--gray));
+	border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+	background: rgb(var(--gray-dark));
 }

@@ -1,42 +1,54 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
 const mongoose = require('mongoose');
-
-// Import dotenv
+const express = require('express');
+const cors = require('cors');
 require('dotenv').config();
 
+// =====================================================
+// Database
+// =====================================================
+
+// Connect to database
+const connectDB = async() => {
+    try {
+        mongoose.Promise = global.Promise;
+        mongoose.connect(process.env.DB_URL, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        })
+        .then(() => {
+            console.log(mongoose.connection.readyState === 1 ?
+                "Connection to Mongo ready!" :
+                "Connection to Mongo failed!"
+            );
+        })
+        .catch((err) => {
+            console.error("Could not connect to database: ", err);
+            process.exit(1);
+        })
+    } catch (err) {
+        console.error("Error connecting to database: ", err);
+    }
+};
+
+// =====================================================
+// API Routes
+// =====================================================
+
 const app = express();
-const port = process.env.PORT || 3000;
+require('./routes/user.routes')(app);
 
-// =====================================================
-// Use methods
-// =====================================================
 app.use(cors());
-app.use(express.json());
 
-// =====================================================
-// Handle Database connection
-// =====================================================
-mongoose.connect(process.env.MONGO_DB_URI, {
-    useNewUrlParser: true,
-});
-
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-db.once('open', () => {
-    console.log('Connected to MongoDB');
+app.use('/', (req, res) => {
+    res.json({ message: "Server is running!" });
 });
 
 // =====================================================
-// Users routes
-// =====================================================
-const usersRouter = require('./routes/users');
-app.use('/users', usersRouter);
-
-// =====================================================
+// Server log
 // =====================================================
 
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+app.listen(process.env.SERVER_PORT, () => {
+    connectDB();
+    console.log(`Server is running on port ${process.env.SERVER_PORT}`);
+    console.log(`http://localhost:${process.env.SERVER_PORT}\n`);
 });

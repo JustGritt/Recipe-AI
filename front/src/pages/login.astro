@@ -13,10 +13,10 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	</head>
 	<body>
 		<Header title={SITE_TITLE} - Register />
-		<main class="bg-white dark:bg-gray-900 w-full min-h-[calc(100vh-310px)]">
+		<main class="bg-white dark:bg-gray-800 w-full min-h-[calc(100vh-310px)]">
 
 			<div class="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0">
-				<div class="w-full bg-white rounded-lg shadow  md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 ">
+				<div class="w-full bg-white rounded-lg shadow  md:mt-0 sm:max-w-md xl:p-0 dark:bg-slate-600">
 					<div class="p-6 space-y-4 md:space-y-6 sm:p-8">
 						<h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
 							Login to your account
@@ -40,7 +40,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 									</label>
 								</div>
 							</div>
-							<button type="submit" class="w-full text-white bg-gray-600 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Login</button>
+							<button type="submit" class="w-full text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-gray-700 dark:hover:bg-gray-800 dark:focus:ring-gray-800">Login</button>
 
 							<p class="text-sm font-light text-gray-500 dark:text-gray-400">
 								You don't have an account yet?
@@ -60,35 +60,42 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 </html>
 
 <script>
-	// Login form
 	const loginForm = document.getElementById('login-form') as HTMLFormElement;
+	const submitButton = loginForm.querySelector('button[type="submit"]') as HTMLButtonElement;
+	const passwordField = loginForm.querySelector('input[name="password"]') as HTMLInputElement;
 
-	// Login form event listener
-	loginForm.addEventListener('submit', async(e) => {
+	loginForm.addEventListener('submit', async (e) => {
 		e.preventDefault();
+		submitButton.disabled = true;
 
-		// Get the form data
-		const formData = new FormData(loginForm);
+		const formData = {
+			email: loginForm.email.value,
+			password: passwordField.value,
+		};
 
-		// Send the form data to the API
-		const response = await fetch(`${import.meta.env.PUBLIC_API_URL}/login`, {
-			method: 'POST',
-			body: formData
-		});
+		try {
+			const response = await fetch(`${import.meta.env.PUBLIC_API_URL}/api/login`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(formData),
+			});
 
-		// Get the response data
-		const data = await response.json();
-
-		// Check if the response was successful
-		if (response.ok) {
-			// Redirect to the dashboard
-			// window.location.href = '/dashboard';
-
-			console.log(data);
-		} else {
-			// Show the error message
-			alert(data.message);
+			if (response.ok) {
+				const jwt = await response.json();
+				localStorage.setItem('jwt', jwt.token);
+				window.location.href = '/dashboard';
+			} else {
+				const responseData = await response.json();
+				alert(responseData.message);
+			}
+		} catch (error) {
+			console.error(error);
+			alert('An error occurred while logging in.');
+		} finally {
+			submitButton.disabled = false;
+			passwordField.value = '';
 		}
-
 	});
 </script>

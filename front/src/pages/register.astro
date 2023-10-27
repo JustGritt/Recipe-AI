@@ -4,6 +4,7 @@ import Header from '@components/Header.astro';
 import Footer from '@components/Footer.astro';
 import Chat from '@components/Chat.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import SuccessNotification from '@components/SuccessNotification.astro';
 ---
 
 <!doctype html>
@@ -13,26 +14,12 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	</head>
 	<body>
 		<Header title={SITE_TITLE} - Register />
-		<main class="bg-white dark:bg-gray-900 w-full relative min-h-[calc(100vh-310px)]">
+		<main class="bg-white dark:bg-gray-800 w-full relative min-h-[calc(100vh-310px)]">
 
-			<div id="notification" class="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg dark:text-gray-400 dark:bg-gray-800 shadow-md border border-gray-200 dark:border-gray-700 hidden" role="alert">
-				<div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-blue-500 bg-blue-100 rounded-lg dark:bg-gray-600 dark:text-blue-200">
-					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-						<path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-					</svg>
-					<span class="sr-only">Notification icon</span>
-				</div>
-				<div class="ml-3 text-sm font-normal">You will receive a confirmation email in a few seconds...</div>
-				<button id="notification-close" type="button" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" aria-label="Close">
-					<span class="sr-only">Close</span>
-					<svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-						<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-					</svg>
-				</button>
-			</div>
+			<SuccessNotification id="notification" />
 
 			<div class="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0">
-				<div class="w-full bg-white rounded-lg md:mt-0 lg:max-w-lg sm:max-w-md xl:p-0 dark:bg-gray-800 shadow-md border border-gray-200 dark:border-gray-700">
+				<div class="w-full bg-white rounded-lg md:mt-0 lg:max-w-lg sm:max-w-md xl:p-0 dark:bg-slate-600 shadow-md border border-gray-200 dark:border-gray-700">
 					<div class="p-6 space-y-4 md:space-y-6 sm:p-8">
 						<h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
 							Create a RecipeAI account
@@ -67,7 +54,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 									</label>
 								</div>
 							</div>
-							<button type="submit" class="w-full text-white bg-gray-600 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Create an account</button>
+							<button type="submit" class="w-full text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-gray-700 dark:hover:bg-gray-800 dark:focus:ring-gray-800">Create an account</button>
 
 							<p class="text-sm font-light text-gray-500 dark:text-gray-400">
 								Already have an account?
@@ -87,15 +74,11 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 </html>
 
 <script>
-	// Get the registration form
 	const registrationForm = document.getElementById('registration-form') as HTMLFormElement;
 
-	// Add an event listener to the registration form
 	registrationForm.addEventListener('submit', async (e) => {
-		// Prevent the default form submission
 		e.preventDefault();
 
-		// Check if the passwords match
 		const password = (document.getElementById('password') as HTMLInputElement).value;
 		const confirmPassword = (document.getElementById('confirm-password') as HTMLInputElement).value;
 		if (password !== confirmPassword) {
@@ -103,40 +86,42 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 			return;
 		}
 
-		// Get the form data
 		const formData = {
 			username: (document.getElementById('username') as HTMLInputElement).value,
 			email: (document.getElementById('email') as HTMLInputElement).value,
-			password: (document.getElementById('password') as HTMLInputElement).value
+			password,
 		};
 
 		console.log(formData);
 
-		// Send the form data to the API
-		const response = await fetch(`${import.meta.env.PUBLIC_API_URL}/users/register`, {
-			method: 'POST',
-			body: JSON.stringify(formData),
-		});
+		try {
+			const response = await fetch(`${import.meta.env.PUBLIC_API_URL}/api/register`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(formData),
+			});
 
-		// Get the response data
-		const responseData = await response.json();
-		if (response.ok) {
-			// Display the success message
-			const notification = document.getElementById('notification') as HTMLDivElement;
-			notification.classList.remove('hidden');
-			notification.classList.add('flex');
+			if (response.ok) {
+				const notification = document.getElementById('notification') as HTMLDivElement;
+				notification.classList.remove('hidden');
+				notification.classList.add('flex');
 
-			setTimeout(() => {
-				// window.location.href = '/login';
-				console.log('Redirecting to login page');
-			}, 2000);
-
-		} else {
-			alert(responseData.message);
+				setTimeout(() => {
+					console.log('Redirecting to login page');
+					window.location.href = '/login';
+				}, 2000);
+			} else {
+				const responseData = await response.json();
+				alert(responseData.message);
+			}
+		} catch (error) {
+			console.error(error);
+			alert('An error occurred while registering. Please try again later.');
 		}
 	});
 
-	// Get the notification close button
 	const notificationCloseButton = document.getElementById('notification-close') as HTMLButtonElement;
 	notificationCloseButton.addEventListener('click', () => {
 		const notification = document.getElementById('notification') as HTMLDivElement;

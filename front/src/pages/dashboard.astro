@@ -4,6 +4,8 @@ import Header from '@components/Header.astro';
 import Footer from '@components/Footer.astro';
 import Chat from '@components/Chat.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+
 ---
 
 <!doctype html>
@@ -13,7 +15,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	</head>
 	<body>
 		<Header title={SITE_TITLE} />
-		<main id="home" class="w-full bg-white dark:bg-gray-800 transition-all duration-300 ease-in-out m-0 max-w-full" >
+		<main id="home" class="w-full bg-white dark:bg-gray-800 transition-all duration-300 ease-in-out m-0 max-w-full min-h-[calc(100vh-310px)]">
 
 			<section class="max-w-[70vw] m-auto">
 
@@ -28,4 +30,22 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 		</main>
 		<Footer />
 	</body>
+
+	<script>
+		const token = localStorage.getItem('jwt')
+		if (token) {
+			const req = await fetch(`${import.meta.env.PUBLIC_API_URL}/api/verify`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'Authorization': `Bearer ${import.meta.env.PUBLIC_OPENAI}`
+				},
+				body: JSON.stringify({ token }),
+			});
+			console.log(await req.json())
+		} else {
+			window.location.href = '/login'
+			console.log('User is not logged in')
+		}
+	</script>
 </html>
