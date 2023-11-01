@@ -36,10 +36,12 @@ const connectDB = async() => {
 
 const app = express();
 require('./routes/user.routes')(app);
+require('./routes/recipe.routes')(app);
 
 app.use(cors());
 
-app.use('/', (req, res) => {
+// Test route
+app.get('/', (req, res) => {
     res.json({ message: "Server is running!" });
 });
 

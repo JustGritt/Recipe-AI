@@ -1,0 +1,129 @@
+[
+    {
+        "name": "Poulet rôti au citron",
+        "ingredients": [
+            "4 cuisses de poulet",
+            "2 citrons",
+            "2 gousses d'ail",
+            "Sel et poivre au goût"
+        ],
+        "instructions": "Préchauffez le four à 200°C. Mélangez le jus de citron, l'ail émincé, le sel et le poivre. Badigeonnez les cuisses de poulet de ce mélange. Faites cuire au four pendant 40 minutes. Servez avec des légumes rôtis.",
+        "difficulty": "Facile",
+        "calories": 350
+    },
+    {
+        "name": "Pâtes à la carbonara",
+        "ingredients": [
+            "200 g de spaghetti",
+            "100 g de pancetta",
+            "2 œufs",
+            "50 g de parmesan râpé",
+            "Poivre noir moulu"
+        ],
+        "instructions": "Faites cuire les pâtes selon les instructions sur l'emballage. Dans une poêle, faites revenir la pancetta. Mélangez les œufs avec le parmesan. Égouttez les pâtes, ajoutez la pancetta, puis le mélange d'œufs et de fromage. Assaisonnez de poivre noir.",
+        "difficulty": "Moyenne",
+        "calories": 450
+    },
+    {
+        "name": "Salade César",
+        "ingredients": [
+            "1 laitue romaine",
+            "200 g de croûtons",
+            "100 g de parmesan râpé",
+            "Sauce César",
+            "Poulet grillé (facultatif)"
+        ],
+        "instructions": "Lavez et coupez la laitue. Ajoutez les croûtons, le parmesan, et la sauce César. Vous pouvez également ajouter du poulet grillé pour plus de protéines.",
+        "difficulty": "Facile",
+        "calories": 300
+    },
+    {
+        "name": "Lasagnes végétariennes",
+        "ingredients": [
+            "Feuilles de lasagne",
+            "Épinards",
+            "Courgettes",
+            "Sauce béchamel",
+            "Fromage râpé"
+        ],
+        "instructions": "Faites cuire les lasagnes selon les instructions. Préparez les légumes et la sauce béchamel. Alternez les couches de lasagne, de légumes, de sauce et de fromage râpé. Faites cuire au four pendant 30 minutes.",
+        "difficulty": "Moyenne",
+        "calories": 380
+    },
+    {
+        "name": "Riz sauté aux légumes",
+        "ingredients": [
+            "Riz cuit",
+            "Légumes (poivrons, carottes, pois)",
+            "Sauce soja",
+            "Huile de sésame"
+        ],
+        "instructions": "Faites sauter les légumes dans de l'huile de sésame. Ajoutez le riz cuit et la sauce soja. Remuez jusqu'à ce que tout soit bien mélangé.",
+        "difficulty": "Facile",
+        "calories": 250
+    },
+    {
+        "name": "Poulet à l'ail et au miel",
+        "ingredients": [
+            "4 poitrines de poulet",
+            "4 cuillères à soupe de miel",
+            "4 gousses d'ail hachées",
+            "Sel et poivre au goût"
+        ],
+        "instructions": "Faites cuire le poulet dans une poêle. Ajoutez l'ail haché, le miel, le sel et le poivre. Faites cuire jusqu'à ce que le poulet soit doré et enrobé de sauce.",
+        "difficulty": "Moyenne",
+        "calories": 400
+    },
+    {
+        "name": "Tacos au poisson",
+        "ingredients": [
+            "Filets de poisson blanc",
+            "Tortillas de maïs",
+            "Salsa",
+            "Laitue",
+            "Tomates",
+            "Avocat"
+        ],
+        "instructions": "Faites cuire le poisson et assemblez les tacos en garnissant les tortillas de salsa, de laitue, de tomates et d'avocat.",
+        "difficulty": "Facile",
+        "calories": 320
+    },
+    {
+        "name": "Risotto aux champignons",
+        "ingredients": [
+            "Riz Arborio",
+            "Champignons",
+            "Bouillon de légumes",
+            "Vin blanc",
+            "Parmesan râpé"
+        ],
+        "instructions": "Faites cuire les champignons et le riz dans du bouillon et du vin blanc, en ajoutant du parmesan râpé. Remuez jusqu'à ce que le risotto soit crémeux.",
+        "difficulty": "Moyenne",
+        "calories": 380
+    },
+    {
+        "name": "Bœuf Stroganoff",
+        "ingredients": [
+            "Bœuf en lanières",
+            "Oignons",
+            "Champignons",
+            "Crème fraîche",
+            "Moutarde"
+        ],
+        "instructions": "Faites cuire le bœuf avec les oignons et les champignons. Ajoutez la crème fraîche et la moutarde. Servez avec des pâtes ou du riz.",
+        "difficulty": "Moyenne",
+        "calories": 420
+    },
+    {
+        "name": "Soupe aux légumes",
+        "ingredients": [
+            "Légumes (carottes, céleri, poireaux)",
+            "Bouillon de légumes",
+            "Pommes de terre",
+            "Sel et poivre au goût"
+        ],
+        "instructions": "Coupez les légumes et faites-les cuire dans le bouillon avec les pommes de terre. Assaisonnez avec du sel et du poivre. Mixez pour obtenir une soupe crémeuse.",
+        "difficulty": "Facile",
+        "calories": 150
+    }
+]

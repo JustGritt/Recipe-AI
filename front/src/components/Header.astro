@@ -64,6 +64,8 @@ import { SITE_TITLE } from '@consts';
 		await req.json().then((res) => {
 			if (res.status === 'success') {
 				createLoggedInMenu();
+			} else {
+				createLoggedOffMenu();
 			}
 		})
 	} else {
