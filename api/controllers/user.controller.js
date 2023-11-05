@@ -54,7 +54,6 @@ exports.verifyToken = async (req, res) => {
 
         res.status(200).send({ status: 'success', message: 'Token verified.' });
     } catch (error) {
-        console.error(error.stack);
         res.status(500).send({ message: 'An error occurred while verifying the token.' });
     }
 }

@@ -50,7 +50,7 @@ import { SITE_TITLE } from '@consts';
 		sideLinks.appendChild(loginLink);
 	}
 
-	const token = localStorage.getItem('jwt')
+	const token = localStorage.getItem('jwt') || null;
 	const sideLinks = document.getElementById('side-links') as HTMLDivElement;
 	if (token) {
 		const req = await fetch(`${import.meta.env.PUBLIC_API_URL}/api/verify`, {

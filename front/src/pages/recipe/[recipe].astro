@@ -1,0 +1,141 @@
+---
+import BaseHead from '@components/BaseHead.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+import Chat from '@components/Chat.astro';
+import Button from '@components/Button.astro';
+
+// Icons
+import Copy from '@icons/Copy.astro';
+import Mail from '@icons/Mail.astro';
+import Bolt from '@icons/Bolt.astro';
+
+import { SITE_TITLE, SITE_DESCRIPTION } from '@consts';
+
+export async function getStaticPaths() {
+    const recipes = await fetch(`${import.meta.env.PUBLIC_API_URL}/api/recipes/`).then(res => res.json());
+    return recipes.recipes.map((recipe:any) => ({
+        params: { recipe: recipe._id },
+        props: {
+            name: recipe.name,
+            ingredients: recipe.ingredients,
+            instructions: recipe.instructions,
+            difficulty: recipe.difficulty,
+            picture: recipe.picture,
+            calories: recipe.calories,
+            tags: recipe.tags,
+            time: recipe.tags.find((tag:string) => tag.includes('minutes'))
+        }
+    }));
+}
+
+
+
+const { name, ingredients, instructions, difficulty, picture, calories, tags, time } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body class="bg-white dark:bg-gray-800 text-slate-900 dark:text-white">
+		<Header />
+
+        <section class="my-4 py-8 w-full">
+            <h2 class="text-slate-900 dark:text-white text-center"> {name} </h2>
+            <img src={picture} alt={name} class="rounded-lg max-h-[500px] mx-auto my-8" />
+
+            <div class="w-3/5 mx-auto flex gap-4">
+                {
+                    (tags as string[]).map(tag => (
+                        <span data-tag={tag} class="bg-gray-200 dark:bg-gray-700 rounded-full px-4 py-2 capitalize">{tag}</span>
+                    ))
+                }
+            </div>
+        </section>
+
+        <section class="w-3/5 mx-auto mt-8 p-4 border-t-4 flex justify-around">
+            <div class="flex gap-4 my-4">
+                <span class="text-slate-900 dark:text-white font-bold">Difficulty:</span>
+                <span class="text-slate-900 dark:text-white">{difficulty}</span>
+            </div>
+
+            <div class="flex gap-4 my-4">
+                <span class="text-slate-900 dark:text-white font-bold">Time:</span>
+                <span class="text-slate-900 dark:text-white">{time}</span>
+            </div>
+
+            <div class="flex gap-4 my-4">
+                <span class="text-slate-900 dark:text-white font-bold">Calories:</span>
+                <span class="text-slate-900 dark:text-white">{calories}</span>
+            </div>
+        </section>
+
+        <section class="w-3/5 mx-auto px-4 py-8 border-y-4 relative">
+
+            <h4 class="text-slate-900 dark:text-white">List of ingredients:</h4>
+            <ul>
+                {
+                    (ingredients as string[]).map(ingredient => (
+                        <li>{ingredient}</li>
+                    ))
+                }
+            </ul>
+
+            <div class="absolute top-0 right-0 flex mt-6">
+                <!-- TODO: Add the copy to clipboard -->
+                <a class="text-white bg-slate-700 hover:bg-slate-800 font-medium rounded-full text-sm px-2.5 py-2.5 text-center mr-2 mb-2 dark:bg-slate-600 dark:hover:bg-slate-700">
+                    <Copy />
+                </a>
+
+                <a href=`mailto:?subject=Ingredients for ${name} recipe&body=${ingredients}` class="block text-white bg-slate-700 hover:bg-slate-800 font-medium rounded-full text-sm px-2.5 py-2.5 text-center mr-2 mb-2 dark:bg-slate-600 dark:hover:bg-slate-700">
+                    <Mail />
+                </a>
+
+                <!-- TODO: Add social networks -->
+            </div>
+
+        </section>
+
+		<section class="w-3/5 mx-auto mt-8 p-4">
+            <h4 class="text-slate-900 dark:text-white">
+                Instructions:
+            </h4>
+
+            {
+                instructions.map((instruction, index) => (
+                    <div class="flex gap-4 my-4">
+                        <span class="text-slate-900 dark:text-white">{instruction}</span>
+                    </div>
+                ))
+            }
+		</section>
+
+        <section class="w-3/5 mx-auto px-4 py-8 border-y-4 relative">
+            <h5 class="text-slate-900 dark:text-white">
+                Need a recommendation?
+            </h5>
+
+            <p>
+                If you want to pair this recipe with a wine, a dessert or cheese, we recommend you to use our pair recommendation tool.
+            </p>
+
+            <button type="button" class="text-white bg-slate-700 hover:bg-slate-800 focus:outline-none focus:ring-4 focus:ring-slate-300 font-medium rounded-full text-m px-5 py-2.5 text-center mr-2 mb-2 dark:bg-slate-600 dark:hover:bg-slate-700 dark:focus:ring-slate-800 flex items-center justify-center">
+                <Bolt />
+                <span class="ml-2">Show recommendation</span>
+            </button>
+
+        </section>
+
+        <section class="w-3/5 mx-auto px-4 py-8 relative">
+            <h5 class="text-slate-900 dark:text-white">
+                Comments
+            </h5>
+
+            <!-- TODO: Add comments -->
+        </section>
+
+        <Chat />
+		<Footer />
+	</body>
+</html>

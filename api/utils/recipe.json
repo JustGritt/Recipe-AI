@@ -1,129 +1,225 @@
 [
     {
-        "name": "Poulet rôti au citron",
+        "name": "Lemon Roasted Chicken",
         "ingredients": [
-            "4 cuisses de poulet",
-            "2 citrons",
-            "2 gousses d'ail",
-            "Sel et poivre au goût"
+            "4 chicken thighs",
+            "2 lemons",
+            "2 cloves of garlic",
+            "Salt and pepper to taste"
         ],
-        "instructions": "Préchauffez le four à 200°C. Mélangez le jus de citron, l'ail émincé, le sel et le poivre. Badigeonnez les cuisses de poulet de ce mélange. Faites cuire au four pendant 40 minutes. Servez avec des légumes rôtis.",
-        "difficulty": "Facile",
-        "calories": 350
+        "instructions": [
+            "1. Preheat the oven to 200°C (400°F).",
+            "2. In a bowl, mix the juice of the lemons, minced garlic, salt, and pepper.",
+            "3. Place the chicken thighs in a baking dish and brush them with the lemon mixture.",
+            "4. Roast the chicken in the preheated oven for about 40 minutes, or until the chicken is cooked through and golden brown.",
+            "5. Serve with roasted vegetables for a delicious meal."
+        ],
+        "difficulty": "Easy",
+        "picture": "https://cdn.discordapp.com/attachments/465607867702181929/1170397523760918628/00024-566616387.png",
+        "calories": 350,
+        "tags": ["chicken", "roasted", "lemon", "oven", "40 minutes", "all seasons", "non-vegan"]
     },
     {
-        "name": "Pâtes à la carbonara",
+        "name": "Spaghetti Carbonara",
         "ingredients": [
-            "200 g de spaghetti",
-            "100 g de pancetta",
-            "2 œufs",
-            "50 g de parmesan râpé",
-            "Poivre noir moulu"
+            "200g of spaghetti",
+            "100g of pancetta",
+            "2 eggs",
+            "50g of grated parmesan",
+            "Ground black pepper"
         ],
-        "instructions": "Faites cuire les pâtes selon les instructions sur l'emballage. Dans une poêle, faites revenir la pancetta. Mélangez les œufs avec le parmesan. Égouttez les pâtes, ajoutez la pancetta, puis le mélange d'œufs et de fromage. Assaisonnez de poivre noir.",
-        "difficulty": "Moyenne",
-        "calories": 450
+        "instructions": [
+            "1. Cook the spaghetti according to the package instructions until al dente. Drain and set aside.",
+            "2. In a pan, sauté the pancetta over medium heat until it's crispy. Remove it from the pan and set it aside.",
+            "3. In a bowl, whisk the eggs and add grated parmesan. Mix until well combined.",
+            "4. Add the cooked spaghetti to the pan with the pancetta. Pour the egg and cheese mixture over the hot pasta, tossing quickly so the eggs don't scramble, until the pasta is coated and creamy.",
+            "5. Season with ground black pepper to taste.",
+            "6. Serve immediately for a delicious Italian classic."
+        ],
+        "difficulty": "Medium",
+        "picture": "https://cdn.discordapp.com/attachments/465607867702181929/1170398400349474826/00029-3209881612.png",
+        "calories": 450,
+        "tags": ["pasta", "carbonara", "Italian", "20 minutes", "all seasons", "non-vegan"]
     },
     {
-        "name": "Salade César",
+        "name": "Caesar Salad",
         "ingredients": [
-            "1 laitue romaine",
-            "200 g de croûtons",
-            "100 g de parmesan râpé",
-            "Sauce César",
-            "Poulet grillé (facultatif)"
+            "1 head of romaine lettuce",
+            "200g of croutons",
+            "100g of grated parmesan",
+            "Caesar dressing",
+            "Grilled chicken (optional)"
         ],
-        "instructions": "Lavez et coupez la laitue. Ajoutez les croûtons, le parmesan, et la sauce César. Vous pouvez également ajouter du poulet grillé pour plus de protéines.",
-        "difficulty": "Facile",
-        "calories": 300
+        "instructions": [
+            "1. Wash the romaine lettuce thoroughly and chop it into bite-sized pieces.",
+            "2. Place the lettuce in a large salad bowl.",
+            "3. Sprinkle croutons and grated parmesan over the lettuce.",
+            "4. Drizzle Caesar dressing over the salad, using as much or as little as you prefer.",
+            "5. Toss the salad until the ingredients are well mixed.",
+            "6. If desired, add grilled chicken for extra protein.",
+            "7. Serve as a refreshing and classic Caesar salad."
+        ],
+        "difficulty": "Easy",
+        "picture": "https://cdn.discordapp.com/attachments/465607867702181929/1170398707620008119/00041-122025315.png",
+        "calories": 300,
+        "tags": ["salad", "Caesar", "chicken", "15 minutes", "all seasons", "non-vegan"]
     },
     {
-        "name": "Lasagnes végétariennes",
+        "name": "Vegetarian Lasagna",
         "ingredients": [
-            "Feuilles de lasagne",
-            "Épinards",
-            "Courgettes",
-            "Sauce béchamel",
-            "Fromage râpé"
+            "Lasagna noodles",
+            "Spinach (200g)",
+            "Zucchini (2 medium-sized)",
+            "Béchamel sauce",
+            "Grated cheese"
         ],
-        "instructions": "Faites cuire les lasagnes selon les instructions. Préparez les légumes et la sauce béchamel. Alternez les couches de lasagne, de légumes, de sauce et de fromage râpé. Faites cuire au four pendant 30 minutes.",
-        "difficulty": "Moyenne",
-        "calories": 380
+        "instructions": [
+            "1. Cook the lasagna noodles according to the package instructions. Drain and set aside.",
+            "2. Preheat the oven to 180°C (350°F).",
+            "3. In a large skillet, sauté the 200g of spinach and 2 medium-sized zucchinis until they are tender. Set aside.",
+            "4. In a baking dish, start by layering the lasagna noodles at the bottom.",
+            "5. Add a layer of sautéed vegetables, a layer of béchamel sauce, and a sprinkle of grated cheese.",
+            "6. Repeat the layers until the dish is filled, finishing with a layer of grated cheese on top.",
+            "7. Bake in the preheated oven for about 30 minutes.",
+            "8. Allow it to cool slightly before serving. Enjoy your vegetarian lasagna!"
+        ],
+        "difficulty": "Medium",
+        "picture": "https://cdn.discordapp.com/attachments/465607867702181929/1170399296114401330/00045-1184338278.png",
+        "calories": 380,
+        "tags": ["lasagna", "vegetarian", "oven", "30 minutes", "all seasons", "vegetarian"]
     },
     {
-        "name": "Riz sauté aux légumes",
+        "name": "Stir-Fried Vegetable Rice",
         "ingredients": [
-            "Riz cuit",
-            "Légumes (poivrons, carottes, pois)",
-            "Sauce soja",
-            "Huile de sésame"
+            "Cooked rice (300g)",
+            "Vegetables (bell peppers, carrots, peas) (300g)",
+            "Soy sauce",
+            "Sesame oil"
         ],
-        "instructions": "Faites sauter les légumes dans de l'huile de sésame. Ajoutez le riz cuit et la sauce soja. Remuez jusqu'à ce que tout soit bien mélangé.",
-        "difficulty": "Facile",
-        "calories": 250
+        "instructions": [
+            "1. Heat a wok or large skillet over high heat. Add a bit of sesame oil to the hot pan.",
+            "2. Add the vegetables (bell peppers, carrots, peas) (300g) to the pan and stir-fry until they are tender and slightly caramelized.",
+            "3. Add the cooked rice (300g) to the pan and stir-fry with the vegetables, ensuring even distribution.",
+            "4. Drizzle soy sauce over the rice and vegetables and stir to combine.",
+            "5. Continue to stir-fry until everything is well mixed and heated through.",
+            "6. Serve the delicious stir-fried vegetable rice as a quick and tasty meal."
+        ],
+        "difficulty": "Easy",
+        "picture": "https://cdn.discordapp.com/attachments/465607867702181929/1170399296613527652/00049-1572732056.png",
+        "calories": 250,
+        "tags": ["stir-fry", "rice", "vegetables", "15 minutes", "all seasons", "vegan"]
     },
     {
-        "name": "Poulet à l'ail et au miel",
+        "name": "Honey Garlic Chicken",
         "ingredients": [
-            "4 poitrines de poulet",
-            "4 cuillères à soupe de miel",
-            "4 gousses d'ail hachées",
-            "Sel et poivre au goût"
+            "4 chicken breasts",
+            "4 tablespoons of honey",
+            "4 cloves of minced garlic",
+            "Salt and pepper to taste"
         ],
-        "instructions": "Faites cuire le poulet dans une poêle. Ajoutez l'ail haché, le miel, le sel et le poivre. Faites cuire jusqu'à ce que le poulet soit doré et enrobé de sauce.",
-        "difficulty": "Moyenne",
-        "calories": 400
+        "instructions": [
+            "1. In a large skillet, heat some oil over medium heat.",
+            "2. Season the chicken breasts with salt and pepper.",
+            "3. Add the chicken breasts to the hot skillet and cook until they are golden brown and fully cooked. Remove them from the pan and set them aside.",
+            "4. In the same skillet, add minced garlic and sauté until fragrant.",
+            "5. Drizzle honey over the garlic and stir until the sauce thickens slightly.",
+            "6. Return the cooked chicken to the pan and coat it with the honey garlic sauce.",
+            "7. Cook for an additional few minutes, ensuring the chicken is fully coated and heated through.",
+            "8. Serve the honey garlic chicken for a sweet and savory delight."
+        ],
+        "difficulty": "Medium",
+        "picture": "https://cdn.discordapp.com/attachments/465607867702181929/1170399297032966315/00056-565661478.png",
+        "calories": 400,
+        "tags": ["chicken", "honey garlic", "stovetop", "25 minutes", "all seasons", "non-vegan"]
     },
     {
-        "name": "Tacos au poisson",
+        "name": "Fish Tacos",
         "ingredients": [
-            "Filets de poisson blanc",
-            "Tortillas de maïs",
+            "White fish fillets (400g)",
+            "Corn tortillas",
             "Salsa",
-            "Laitue",
-            "Tomates",
-            "Avocat"
+            "Lettuce",
+            "Tomatoes",
+            "Avocado"
         ],
-        "instructions": "Faites cuire le poisson et assemblez les tacos en garnissant les tortillas de salsa, de laitue, de tomates et d'avocat.",
-        "difficulty": "Facile",
-        "calories": 320
+        "instructions": [
+            "1. Cook the white fish fillets (400g) by grilling or pan-frying until they are cooked and slightly crispy.",
+            "2. Warm the corn tortillas in a dry skillet or microwave them for a few seconds until they are pliable.",
+            "3. Assemble your fish tacos by placing a piece of cooked fish in each tortilla.",
+            "4. Top the fish with salsa, shredded lettuce, sliced tomatoes, and avocado slices.",
+            "5. Serve your fish tacos with a squeeze of lime and enjoy a fresh and flavorful meal."
+        ],
+        "difficulty": "Easy",
+        "picture": "https://cdn.discordapp.com/attachments/465607867702181929/1170399297733406772/00063-1408046469.png",
+        "calories": 320,
+        "tags": ["fish", "tacos", "grill", "20 minutes", "all seasons", "non-vegan"]
     },
     {
-        "name": "Risotto aux champignons",
+        "name": "Mushroom Risotto",
         "ingredients": [
-            "Riz Arborio",
-            "Champignons",
-            "Bouillon de légumes",
-            "Vin blanc",
-            "Parmesan râpé"
+            "Arborio rice (300g)",
+            "Mushrooms (200g)",
+            "Vegetable broth",
+            "White wine",
+            "Grated parmesan"
         ],
-        "instructions": "Faites cuire les champignons et le riz dans du bouillon et du vin blanc, en ajoutant du parmesan râpé. Remuez jusqu'à ce que le risotto soit crémeux.",
-        "difficulty": "Moyenne",
-        "calories": 380
+        "instructions": [
+            "1. In a large saucepan, heat some oil or butter over medium heat.",
+            "2. Add Arborio rice (300g) and sauté until it becomes translucent around the edges.",
+            "3. Pour in a splash of white wine and cook, stirring, until it's mostly absorbed by the rice.",
+            "4. Start adding vegetable broth one ladle at a time, stirring frequently, and allowing each addition to be absorbed before adding more.",
+            "5. In a separate pan, sauté sliced mushrooms (200g) until they are browned and tender.",
+            "6. When the rice is creamy and cooked to your liking, stir in the sautéed mushrooms and grated parmesan.",
+            "7. Season with salt and pepper to taste.",
+            "8. Serve your mushroom risotto hot for a comforting Italian dish."
+        ],
+        "difficulty": "Medium",
+        "picture": "https://cdn.discordapp.com/attachments/465607867702181929/1170399298521944104/00067-1819356169.png",
+        "calories": 380,
+        "tags": ["risotto", "mushrooms", "stovetop", "35 minutes", "all seasons", "vegetarian"]
     },
     {
-        "name": "Bœuf Stroganoff",
+        "name": "Beef Stroganoff",
         "ingredients": [
-            "Bœuf en lanières",
-            "Oignons",
-            "Champignons",
-            "Crème fraîche",
-            "Moutarde"
+            "Strips of beef (400g)",
+            "Onions",
+            "Mushrooms",
+            "Sour cream",
+            "Mustard"
         ],
-        "instructions": "Faites cuire le bœuf avec les oignons et les champignons. Ajoutez la crème fraîche et la moutarde. Servez avec des pâtes ou du riz.",
-        "difficulty": "Moyenne",
-        "calories": 420
+        "instructions": [
+            "1. Heat some oil in a large skillet over medium-high heat.",
+            "2. Add the strips of beef (400g) and cook until they are browned. Remove the beef from the pan and set it aside.",
+            "3. In the same skillet, add chopped onions and sliced mushrooms. Sauté until they are tender and the mushrooms are browned.",
+            "4. Return the cooked beef to the skillet and stir in sour cream and a dollop of mustard.",
+            "5. Simmer for a few minutes until the sauce is heated through and the flavors meld.",
+            "6. Serve your beef stroganoff with pasta or rice for a hearty and satisfying meal."
+        ],
+        "difficulty": "Medium",
+        "picture": "https://cdn.discordapp.com/attachments/465607867702181929/1170399299021054102/00071-2687888599.png",
+        "calories": 420,
+        "tags": ["stroganoff", "beef", "mushrooms", "sour cream", "mustard", "medium", "25 minutes", "all seasons", "non-vegan"]
     },
     {
-        "name": "Soupe aux légumes",
+        "name": "Vegetable Soup",
         "ingredients": [
-            "Légumes (carottes, céleri, poireaux)",
-            "Bouillon de légumes",
-            "Pommes de terre",
-            "Sel et poivre au goût"
+            "Assorted vegetables (carrots, celery, leeks) (about 400g)",
+            "Vegetable broth",
+            "Potatoes",
+            "Salt and pepper to taste"
         ],
-        "instructions": "Coupez les légumes et faites-les cuire dans le bouillon avec les pommes de terre. Assaisonnez avec du sel et du poivre. Mixez pour obtenir une soupe crémeuse.",
-        "difficulty": "Facile",
-        "calories": 150
+        "instructions": [
+            "1. Cut about 400g of assorted vegetables, including carrots, celery, and leeks, into small pieces.",
+            "2. In a large pot, combine the chopped vegetables, vegetable broth, and potatoes.",
+            "3. Season with salt and pepper to taste.",
+            "4. Simmer until the vegetables and potatoes are soft and fully cooked.",
+            "5. Use an immersion blender to blend the soup until it reaches your desired consistency.",
+            "6. Serve your delicious vegetable soup hot and enjoy."
+        ],
+        "difficulty": "Easy",
+        "picture": "https://cdn.discordapp.com/attachments/465607867702181929/1170399299482431508/00074-1440035319.png",
+        "calories": 150,
+        "tags": ["soup", "vegetables", "easy", "25 minutes", "all seasons", "vegan"]
     }
+
 ]

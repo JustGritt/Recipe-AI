@@ -6,8 +6,6 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '@consts';
 import FormattedDate from '@components/FormattedDate.astro';
 
 const recipes = await fetch(`${import.meta.env.PUBLIC_API_URL}/api/recipes/`).then(res => res.json())
-console.log(recipes.recipes)
-
 ---
 
 <!doctype html>
@@ -26,9 +24,8 @@ console.log(recipes.recipes)
 					{
 						recipes.recipes.map((recipe: any) => (
 							<li class="w-[calc(50%-16px)] ">
-								<a href={`/recipes/${recipe._id}`} class="block ">
-									// TODO: Remove hard link in src
-									<img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt={recipe.name} class="w-full h-auto rounded-lg" />
+								<a href={`/recipe/${recipe._id}`} class="block ">
+									<img src={recipe.picture} alt={recipe.name} class="w-full h-auto rounded-lg" />
 									<h2 class="text-2xl font-bold mt-4 text-slate-900 dark:text-white">{recipe.name}</h2>
 									<p class="text-sm text-gray-500">
 										Recette {recipe.difficulty} - {recipe.calories} cal.
