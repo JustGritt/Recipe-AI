@@ -51,11 +51,10 @@ app.get('/', (req, res) => {
 // Server log
 // =====================================================
 
+connectDB();
 app.listen(process.env.SERVER_PORT, () => {
-    connectDB();
     console.log(`Server is running on port ${process.env.SERVER_PORT}`);
     console.log(`http://localhost:${process.env.SERVER_PORT}\n`);
 });
 
 module.exports = app;
-module
