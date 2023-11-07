@@ -35,10 +35,12 @@ const connectDB = async() => {
 // =====================================================
 
 const app = express();
+app.use(cors());
+
+// Imported routes
 require('./routes/user.routes')(app);
 require('./routes/recipe.routes')(app);
-
-app.use(cors());
+require('./routes/rating.routes')(app);
 
 // Test route
 app.get('/', (req, res) => {
@@ -54,3 +56,5 @@ app.listen(process.env.SERVER_PORT, () => {
     console.log(`Server is running on port ${process.env.SERVER_PORT}`);
     console.log(`http://localhost:${process.env.SERVER_PORT}\n`);
 });
+
+module.exports = app;

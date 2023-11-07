@@ -52,7 +52,15 @@ exports.verifyToken = async (req, res) => {
         const user = await User.findById(decoded.id);
         if (!user) return res.status(401).send({ message: 'Invalid token.' });
 
-        res.status(200).send({ status: 'success', message: 'Token verified.' });
+        res.status(200).send({
+            status: 'success',
+            message: 'Token verified.' ,
+            user: {
+                id: user._id,
+                username: user.username,
+                email: user.email,
+            }
+        });
     } catch (error) {
         res.status(500).send({ message: 'An error occurred while verifying the token.' });
     }

@@ -1,0 +1,51 @@
+---
+import Lock from '@icons/Lock.astro';
+---
+
+<section class="relative w-full py-0 bg-white text-black dark:bg-gray-800 dark:text-white">
+    <div id="comments" class="flex flex-col items-center justify-center w-full bg-slate-600 rounded-lg"></div>
+</section>
+
+<script>
+	const createLoggedInComments = () => {
+        const message = document.createElement('p');
+        message.textContent = "You are logged in";
+        message.classList.add('py-4', 'text-center', 'text-white', 'text-xl', 'm-0');
+        comments.appendChild(message);
+        // TODO: Add comment form
+	}
+
+	const createLoggedOffComments = () => {
+        const message = document.createElement('p');
+        message.textContent = "You need to be logged in to comment";
+        message.classList.add('py-4', 'text-center', 'text-white', 'text-xl', 'm-0');
+        comments.appendChild(message);
+	}
+
+	const token = localStorage.getItem('jwt') || null;
+	const sideLinks = document.getElementById('side-links') as HTMLDivElement;
+    const comments = document.getElementById('comments') as HTMLDivElement;
+
+	if (token) {
+		const req = await fetch(`${import.meta.env.PUBLIC_API_URL}/api/verify`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${import.meta.env.PUBLIC_OPENAI}`
+			},
+			body: JSON.stringify({ token }),
+		});
+		await req.json().then((res) => {
+			if (res.status === 'success') {
+				createLoggedInComments();
+                console.log("User connected as", res.user.username);
+			} else {
+				createLoggedOffComments();
+                console.log("User not connected");
+			}
+		})
+	} else {
+		createLoggedOffComments();
+        console.log("User not connected end");
+	}
+</script>
