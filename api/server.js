@@ -11,7 +11,7 @@ require('dotenv').config();
 const connectDB = async() => {
     try {
         mongoose.Promise = global.Promise;
-        mongoose.connect(process.env.DB_URL, {
+        mongoose.connect(process.env.MONGODB_URI, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         })
@@ -58,3 +58,4 @@ app.listen(process.env.SERVER_PORT, () => {
 });
 
 module.exports = app;
+module

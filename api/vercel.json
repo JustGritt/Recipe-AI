@@ -8,8 +8,13 @@
     ],
     "routes": [
         {
-            "src": "/(.*)",
+            "src": "/routes/(.*)",
             "dest": "server.js"
         }
+    ],
+    "rewrites": [
+        { "source": "/api/recipes", "destination": "/routes/recipe.routes.js" },
+        { "source": "/api/users", "destination": "/routes/user.routes.js" },
+        { "source": "/api/ratings", "destination": "/routes/rating.routes.js" }
     ]
 }
