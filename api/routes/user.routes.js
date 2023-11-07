@@ -4,10 +4,6 @@ const jsonParser = bodyParser.json();
 module.exports = (app) => {
     const User = require('../controllers/user.controller.js');
 
-    // Handle CORS
-    const cors = require('cors');
-    app.use(cors());
-
     // Auth routes
     app.post('/api/register', jsonParser, User.register);
     app.post('/api/login', jsonParser, User.login);
