@@ -1,0 +1,121 @@
+---
+
+---
+<script>
+    type MessageRole = 'user' | 'assistant';
+
+    interface ConversationMessage {
+      role: MessageRole;
+      content: string;
+    }
+
+    let transcript: string = '';
+    let isListening: boolean = false;
+    let conversation: ConversationMessage[] = [];
+
+    let recognition: SpeechRecognition | undefined;
+
+    /*
+    function addToConversation(text: string, role: MessageRole): void {
+      const userMessage: ConversationMessage = { role, content: text };
+      conversation.push(userMessage);
+      renderConversation();
+    }*/
+
+    function renderConversation(): void {
+      const conversationElement = document.getElementById('conversation');
+      if (conversationElement) {
+        conversationElement.innerHTML = '';
+        conversation.forEach((message, index) => {
+        const div = document.createElement('div');
+        div.classList.add(message.role === 'user' ? 'user-message' : 'assistant-message');
+        div.innerHTML = `<p>${message.content}</p>`;
+        
+        if (message.role === 'user') {
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.addEventListener('click', () => handleDelete(index));
+        div.appendChild(deleteButton);
+        }
+
+        conversationElement.appendChild(div);
+    });
+    }
+    }
+
+    function handleDelete(index: number): void {
+        const updatedConversation = [...conversation];
+        updatedConversation.splice(index, 1);
+
+        if (index < updatedConversation.length && updatedConversation[index].role === 'assistant') {
+        updatedConversation.splice(index, 1);
+        }
+
+        conversation = updatedConversation;
+        renderConversation();
+    }
+
+    function startListening(): void {
+      const startListeningBtn = document.getElementById('start-listening');
+      const chatWindowInputText = document.querySelector('#chat-window-input input') as HTMLInputElement;
+      if (window.SpeechRecognition || (window as any).webkitSpeechRecognition) {
+        recognition = new (window.SpeechRecognition || (window as any).webkitSpeechRecognition)();
+        
+        recognition.onstart = () => {
+          isListening = true;
+          startListeningBtn!.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#BC4949" viewBox="0 0 256 256">
+            <path d="M213.92,210.62l-160-176A8,8,0,1,0,42.08,45.38L80,87.09V128a48,48,0,0,0,73.91,40.4l10.88,12A64,64,0,0,1,64,128a8,8,0,0,0-16,0,80.11,80.11,0,0,0,72,79.6V232a8,8,0,0,0,16,0V207.59a79.74,79.74,0,0,0,39.62-15.31l26.46,29.1a8,8,0,1,0,11.84-10.76ZM128,160a32,32,0,0,1-32-32V104.69l46.92,51.62A32,32,0,0,1,128,160ZM87.16,38.78A48,48,0,0,1,176,64v60.43a8,8,0,0,1-16,0V64a32,32,0,0,0-59.24-16.81,8,8,0,1,1-13.6-8.41ZM187.64,151.27A63.71,63.71,0,0,0,192,128a8,8,0,0,1,16,0,79.62,79.62,0,0,1-5.46,29.09,8,8,0,1,1-14.9-5.82Z">
+            </path>
+          </svg>`
+        };
+
+        recognition.onresult = (event: SpeechRecognitionEvent) => {
+          const lastResultIndex = event.results.length - 1;
+          const recognizedText = event.results[lastResultIndex][0].transcript;
+          transcript = recognizedText;
+          //document.getElementById('transcript')!.textContent = transcript;
+          chatWindowInputText!.value = transcript;
+          //addToConversation(recognizedText, 'user');
+        };
+
+        recognition.onend = () => {
+          isListening = false;
+          startListeningBtn!.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#000000" viewBox="0 0 256 256"><path d="M128,176a48.05,48.05,0,0,0,48-48V64a48,48,0,0,0-96,0v64A48.05,48.05,0,0,0,128,176ZM96,64a32,32,0,0,1,64,0v64a32,32,0,0,1-64,0Zm40,143.6V232a8,8,0,0,1-16,0V207.6A80.11,80.11,0,0,1,48,128a8,8,0,0,1,16,0,64,64,0,0,0,128,0,8,8,0,0,1,16,0A80.11,80.11,0,0,1,136,207.6Z"></path></svg> `
+        };
+
+        recognition.onerror = (event: SpeechRecognitionError) => {
+          isListening = false;
+          startListeningBtn!.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#d72b2b" viewBox="0 0 256 256">
+            <path d="M213.92,210.62l-160-176A8,8,0,1,0,42.08,45.38L80,87.09V128a48,48,0,0,0,73.91,40.4l10.88,12A64,64,0,0,1,64,128a8,8,0,0,0-16,0,80.11,80.11,0,0,0,72,79.6V232a8,8,0,0,0,16,0V207.59a79.74,79.74,0,0,0,39.62-15.31l26.46,29.1a8,8,0,1,0,11.84-10.76ZM128,160a32,32,0,0,1-32-32V104.69l46.92,51.62A32,32,0,0,1,128,160ZM87.16,38.78A48,48,0,0,1,176,64v60.43a8,8,0,0,1-16,0V64a32,32,0,0,0-59.24-16.81,8,8,0,1,1-13.6-8.41ZM187.64,151.27A63.71,63.71,0,0,0,192,128a8,8,0,0,1,16,0,79.62,79.62,0,0,1-5.46,29.09,8,8,0,1,1-14.9-5.82Z">
+            </path>
+          </svg>`
+          console.error('Speech recognition error:', event.error);
+        };
+
+        recognition.start();
+      }else {
+        startListeningBtn!.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" fill="#BC4949" viewBox="0 0 256 256">
+            <path d="M213.92,210.62l-160-176A8,8,0,1,0,42.08,45.38L80,87.09V128a48,48,0,0,0,73.91,40.4l10.88,12A64,64,0,0,1,64,128a8,8,0,0,0-16,0,80.11,80.11,0,0,0,72,79.6V232a8,8,0,0,0,16,0V207.59a79.74,79.74,0,0,0,39.62-15.31l26.46,29.1a8,8,0,1,0,11.84-10.76ZM128,160a32,32,0,0,1-32-32V104.69l46.92,51.62A32,32,0,0,1,128,160ZM87.16,38.78A48,48,0,0,1,176,64v60.43a8,8,0,0,1-16,0V64a32,32,0,0,0-59.24-16.81,8,8,0,1,1-13.6-8.41ZM187.64,151.27A63.71,63.71,0,0,0,192,128a8,8,0,0,1,16,0,79.62,79.62,0,0,1-5.46,29.09,8,8,0,1,1-14.9-5.82Z">
+            </path>
+          </svg>`
+      }
+    }
+
+    document.getElementById('start-listening')!.addEventListener('click', () => {
+      if (isListening) {
+        recognition?.stop();
+      } else {
+        startListening();
+      }
+    });
+    
+  </script>
+
+<section id="voice-input">
+    <div>
+        <button id="start-listening">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#000000" viewBox="0 0 256 256"><path d="M128,176a48.05,48.05,0,0,0,48-48V64a48,48,0,0,0-96,0v64A48.05,48.05,0,0,0,128,176ZM96,64a32,32,0,0,1,64,0v64a32,32,0,0,1-64,0Zm40,143.6V232a8,8,0,0,1-16,0V207.6A80.11,80.11,0,0,1,48,128a8,8,0,0,1,16,0,64,64,0,0,0,128,0,8,8,0,0,1,16,0A80.11,80.11,0,0,1,136,207.6Z"></path></svg> 
+        </button>
+    </div>
+</section>
+
