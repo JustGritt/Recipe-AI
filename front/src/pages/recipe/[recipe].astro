@@ -31,7 +31,7 @@ export async function getStaticPaths() {
 
 const { name, ingredients, instructions, difficulty, picture, calories, tags, time } = Astro.props;
 ---
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
@@ -43,7 +43,7 @@ const { name, ingredients, instructions, difficulty, picture, calories, tags, ti
             <h2 class="text-slate-900 dark:text-white text-center"> {name} </h2>
             <img src={picture} alt={name} class="rounded-lg max-h-[500px] mx-auto my-8" />
 
-            <div class="w-3/5 mx-auto flex gap-4 flex-wrap">
+            <div class="w-4/5 mx-auto flex gap-4 flex-wrap lg:w-3/5">
                 {
                     (tags as string[]).map(tag => (
                         <span data-tag={tag} class="bg-gray-200 dark:bg-gray-700 rounded-full px-4 py-2 capitalize ">{tag}</span>
@@ -52,18 +52,18 @@ const { name, ingredients, instructions, difficulty, picture, calories, tags, ti
             </div>
         </section>
 
-        <section class="w-3/5 mx-auto p-4 border-t-4 flex justify-around">
-            <div class="flex gap-4 my-4">
+        <section class="w-4/5 mx-auto p-4 border-t-4 flex justify-items-center lg:justify-around flex-col lg:w-3/5 lg:flex-row">
+            <div class="flex gap-4 my-2">
                 <span class="text-slate-900 dark:text-white font-bold">Difficulty:</span>
                 <span class="text-slate-900 dark:text-white">{difficulty}</span>
             </div>
 
-            <div class="flex gap-4 my-4">
+            <div class="flex gap-4 my-2">
                 <span class="text-slate-900 dark:text-white font-bold">Time:</span>
                 <span class="text-slate-900 dark:text-white">{time}</span>
             </div>
 
-            <div class="flex gap-4 my-4">
+            <div class="flex gap-4 my-2">
                 <span class="text-slate-900 dark:text-white font-bold">Calories:</span>
                 <span class="text-slate-900 dark:text-white">{calories}</span>
             </div>
@@ -81,10 +81,9 @@ const { name, ingredients, instructions, difficulty, picture, calories, tags, ti
             </ul>
 
             <div class="absolute top-0 right-0 flex mt-6">
-                <!-- TODO: Add the copy to clipboard -->
-                <a class="text-white bg-slate-700 hover:bg-slate-800 font-medium rounded-full text-sm px-2.5 py-2.5 text-center mr-2 mb-2 dark:bg-slate-600 dark:hover:bg-slate-700">
+                <button id="copyButton" class="text-white bg-slate-700 hover:bg-slate-800 font-medium rounded-full text-sm px-2.5 py-2.5 text-center mr-2 mb-2 dark:bg-slate-600 dark:hover:bg-slate-700">
                     <Copy />
-                </a>
+                </button>
 
                 <a href=`mailto:?subject=Ingredients for ${name} recipe&body=${ingredients}` class="block text-white bg-slate-700 hover:bg-slate-800 font-medium rounded-full text-sm px-2.5 py-2.5 text-center mr-2 mb-2 dark:bg-slate-600 dark:hover:bg-slate-700">
                     <Mail />
@@ -141,7 +140,9 @@ const { name, ingredients, instructions, difficulty, picture, calories, tags, ti
 </html>
 
 <script>
+    // Selectors
     const recoButton = document.getElementById('recoButton') as HTMLButtonElement;
+    const copyButton = document.getElementById('copyButton') as HTMLButtonElement;
     const instructionsList = document.getElementById('instructionSection') as HTMLUListElement;
     const recoContainer = document.getElementById('recoContainer') as HTMLDivElement;
 
@@ -150,8 +151,13 @@ const { name, ingredients, instructions, difficulty, picture, calories, tags, ti
 
         if(recoContainer.childElementCount > 0) {
             console.log("Quick exit");
+            recoContainer.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" });
             return;
         }
+
+        // Disable the button until the response is received
+        recoButton.disabled = true;
+        recoButton.classList.add('opacity-50', 'cursor-not-allowed');
 
         // Get all messages in history
         const instructionItems = Array.from(instructionsList.querySelectorAll('li')).map((ingredient) => {
@@ -170,15 +176,14 @@ const { name, ingredients, instructions, difficulty, picture, calories, tags, ti
             },
             body: JSON.stringify({
                 model: 'gpt-3.5-turbo',
-                // model: 'gpt-4',
                 messages: [
                     {
                         role: 'system',
-                        content: 'You are now to act as an expert chef with 10 years of experience. Your goal is to help me pair my current recipe with a selection of wine, cheese or dessert that would fit the best. You can also suggest a low calorie alternative and vegan alternative if you want.'
+                        content: 'You are now to act as an expert chef with 10 years of experience. Your goal is to help me pair my current recipe with a selection of wine, cheese or dessert that would fit the best. Suggest a low calorie and vegan alternative if and recommend seasonal products if possible.'
                     },
                     ...instructionItems
                 ],
-                max_tokens: 500,
+                max_tokens: 1000,
                 temperature: 0.9,
                 top_p: 1,
                 presence_penalty: 0.6,
@@ -217,6 +222,10 @@ const { name, ingredients, instructions, difficulty, picture, calories, tags, ti
             }
         }
 
+        // Enable the button again
+        recoButton.disabled = false;
+        recoButton.classList.remove('opacity-50', 'cursor-not-allowed');
+
         return message;
     }
 
@@ -224,4 +233,8 @@ const { name, ingredients, instructions, difficulty, picture, calories, tags, ti
         handleResponse();
     });
 
+    copyButton?.addEventListener('click', () => {
+        const getIngredients = () => Array.from(instructionsList.querySelectorAll('li')).map(ingredient => ingredient.innerText);
+        navigator.clipboard.writeText(getIngredients().join('\n'));
+    });
 </script>
