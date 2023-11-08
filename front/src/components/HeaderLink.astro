@@ -1,27 +1,36 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
-
 type Props = HTMLAttributes<'a'>;
 
 const { href, class: className, ...props } = Astro.props;
 
 const { pathname } = Astro.url;
-const isActive = href === pathname || href === pathname.replace(/\/$/, '');
+// const isActive = href === pathname || href === pathname.replace(/\/$/, '');
+// Make it so that isActive also matches for nested routes (e.g. /docs/astro/overview)
+const isActive = href === pathname || pathname.startsWith(href + '/');
+
+
 ---
 
-<a href={href} class:list={[className, { active: isActive }]} {...props}>
+<a href={href} class:list={[className, { active: isActive }]} {...props}
+	class="relative inline-flex justify-center items-center my-0 py-2 mx-2 px-4 rounded-lg transition-all hover:bg-gray-200 dark:hover:bg-slate-700">
 	<slot />
 </a>
 
 <style lang="scss" scoped>
-	a {
+	a.active {
 		position: relative;
-		display: inline-block;
-		text-decoration: none;
-
-		&.active {
-			font-weight: bolder;
-			text-decoration: underline;
+		background: #f3f4f6;
+		color: #60739e;
+		&::after {
+			content: '';
+			position: absolute;
+			bottom: 4px;
+			width: 50%;
+			height: 4px;
+			border-radius: 4px;
+			background: #60739e;
 		}
 	}
 </style>
+

@@ -47,7 +47,8 @@ html {
 
 body {
     height: 100%;
-    overflow: auto;
+	width: 100vw;
+    overflow-x: hidden;
 }
 body {
 	font-family: 'Atkinson', 'Quicksand', 'Nunito', 'Montserrat', sans-serif;

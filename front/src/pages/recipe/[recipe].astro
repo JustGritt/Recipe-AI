@@ -69,7 +69,7 @@ const { name, ingredients, instructions, difficulty, picture, calories, tags, ti
             </div>
         </section>
 
-        <section id="instructionSection" class="w-3/5 mx-auto px-4 py-8 border-y-4 relative">
+        <section id="instructionSection" class="w-4/5 lg:w-3/5 mx-auto px-4 py-8 border-y-4 relative">
             <h4 class="text-slate-900 dark:text-white">List of ingredients:</h4>
 
             <ul>
@@ -80,12 +80,12 @@ const { name, ingredients, instructions, difficulty, picture, calories, tags, ti
                 }
             </ul>
 
-            <div class="absolute top-0 right-0 flex mt-6">
-                <button id="copyButton" class="text-white bg-slate-700 hover:bg-slate-800 font-medium rounded-full text-sm px-2.5 py-2.5 text-center mr-2 mb-2 dark:bg-slate-600 dark:hover:bg-slate-700">
+            <div class="flex mt-6 bg-slate-700 p-4 rounded-md gap-4 flex-wrap">
+                <button id="copyButton" class="text-white bg-slate-700 hover:bg-slate-800 font-medium rounded-full text-sm px-2.5 py-2.5 text-center border border-transparent hover:border transition-all dark:bg-slate-600 dark:hover:bg-slate-700 dark:hover:border-slate-900">
                     <Copy />
                 </button>
 
-                <a href=`mailto:?subject=Ingredients for ${name} recipe&body=${ingredients}` class="block text-white bg-slate-700 hover:bg-slate-800 font-medium rounded-full text-sm px-2.5 py-2.5 text-center mr-2 mb-2 dark:bg-slate-600 dark:hover:bg-slate-700">
+                <a href=`mailto:?subject=Ingredients for ${name} recipe&body=${ingredients}` class="block text-white bg-slate-700 hover:bg-slate-800 font-medium rounded-full text-sm px-2.5 py-2.5 text-center dark:bg-slate-600 dark:hover:bg-slate-700">
                     <Mail />
                 </a>
 
@@ -94,7 +94,7 @@ const { name, ingredients, instructions, difficulty, picture, calories, tags, ti
 
         </section>
 
-		<section class="w-3/5 mx-auto mt-8 p-4">
+		<section class="w-4/5 lg:w-3/5 mx-auto mt-8 p-4">
             <h4 class="text-slate-900 dark:text-white">
                 Instructions:
             </h4>
@@ -108,7 +108,7 @@ const { name, ingredients, instructions, difficulty, picture, calories, tags, ti
             }
 		</section>
 
-        <section class="w-3/5 mx-auto px-4 py-8 border-y-4 relative">
+        <section class="w-4/5 lg:w-3/5 mx-auto px-4 py-8 border-y-4 relative">
             <h5 class="text-slate-900 dark:text-white">
                 Need a recommendation?
             </h5>
@@ -125,12 +125,11 @@ const { name, ingredients, instructions, difficulty, picture, calories, tags, ti
             <div id="recoContainer">
         </section>
 
-        <section class="w-3/5 mx-auto px-4 py-8 relative">
-            <h5 class="text-slate-900 dark:text-white">
+        <section class="w-4/5 lg:w-3/5 mx-auto px-4 py-8 relative">
+            <h5 class="text-slate-900 dark:text-white mb-4">
                 Comments
             </h5>
 
-            <!-- TODO: Add comments -->
             <Comment />
         </section>
 

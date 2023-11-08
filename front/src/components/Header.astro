@@ -1,12 +1,13 @@
 ---
 import HeaderLink from './HeaderLink.astro';
+import DarkModeToggle from './DarkModeToggle.astro';
 import { SITE_TITLE } from '@consts';
 ---
 
-<header class="relative w-full m-0 px-4 py-0 bg-white text-black dark:bg-gray-800 dark:text-white">
-	<nav class="flex justify-between items-center">
-		<h2 class="text-base m-0 p-2 rounded-sm text-white bg-slate-950 dark:bg-slate-800 dark:text-white">
-			<a href="/" class="p-0 no-underline">{SITE_TITLE}</a>
+<header class="relative w-full m-0 px-4 py-0 bg-white text-black dark:bg-gray-800 dark:text-white h-20">
+	<nav class="flex justify-end items-center h-20 lg:justify-between">
+		<h2 class="hidden text-base m-0 p-2 rounded-sm text-white bg-slate-950 dark:bg-slate-800 dark:text-white h-10 items-center justify-center overflow-hidden lg:flex">
+			<a href="/" class="text-white no-underline border-md p-4">{SITE_TITLE}</a>
 		</h2>
 		<div class="internal-links">
 			<HeaderLink href="/">Home</HeaderLink>
@@ -14,10 +15,12 @@ import { SITE_TITLE } from '@consts';
 			<HeaderLink href="/about">About</HeaderLink>
 		</div>
 
-		
+
 		<div id="side-links" class="flex max-[720px]:hidden">
 			<!-- Menu -->
+			<DarkModeToggle />
 		</div>
+
 	</nav>
 </header>
 
@@ -25,28 +28,30 @@ import { SITE_TITLE } from '@consts';
 	const createLoggedInMenu = () => {
 		const dashboardLink = document.createElement('a');
 		dashboardLink.href = '/dashboard';
-		dashboardLink.classList.add('header-link');
+		dashboardLink.classList.add('link');
 		dashboardLink.textContent = 'Dashboard';
-		sideLinks.appendChild(dashboardLink);
 
 		const logoutLink = document.createElement('a');
 		logoutLink.href = '/logout';
 		logoutLink.classList.add('header-link');
 		logoutLink.textContent = 'Logout';
+
 		sideLinks.appendChild(logoutLink);
+		sideLinks.appendChild(dashboardLink);
 	}
 
 	const createLoggedOffMenu = () => {
 		const registerLink = document.createElement('a');
 		registerLink.href = '/register';
-		registerLink.classList.add('header-link');
+		registerLink.classList.add('a');
 		registerLink.textContent = 'Register';
-		sideLinks.appendChild(registerLink);
 
 		const loginLink = document.createElement('a');
 		loginLink.href = '/login';
-		loginLink.classList.add('header-link');
+		loginLink.classList.add('a');
 		loginLink.textContent = 'Login';
+
+		sideLinks.appendChild(registerLink);
 		sideLinks.appendChild(loginLink);
 	}
 
@@ -74,31 +79,14 @@ import { SITE_TITLE } from '@consts';
 </script>
 
 <style lang="scss" scoped>
-	.internal-links {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		> a {
-			height: 60px;
-		}
-	}
+	.links {
 
-	a {
-		padding: 1rem;
-		color: var(--black);
-		border-bottom: 4px solid transparent;
-		text-decoration: none;
-		margin: 0 4px;
-		&.active {
-			text-decoration: none;
-			border-bottom-color: var(--accent);
-		}
-	}
+		&-internal {
 
-	#side-links {
-		> a {
-			margin: 0 4px;
+		}
+
+		&-side {
+
 		}
 	}
 </style>

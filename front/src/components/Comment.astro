@@ -3,16 +3,76 @@ import Lock from '@icons/Lock.astro';
 ---
 
 <section class="relative w-full py-0 bg-white text-black dark:bg-gray-800 dark:text-white">
-    <div id="comments" class="flex flex-col items-center justify-center w-full bg-slate-600 rounded-lg"></div>
+    <div id="comments" class="flex flex-col items-center justify-center w-full"></div>
 </section>
 
 <script>
 	const createLoggedInComments = () => {
-        const message = document.createElement('p');
-        message.textContent = "You are logged in";
-        message.classList.add('py-4', 'text-center', 'text-white', 'text-xl', 'm-0');
-        comments.appendChild(message);
-        // TODO: Add comment form
+
+		// Create a form for the comment
+		const form = document.createElement('form');
+		form.classList.add('flex', 'flex-col', 'items-center', 'justify-center', 'w-full');
+		comments.appendChild(form);
+
+		// Create a textarea for the comment
+		const textarea = document.createElement('textarea');
+		textarea.classList.add('w-full', 'min-h-[4rem]', 'bg-gray-100', 'text-black', 'dark:bg-gray-800', 'dark:text-white', 'rounded-lg', 'p-4', 'mb-2', 'outline-none');
+		textarea.setAttribute('placeholder', 'Write a comment...');
+
+		// Create a button container for the comment
+		const buttonContainer = document.createElement('div');
+		buttonContainer.classList.add('w-full', 'flex', 'flex-row', 'justify-between', 'items-center', 'gap-2', 'mt-2');
+
+		// Create a submit button for the comment
+		const submit = document.createElement('button');
+		submit.textContent = "Post";
+		submit.classList.add('w-1/2', 'inline', 'bg-gray-300', 'text-black', 'dark:bg-gray-700', 'dark:text-white', 'rounded-lg', 'p-2', 'mb-2');
+		submit.setAttribute('type', 'submit');
+
+		// Cancel button for the comment
+		const cancel = document.createElement('button');
+		cancel.textContent = "Cancel";
+		cancel.classList.add('w-1/2', 'inline', 'bg-gray-300', 'text-black', 'dark:bg-gray-700', 'dark:text-white', 'rounded-lg', 'p-2', 'mb-2');
+		cancel.setAttribute('type', 'button');
+
+		// Add the form elements to document
+		form.appendChild(textarea);
+		form.appendChild(buttonContainer);
+		buttonContainer.appendChild(submit);
+		buttonContainer.appendChild(cancel);
+
+		// Add event listener to the form
+		form.addEventListener('submit', async (e) => {
+			e.preventDefault();
+			const comment = textarea.value;
+			const token = localStorage.getItem('jwt') || null;
+			const req = await fetch(`${import.meta.env.PUBLIC_API_URL}/api/comments`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'Authorization': `Bearer ${import.meta.env.PUBLIC_OPENAI}`
+				},
+				body: JSON.stringify({ comment, token }),
+			});
+			await req.json().then((res) => {
+				if (res.status === 'success') {
+					textarea.value = '';
+					console.log("Comment posted");
+				} else {
+					console.log("Comment not posted");
+				}
+			})
+		})
+
+		// Create a list for the comments
+		const list = document.createElement('ul');
+		list.classList.add('w-full', 'bg-slate-600', 'rounded-lg', 'p-4', 'mt-4');
+		comments.appendChild(list);
+
+		// Get the comments
+
+
+
 	}
 
 	const createLoggedOffComments = () => {
