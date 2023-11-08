@@ -42,6 +42,12 @@
     border-radius: 1rem;
 }
 
+@media screen and (max-width: 768px) {
+    #chat-window-history::-webkit-scrollbar {
+        display:none;
+    }
+}
+
 @media (prefers-color-scheme: dark) {
     #chat .message-user {
         position: relative;

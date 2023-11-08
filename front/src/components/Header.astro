@@ -1,57 +1,70 @@
 ---
 import HeaderLink from './HeaderLink.astro';
+import DarkModeToggle from './DarkModeToggle.astro';
 import { SITE_TITLE } from '@consts';
 ---
 
-<header class="relative w-full m-0 px-4 py-0 bg-white text-black dark:bg-gray-800 dark:text-white">
-	<nav class="flex justify-between items-center">
-		<h2 class="text-base m-0 p-2 rounded-sm text-white bg-slate-950 dark:bg-slate-800 dark:text-white">
-			<a href="/" class="p-0 no-underline">{SITE_TITLE}</a>
+<header class="relative w-full m-0 px-4 py-0 bg-white text-black dark:bg-gray-800 dark:text-white h-20">
+	<nav class="flex justify-end items-center h-20 lg:justify-between">
+		<!-- Logo -->
+		<h2 class="hidden text-base m-0 p-2 rounded-sm text-white bg-slate-950 dark:bg-slate-800 dark:text-white h-10 items-center justify-center overflow-hidden lg:flex">
+			<a href="/" class="text-white no-underline border-md p-4">{SITE_TITLE}</a>
 		</h2>
-		<div class="internal-links">
+
+		<!-- Main nav -->
+		<div>
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/recipe">Recipe</HeaderLink>
 			<HeaderLink href="/about">About</HeaderLink>
 		</div>
 
-		
-		<div id="side-links" class="flex max-[720px]:hidden">
-			<!-- Menu -->
+		<!-- Side links -->
+		<div id="sideLinks" class="flex justify-center items-center flex-row-reverse h-20">
+			<DarkModeToggle />
 		</div>
+
 	</nav>
 </header>
 
 <script>
 	const createLoggedInMenu = () => {
+		// Create a container for the links
+		const linksContainer = document.createElement('div');
+		linksContainer.classList.add('flex', 'items-center', 'justify-center', 'flex-row-reverse', 'h-20');
+
 		const dashboardLink = document.createElement('a');
+		dashboardLink.classList.add('relative', 'inline-flex', 'justify-center', 'items-center', 'my-0', 'py-2', 'mx-2', 'px-4', 'rounded-lg', 'transition-all', 'hover:bg-gray-200', 'dark:hover:bg-slate-700');
 		dashboardLink.href = '/dashboard';
-		dashboardLink.classList.add('header-link');
 		dashboardLink.textContent = 'Dashboard';
-		sideLinks.appendChild(dashboardLink);
 
 		const logoutLink = document.createElement('a');
+		logoutLink.classList.add('relative', 'inline-flex', 'justify-center', 'items-center', 'my-0', 'py-2', 'mx-2', 'px-4', 'rounded-lg', 'transition-all', 'hover:bg-gray-200', 'dark:hover:bg-slate-700');
 		logoutLink.href = '/logout';
-		logoutLink.classList.add('header-link');
 		logoutLink.textContent = 'Logout';
-		sideLinks.appendChild(logoutLink);
+
+		// Append the links to the container
+		linksContainer.appendChild(logoutLink);
+		linksContainer.appendChild(dashboardLink);
+		sideLinks.appendChild(linksContainer);
 	}
 
 	const createLoggedOffMenu = () => {
 		const registerLink = document.createElement('a');
+		registerLink.classList.add('relative', 'inline-flex', 'justify-center', 'items-center', 'my-0', 'py-2', 'mx-2', 'px-4', 'rounded-lg', 'transition-all', 'hover:bg-gray-200', 'dark:hover:bg-slate-700');
 		registerLink.href = '/register';
-		registerLink.classList.add('header-link');
 		registerLink.textContent = 'Register';
-		sideLinks.appendChild(registerLink);
 
 		const loginLink = document.createElement('a');
+		loginLink.classList.add('relative', 'inline-flex', 'justify-center', 'items-center', 'my-0', 'py-2', 'px-4', 'rounded-lg', 'transition-all', 'hover:bg-gray-200', 'dark:hover:bg-slate-700');
 		loginLink.href = '/login';
-		loginLink.classList.add('header-link');
 		loginLink.textContent = 'Login';
+
+		sideLinks.appendChild(registerLink);
 		sideLinks.appendChild(loginLink);
 	}
 
 	const token = localStorage.getItem('jwt') || null;
-	const sideLinks = document.getElementById('side-links') as HTMLDivElement;
+	const sideLinks = document.getElementById('sideLinks') as HTMLDivElement;
 	if (token) {
 		const req = await fetch(`${import.meta.env.PUBLIC_API_URL}/api/verify`, {
 			method: 'POST',
@@ -72,33 +85,3 @@ import { SITE_TITLE } from '@consts';
 		createLoggedOffMenu();
 	}
 </script>
-
-<style lang="scss" scoped>
-	.internal-links {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		> a {
-			height: 60px;
-		}
-	}
-
-	a {
-		padding: 1rem;
-		color: var(--black);
-		border-bottom: 4px solid transparent;
-		text-decoration: none;
-		margin: 0 4px;
-		&.active {
-			text-decoration: none;
-			border-bottom-color: var(--accent);
-		}
-	}
-
-	#side-links {
-		> a {
-			margin: 0 4px;
-		}
-	}
-</style>
