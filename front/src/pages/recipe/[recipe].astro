@@ -36,12 +36,12 @@ const { name, ingredients, instructions, difficulty, picture, calories, tags, ti
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
-	<body class="bg-white dark:bg-gray-800 text-slate-900 dark:text-white">
+	<body class="bg-white text-slate-900 transition-colors">
 		<Header />
 
-        <section class="py-8 w-full">
-            <h2 class="text-slate-900 dark:text-white text-center"> {name} </h2>
-            <img src={picture} alt={name} class="rounded-lg max-h-[500px] mx-auto my-8" />
+        <section class="w-scren py-8 mt-20">
+            <h2 class="text-slate-900 text-center"> {name} </h2>
+            <img src={picture} alt={name} class="rounded-lg mx-auto my-8 w-4/5 lg:w-3/5" />
 
             <div class="w-4/5 mx-auto flex gap-4 flex-wrap lg:w-3/5">
                 {
@@ -80,7 +80,7 @@ const { name, ingredients, instructions, difficulty, picture, calories, tags, ti
                 }
             </ul>
 
-            <div class="flex mt-6 bg-slate-700 p-4 rounded-md gap-4 flex-wrap">
+            <div class="flex mt-6 dark:bg-slate-700 p-4 rounded-md gap-4 flex-wrap">
                 <button id="copyButton" class="text-white bg-slate-700 hover:bg-slate-800 font-medium rounded-full text-sm px-2.5 py-2.5 text-center border border-transparent hover:border transition-all dark:bg-slate-600 dark:hover:bg-slate-700 dark:hover:border-slate-900">
                     <Copy />
                 </button>

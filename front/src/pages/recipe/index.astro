@@ -12,20 +12,22 @@ const recipes = await fetch(`${import.meta.env.PUBLIC_API_URL}/api/recipes/`).th
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
-	<body class="bg-white dark:bg-gray-800 text-slate-900 dark:text-white">
-		<Header />
-		<main class="w-3/5">
+	<body class="w-full transition-all ease-in-out bg-white">
+		<header>
+			<Header />
+		</header>
 
-			<h2 class="text-slate-900 dark:text-white"> Discover new recipes </h2>
+		<main id="recipes" class="w-full mt-20 mx-auto max-w-screen-xl">
+			<h2 class="text-slate-900">Discover new recipes</h2>
 
 			<section>
 				<ul class="flex flex-wrap gap-8 list-none m-0 p-0 w-full mt-8">
 					{
 						recipes.recipes.map((recipe: any) => (
-							<li class="w-[calc(50%-16px)] ">
-								<a href={`/recipe/${recipe._id}`} class="block ">
+							<li class="w-[calc(50%-1rem)] ">
+								<a href={`/recipe/${recipe._id}`} class="block">
 									<img src={recipe.picture} alt={recipe.name} class="w-full h-auto rounded-lg" />
-									<h2 class="text-2xl font-bold mt-4 text-slate-900 dark:text-white">{recipe.name}</h2>
+									<h2 class="text-2xl font-bold mt-4 text-slate-900">{recipe.name}</h2>
 									<p class="text-sm text-gray-500">
 										Recette {recipe.difficulty} - {recipe.calories} cal.
 									</p>
