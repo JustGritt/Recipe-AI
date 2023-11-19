@@ -8,7 +8,7 @@ const isActive = href === pathname || pathname.startsWith(href + '/');
 ---
 
 <a href={href} class:list={[className, { active: isActive }]} {...props}
-	class="relative inline-flex justify-center items-center my-0 py-2 mx-2 px-4 rounded-lg transition-colors hover:bg-gray-200">
+	class="relative inline-flex justify-center items-center my-0 py-2 mx-2 px-4 rounded-lg transition-colors bg-transparent hover:bg-gray-200 h-10">
 	<slot />
 </a>
 
@@ -17,6 +17,7 @@ const isActive = href === pathname || pathname.startsWith(href + '/');
 		position: relative;
 		font-weight: 600;
 		color: #60739e;
+		background: #f3f4f6;
 		&::after {
 			content: '';
 			position: absolute;

@@ -295,7 +295,7 @@ body {
 }
 
 .dark header nav a:active {
-    background-color: rgb(31 41 55 / 1)
+    background-color: rgb(31 41 55 / 1);
 }
 
 /* Override colors scheme */
@@ -303,31 +303,58 @@ body {
 /* ====================
     Background colors
     ==================== */
+
 .dark .bg-white {
-    background-color: #1f2937;
+    background-color: rgb(31 41 55 / var(--tw-bg-opacity));
+}
+
+.dark .bg-gray-50 {
+    background-color: #4b5563;
+}
+
+.dark .bg-gray-100 {
+    background-color: #374151;
+}
+
+.dark .bg-gray-600 {
+    background-color: #4b5563;
+}
+
+.dark .bg-gray-300 {
+    background-color: #374151;
 }
 
 .dark .bg-gray-800 {
     background-color: #fff;
 }
 
-.dark .hover\:bg-gray-200 {
-    background-color: rgb(229 231 235)
+.dark .hover\:bg-gray-200:hover {
+    background-color: rgb(229 231 235 / var(--tw-bg-opacity));
 }
 
 /* ====================
     Text colors
     ==================== */
 .dark .text-white {
-    color: rgb(15 23 42)
+    color: rgb(15 23 42 / 1)
+}
+
+.dark .text-slate-900,
+.dark .text-black {
+    color: rgb(255 255 255 / 1)
 }
 
 .dark .text-gray-500 {
-    color: rgb(189, 195, 199);
+    color: rgb(189, 195, 199 / 1);
 }
 
-.dark .text-slate-900 {
-    color: #fff;
+.dark .text-gray-900 {
+    color: #f9fafb;
 }
+/* ====================
+    Border colors
+    ==================== */
 
-
+.dark .border-slate-200 {
+    border-color: #374151;
+}

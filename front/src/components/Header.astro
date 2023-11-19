@@ -5,43 +5,44 @@ import DarkModeToggle from './DarkModeToggle.astro';
 import { SITE_TITLE } from '@consts';
 ---
 
-<header class="fixed min-w-[calc(100vw-8px)] m-0 px-4 py-0  backdrop-filter backdrop-blur-sm bg-opacity-60 h-20 transition-colors shadow bg-white text-black">
+<header class="fixed min-w-[calc(100vw-8px)] m-0 px-4 py-0 backdrop-filter backdrop-blur-sm bg-opacity-60 h-20 transition-colors shadow bg-white text-black">
 	<nav class="relative flex justify-end items-center h-20 lg:justify-between">
 		<!-- Logo -->
-		<h2 class="hidden text-base m-0 p-2 rounded-sm bg-slate-950 h-10 items-center justify-center overflow-hidden lg:flex">
-			<a href="/" class="no-underline border-md p-4 text-zinc-50">{SITE_TITLE}</a>
-		</h2>
-
-		<!-- Mobile nav -->
-		<div class="absolute left-0 focus:outline-none rounded-lg p-2 bg-gray-100 hover:bg-gray-200 lg:hidden">
-			<Menu />
-		</div>
+		<a href="/" class="no-underline border-md p-4 hidden text-base m-0 rounded-m h-10 items-center justify-center overflow-hidden lg:flex bg-slate-950 text-zinc-50 hover:text-white ">{SITE_TITLE}</a>
 
 		<!-- Main nav -->
-		<div class="hidden lg:block lg:absolute lg:left-1/2 lg:-translate-x-1/2">
+		<div class="hidden md:block md:absolute md:left-2 lg:left-1/2 lg:-translate-x-1/2">
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/recipe">Recipe</HeaderLink>
 			<HeaderLink href="/about">About</HeaderLink>
 		</div>
 
 		<!-- Side links -->
-		<div id="sideLinks" class="flex justify-center items-center flex-row-reverse h-20">
+		<div id="sideLinks" class="flex justify-center items-center flex-row-reverse h-10">
 			<DarkModeToggle />
 		</div>
 
 	</nav>
 </header>
 
+<!-- Mobile nav -->
+<div class="w-full h-16 fixed bottom-1 left-0 flex justify-left items-center md:hidden">
+	<HeaderLink href="/">Home</HeaderLink>
+	<HeaderLink href="/recipe">Recipe</HeaderLink>
+	<HeaderLink href="/about">About</HeaderLink>
+</div>
+
+
 <script>
 
 	const createLoggedOffMenu = () => {
 		const registerLink = document.createElement('a');
-		registerLink.classList.add('relative', 'inline-flex', 'justify-center', 'items-center', 'my-0', 'py-2', 'mx-2', 'px-4', 'rounded-lg', 'transition-all', 'hover:bg-gray-200');
+		registerLink.classList.add('relative', 'inline-flex', 'justify-center', 'items-center', 'h-full', 'my-0', 'py-2', 'mx-2', 'px-4', 'rounded-lg', 'transition-all', 'hover:bg-gray-200');
 		registerLink.href = '/register';
 		registerLink.textContent = 'Register';
 
 		const loginLink = document.createElement('a');
-		loginLink.classList.add('relative', 'inline-flex', 'justify-center', 'items-center', 'my-0', 'py-2', 'px-4', 'rounded-lg', 'transition-all', 'hover:bg-gray-200', 'dark:hover:bg-slate-700');
+		loginLink.classList.add('relative', 'inline-flex', 'justify-center', 'items-center', 'h-full', 'my-0', 'py-2', 'px-4', 'rounded-lg', 'transition-all', 'hover:bg-gray-200');
 		loginLink.href = '/login';
 		loginLink.textContent = 'Login';
 
@@ -55,12 +56,12 @@ import { SITE_TITLE } from '@consts';
 		linksContainer.classList.add('flex', 'items-center', 'justify-center', 'flex-row-reverse', 'h-20');
 
 		const dashboardLink = document.createElement('a');
-		dashboardLink.classList.add('relative', 'inline-flex', 'justify-center', 'items-center', 'my-0', 'py-2', 'mx-2', 'px-4', 'rounded-lg', 'transition-all', 'hover:bg-gray-200', 'dark:hover:bg-slate-700');
+		dashboardLink.classList.add('relative', 'inline-flex', 'justify-center', 'items-center', 'my-0', 'py-2', 'mx-2', 'px-4', 'rounded-lg', 'transition-all', 'hover:bg-gray-200');
 		dashboardLink.href = '/dashboard';
 		dashboardLink.textContent = 'Dashboard';
 
 		const logoutLink = document.createElement('a');
-		logoutLink.classList.add('relative', 'inline-flex', 'justify-center', 'items-center', 'my-0', 'py-2', 'mx-2', 'px-4', 'rounded-lg', 'transition-all', 'hover:bg-gray-200', 'dark:hover:bg-slate-700');
+		logoutLink.classList.add('relative', 'inline-flex', 'justify-center', 'items-center', 'my-0', 'py-2', 'mx-2', 'px-4', 'rounded-lg', 'transition-all', 'hover:bg-gray-200');
 		logoutLink.href = '/logout';
 		logoutLink.textContent = 'Logout';
 
