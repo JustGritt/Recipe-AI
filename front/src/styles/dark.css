@@ -316,6 +316,10 @@ body {
     background-color: #374151;
 }
 
+.dark .bg-gray-200 {
+    background-color: #374151;
+}
+
 .dark .bg-gray-600 {
     background-color: #4b5563;
 }
@@ -329,7 +333,7 @@ body {
 }
 
 .dark .hover\:bg-gray-200:hover {
-    background-color: rgb(229 231 235 / var(--tw-bg-opacity));
+    background-color: #4b5563;
 }
 
 /* ====================
@@ -357,4 +361,8 @@ body {
 
 .dark .border-slate-200 {
     border-color: #374151;
+}
+
+.dark .border-gray-300 {
+    border-color: #4b5563;
 }

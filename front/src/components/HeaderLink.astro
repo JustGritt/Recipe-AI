@@ -8,24 +8,27 @@ const isActive = href === pathname || pathname.startsWith(href + '/');
 ---
 
 <a href={href} class:list={[className, { active: isActive }]} {...props}
-	class="relative inline-flex justify-center items-center my-0 py-2 mx-2 px-4 rounded-lg transition-colors bg-transparent hover:bg-gray-200 h-10">
+	class="relative inline-flex justify-center items-center my-0 py-2 mx-2 px-4 rounded-lg transition-colors bg-transparent hover:bg-gray-200 h-10 text-black">
 	<slot />
 </a>
 
 <style lang="scss" scoped>
-	a.active {
+	a {
+		color: inherit;
+	}
+
+	.active {
 		position: relative;
 		font-weight: 600;
-		color: #60739e;
-		background: #f3f4f6;
 		&::after {
 			content: '';
 			position: absolute;
-			bottom: 4px;
-			width: 50%;
+			bottom: 0;
+			width: 75%;
 			height: 4px;
 			border-radius: 4px;
-			background: #60739e;
+			background: currentColor;
+			transition: all 0.2s ease-in-out;
 		}
 	}
 </style>

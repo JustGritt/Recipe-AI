@@ -2,8 +2,8 @@
 import Lock from '@icons/Lock.astro';
 ---
 
-<section class="relative w-full py-0 bg-white text-black dark:bg-gray-800 dark:text-white">
-    <div id="comments" class="flex flex-col items-center justify-center w-full"></div>
+<section class="relative w-full py-0 bg-gray-200 text-black rounded-md">
+    <div id="comments" class="flex flex-col items-center justify-center w-full p-4"></div>
 </section>
 
 <script>
@@ -16,23 +16,23 @@ import Lock from '@icons/Lock.astro';
 
 		// Create a textarea for the comment
 		const textarea = document.createElement('textarea');
-		textarea.classList.add('w-full', 'min-h-[4rem]', 'bg-gray-100', 'text-black', 'dark:bg-gray-800', 'dark:text-white', 'rounded-lg', 'p-4', 'mb-2', 'outline-none');
+		textarea.classList.add('w-full', 'min-h-[6rem]', 'bg-gray-100', 'text-black', 'rounded-md', 'p-4', 'mx-2', 'outline-none', 'text-black', 'border-2', 'border-gray-300', 'transition', 'duration-200', 'ease-in-out');
 		textarea.setAttribute('placeholder', 'Write a comment...');
 
 		// Create a button container for the comment
 		const buttonContainer = document.createElement('div');
-		buttonContainer.classList.add('w-full', 'flex', 'flex-row', 'justify-between', 'items-center', 'gap-2', 'mt-2');
+		buttonContainer.classList.add('w-full', 'flex', 'flex-row', 'justify-end', 'items-end', 'gap-2', 'ml-auto', 'mr-0', 'mt-4', 'w-80');
 
 		// Create a submit button for the comment
 		const submit = document.createElement('button');
 		submit.textContent = "Post";
-		submit.classList.add('w-1/2', 'inline', 'bg-gray-300', 'text-black', 'dark:bg-gray-700', 'dark:text-white', 'rounded-lg', 'p-2', 'mb-2');
+		submit.classList.add('w-1/2', 'inline', 'bg-gray-400', 'text-black', 'rounded-lg', 'p-2', 'mb-2');
 		submit.setAttribute('type', 'submit');
 
 		// Cancel button for the comment
 		const cancel = document.createElement('button');
 		cancel.textContent = "Cancel";
-		cancel.classList.add('w-1/2', 'inline', 'bg-gray-300', 'text-black', 'dark:bg-gray-700', 'dark:text-white', 'rounded-lg', 'p-2', 'mb-2');
+		cancel.classList.add('w-1/2', 'inline', 'bg-gray-400', 'text-black', 'rounded-lg', 'p-2', 'mb-2');
 		cancel.setAttribute('type', 'button');
 
 		// Add the form elements to document
@@ -64,21 +64,25 @@ import Lock from '@icons/Lock.astro';
 			})
 		})
 
+		// Add event listener to the cancel button
+		cancel.addEventListener('click', () => {
+			textarea.value = '';
+		})
+
 		// Create a list for the comments
 		const list = document.createElement('ul');
 		list.classList.add('w-full', 'bg-slate-600', 'rounded-lg', 'p-4', 'mt-4');
 		comments.appendChild(list);
 
+		// TODO: Add comments
+		list.style.display = 'none';
 		// Get the comments
-
-
-
 	}
 
 	const createLoggedOffComments = () => {
         const message = document.createElement('p');
         message.textContent = "You need to be logged in to comment";
-        message.classList.add('py-4', 'text-center', 'text-white', 'text-xl', 'm-0');
+        message.classList.add('py-4', 'text-center', 'text-black', 'text-xl', 'm-0');
         comments.appendChild(message);
 	}
 

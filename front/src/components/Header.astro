@@ -5,7 +5,7 @@ import DarkModeToggle from './DarkModeToggle.astro';
 import { SITE_TITLE } from '@consts';
 ---
 
-<header class="fixed min-w-[calc(100vw-8px)] m-0 px-4 py-0 backdrop-filter backdrop-blur-sm bg-opacity-60 h-20 transition-colors shadow bg-white text-black">
+<header class="fixed min-w-[calc(100vw-8px)] m-0 px-4 py-0 backdrop-filter backdrop-blur-sm bg-opacity-60 h-20 transition-colors shadow bg-white text-black z-10">
 	<nav class="relative flex justify-end items-center h-20 lg:justify-between">
 		<!-- Logo -->
 		<a href="/" class="no-underline border-md p-4 hidden text-base m-0 rounded-m h-10 items-center justify-center overflow-hidden lg:flex bg-slate-950 text-zinc-50 hover:text-white ">{SITE_TITLE}</a>
@@ -37,12 +37,12 @@ import { SITE_TITLE } from '@consts';
 
 	const createLoggedOffMenu = () => {
 		const registerLink = document.createElement('a');
-		registerLink.classList.add('relative', 'inline-flex', 'justify-center', 'items-center', 'h-full', 'my-0', 'py-2', 'mx-2', 'px-4', 'rounded-lg', 'transition-all', 'hover:bg-gray-200');
+		registerLink.classList.add('relative', 'inline-flex', 'justify-center', 'items-center', 'h-full', 'my-0', 'py-2', 'mx-2', 'px-4', 'rounded-lg', 'transition-all', 'hover:bg-gray-200', 'text-black');
 		registerLink.href = '/register';
 		registerLink.textContent = 'Register';
 
 		const loginLink = document.createElement('a');
-		loginLink.classList.add('relative', 'inline-flex', 'justify-center', 'items-center', 'h-full', 'my-0', 'py-2', 'px-4', 'rounded-lg', 'transition-all', 'hover:bg-gray-200');
+		loginLink.classList.add('relative', 'inline-flex', 'justify-center', 'items-center', 'h-full', 'my-0', 'py-2', 'px-4', 'rounded-lg', 'transition-all', 'hover:bg-gray-200', 'text-black');
 		loginLink.href = '/login';
 		loginLink.textContent = 'Login';
 
@@ -56,12 +56,12 @@ import { SITE_TITLE } from '@consts';
 		linksContainer.classList.add('flex', 'items-center', 'justify-center', 'flex-row-reverse', 'h-20');
 
 		const dashboardLink = document.createElement('a');
-		dashboardLink.classList.add('relative', 'inline-flex', 'justify-center', 'items-center', 'my-0', 'py-2', 'mx-2', 'px-4', 'rounded-lg', 'transition-all', 'hover:bg-gray-200');
+		dashboardLink.classList.add('relative', 'inline-flex', 'justify-center', 'items-center', 'my-0', 'py-2', 'mx-2', 'px-4', 'rounded-lg', 'transition-all', 'hover:bg-gray-200', 'text-black');
 		dashboardLink.href = '/dashboard';
 		dashboardLink.textContent = 'Dashboard';
 
 		const logoutLink = document.createElement('a');
-		logoutLink.classList.add('relative', 'inline-flex', 'justify-center', 'items-center', 'my-0', 'py-2', 'mx-2', 'px-4', 'rounded-lg', 'transition-all', 'hover:bg-gray-200');
+		logoutLink.classList.add('relative', 'inline-flex', 'justify-center', 'items-center', 'my-0', 'py-2', 'mx-2', 'px-4', 'rounded-lg', 'transition-all', 'hover:bg-gray-200', 'text-black');
 		logoutLink.href = '/logout';
 		logoutLink.textContent = 'Logout';
 
