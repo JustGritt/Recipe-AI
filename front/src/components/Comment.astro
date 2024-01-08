@@ -1,12 +1,38 @@
 ---
 import Lock from '@icons/Lock.astro';
+
+const { recipeId } = Astro.props;
+const ratings = await fetch(`${import.meta.env.PUBLIC_API_URL}/api/ratings/${recipeId}`).then(res => res.json());
 ---
 
 <section class="relative w-full py-0 bg-gray-200 text-black rounded-md">
     <div id="comments" class="flex flex-col items-center justify-center w-full p-4">
-		<!-- Content of comments -->
+
 	</div>
+
+
+
+
 </section>
+
+<section id="ratings" class="flex w-full p-4">
+	<!-- Content of comments -->
+	<ul class="w-full">
+		{
+			ratings.map((rating: any) => (
+				<li class="mt-4 p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+					<p>User ID: {rating.userId}</p>
+					<p>Rating: {rating.rating}</p>
+					<p>Comment: {rating.comment}</p>
+					<p>Username: {rating.username}</p>
+				</li>
+			))
+		}
+	</ul>
+
+
+</section>
+
 
 <script>
 	const createLoggedInComments = (username: string) => {
@@ -32,6 +58,7 @@ import Lock from '@icons/Lock.astro';
 		label.classList.add('text-black', 'text-xl', 'font-bold', 'mr-2');
 		rating.appendChild(label);
 
+		let starCount = ""
 		// Create the stars for the rating
 		for (let i = 0; i < 5; i++) {
 			const star = document.createElement('input');
@@ -50,7 +77,9 @@ import Lock from '@icons/Lock.astro';
 					}
 				}
 				console.log(star.value);
+				starCount = star.value;
 			})
+
 
 			// Add the star to the rating
 			rating.appendChild(star);
@@ -89,17 +118,19 @@ import Lock from '@icons/Lock.astro';
 		// Add event listener to the form
 		form.addEventListener('submit', async (e) => {
 			e.preventDefault();
+			console.log("form", e);
 			const comment = textarea.value;
 			const token = localStorage.getItem('jwt') || null;
-			const req = await fetch(`${import.meta.env.PUBLIC_API_URL}/api/comments`, {
+			const rating = starCount;
+			const recipeId = window.location.pathname.split('/')[2];
+
+			const req = await fetch(`${import.meta.env.PUBLIC_API_URL}/api/ratings`, {
 				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					'Authorization': `Bearer ${import.meta.env.PUBLIC_OPENAI}`
-				},
-				body: JSON.stringify({ comment, token }),
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ comment, token, rating, recipeId }),
 			});
 			await req.json().then((res) => {
+				console.log(res);
 				if (res.status === 'success') {
 					textarea.value = '';
 					console.log("Comment posted");

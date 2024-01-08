@@ -17,6 +17,7 @@ export async function getStaticPaths() {
     return recipes.recipes.map((recipe:any) => ({
         params: { recipe: recipe._id },
         props: {
+            recipeId: recipe._id,
             name: recipe.name,
             ingredients: recipe.ingredients,
             instructions: recipe.instructions,
@@ -29,7 +30,7 @@ export async function getStaticPaths() {
     }));
 }
 
-const { name, ingredients, instructions, difficulty, picture, calories, tags, time } = Astro.props;
+const { name, ingredients, instructions, difficulty, picture, calories, tags, time, recipeId } = Astro.props;
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -130,7 +131,8 @@ const { name, ingredients, instructions, difficulty, picture, calories, tags, ti
                 Comments
             </h5>
 
-            <Comment />
+            <Comment {recipeId} />
+
         </section>
 
         <Chat />
