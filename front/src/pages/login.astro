@@ -13,10 +13,21 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	</head>
 	<body>
 		<Header title={SITE_TITLE} - Register />
+<<<<<<< Updated upstream
 		<main class="w-full transition-colors ease-in-out m-0 max-w-full min-h-[100vh] bg-white">
 
 			<section class="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0 mt-20">
 				<div class="w-full bg-white rounded-lg border border-slate-200 shadow-2xl md:mt-0 sm:max-w-lg xl:p-0">
+||||||| Stash base
+		<main class="bg-white dark:bg-gray-800 w-full min-h-[calc(100vh-310px)]">
+
+			<div class="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0">
+				<div class="w-full bg-white rounded-lg shadow  md:mt-0 sm:max-w-md xl:p-0 dark:bg-slate-600">
+=======
+		<main id="home" class="w-full bg-white dark:bg-gray-800 transition-all duration-300 ease-in-out m-0 max-w-full min-h-[calc(100vh-310px)] py-20 h-full">
+			<section class="max-w-[70vw] m-auto mt-20">
+				<div class="w-full bg-white rounded-lg shadow md:mt-0 xl:p-0 dark:bg-slate-600 border">
+>>>>>>> Stashed changes
 					<div class="p-6 space-y-4 md:space-y-6 sm:p-8">
 						<h1 class="text-xl font-bold leading-tight tracking-tight text-slate-900 md:text-2xl">
 							Login to your account
@@ -34,9 +45,19 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 								<div class="flex items-center h-5">
 									<input id="remember" aria-describedby="remember" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-gray-300">
 								</div>
+<<<<<<< Updated upstream
 								<div class="ml-2 text-sm">
 									<label for="remember" class="font-light text-slate-900">
                                         Remember me
+||||||| Stash base
+								<div class="ml-3 text-sm">
+									<label for="remember" class="font-light text-gray-500 dark:text-gray-300">
+                                        Remember me
+=======
+								<div class="ml-3 text-sm">
+									<label for="remember" class="font-light text-gray-500 dark:text-gray-300">
+										Remember me
+>>>>>>> Stashed changes
 									</label>
 								</div>
 							</div>
@@ -51,9 +72,18 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 						</form>
 					</div>
 				</div>
+<<<<<<< Updated upstream
 			</section>
 
 			<Chat />
+||||||| Stash base
+			</div>
+
+			<Chat />
+=======
+				<Chat />
+			</section>
+>>>>>>> Stashed changes
 		</main>
 		<Footer />
 	</body>

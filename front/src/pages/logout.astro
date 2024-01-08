@@ -13,9 +13,11 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	</head>
 	<body>
 		<Header title={SITE_TITLE} - Register />
-		<main class="bg-white dark:bg-gray-800 w-full min-h-[calc(100vh-310px)]">
-            <h1 class="text-center text-slate-900 dark:text-white mt-4">You are now logged off</h1>
-			<Chat />
+		<main id="home" class="w-full bg-white dark:bg-gray-800 transition-all duration-300 ease-in-out m-0 max-w-full min-h-[calc(100vh-310px)] py-20 h-full">
+			<section class="max-w-[70vw] m-auto mt-20">
+				<h1 class="text-center text-slate-900 dark:text-white mt-4">You are now logged off</h1>
+				<Chat />
+			</section>
 		</main>
 		<Footer />
 	</body>
