@@ -1,32 +1,30 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
-type Props = HTMLAttributes<'a'>;
-
 const { href, class: className, ...props } = Astro.props;
-
 const { pathname } = Astro.url;
 const isActive = href === pathname || pathname.startsWith(href + '/');
-
-
 ---
+
 <a href={href} class:list={[className, { active: isActive }]} {...props}
-	class="relative inline-flex justify-center items-center my-0 py-2 mx-2 px-4 rounded-lg transition-all hover:bg-gray-200 dark:hover:bg-slate-700">
+	class="relative max-h-[40px] inline-flex justify-center items-center my-0 py-2 mx-2 px-4 rounded-lg transition-colors hover:bg-gray-200">
 	<slot />
 </a>
 
 <style lang="scss" scoped>
-	a.active {
-		position: relative;
-		background: #f3f4f6;
-		color: #60739e;
-		&::after {
-			content: '';
-			position: absolute;
-			bottom: 4px;
-			width: 50%;
-			height: 4px;
-			border-radius: 4px;
-			background: #60739e;
+	a {
+		max-height: 40px;
+		height: 100%;
+		&.active {
+			position: relative;
+			color: #60739e;
+			&::after {
+				content: '';
+				position: absolute;
+				bottom: 4px;
+				width: 70%;
+				height: 4px;
+				border-radius: 8px;
+				background: #60739e;
+			}
 		}
 	}
 </style>

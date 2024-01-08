@@ -2,37 +2,82 @@
 import Lock from '@icons/Lock.astro';
 ---
 
-<section class="relative w-full py-0 bg-white text-black dark:bg-gray-800 dark:text-white">
-    <div id="comments" class="flex flex-col items-center justify-center w-full"></div>
+<section class="relative w-full py-0 bg-gray-200 text-black rounded-md">
+    <div id="comments" class="flex flex-col items-center justify-center w-full p-4">
+		<!-- Content of comments -->
+	</div>
 </section>
 
 <script>
-	const createLoggedInComments = () => {
+	const createLoggedInComments = (username: string) => {
 
 		// Create a form for the comment
 		const form = document.createElement('form');
 		form.classList.add('flex', 'flex-col', 'items-center', 'justify-center', 'w-full');
 		comments.appendChild(form);
 
+		// Create a rating (1 to 5 stars) for the comment
+		const rating = document.createElement('div');
+		rating.classList.add('w-full', 'flex', 'flex-row', 'justify-start', 'items-center', 'gap-2', 'mr-0', 'ml-0', 'my-2');
+
+		// Create a header for the form
+		const header = document.createElement('h3');
+		header.textContent = `Comment as ${username}`;
+		header.classList.add('text-black', 'text-2xl', 'font-bold', 'mb-4', 'w-full', 'text-left', 'mb-0');
+		rating.appendChild(header);
+
+		// Create a label for the rating
+		const label = document.createElement('label');
+		label.textContent = "Rating:";
+		label.classList.add('text-black', 'text-xl', 'font-bold', 'mr-2');
+		rating.appendChild(label);
+
+		// Create the stars for the rating
+		for (let i = 0; i < 5; i++) {
+			const star = document.createElement('input');
+			star.setAttribute('type', 'radio');
+			star.setAttribute('name', 'rating');
+			star.setAttribute('value', `${i + 1}`);
+
+			// Add event listener to the stars
+			star.addEventListener('click', () => {
+				const starValue = parseInt(star.value);
+				// If the star value is above 1, change the background color of the previous stars
+				if (starValue > 1) {
+					for (let j = 0; j < starValue - 1; j++) {
+						// rating.children[j].classList.add('bg-yellow-400');
+						console.log(rating.children[j]);
+					}
+				}
+				console.log(star.value);
+			})
+
+			// Add the star to the rating
+			rating.appendChild(star);
+		}
+
+		// Add the rating to the form
+		form.appendChild(rating);
+
 		// Create a textarea for the comment
 		const textarea = document.createElement('textarea');
-		textarea.classList.add('w-full', 'min-h-[4rem]', 'bg-gray-100', 'text-black', 'dark:bg-gray-800', 'dark:text-white', 'rounded-lg', 'p-4', 'mb-2', 'outline-none');
+		textarea.classList.add('w-full', 'min-h-[6rem]', 'bg-gray-100', 'text-black', 'rounded-md', 'p-4', 'mx-2', 'mt-2', 'outline-none', 'text-black', 'border-2', 'border-gray-300', 'transition', 'duration-200', 'ease-in-out');
 		textarea.setAttribute('placeholder', 'Write a comment...');
 
 		// Create a button container for the comment
 		const buttonContainer = document.createElement('div');
-		buttonContainer.classList.add('w-full', 'flex', 'flex-row', 'justify-between', 'items-center', 'gap-2', 'mt-2');
+		buttonContainer.classList.add('w-full', 'flex', 'flex-row', 'justify-end', 'items-end', 'gap-2', 'ml-auto', 'mr-0', 'mt-4', 'w-80');
 
 		// Create a submit button for the comment
 		const submit = document.createElement('button');
 		submit.textContent = "Post";
-		submit.classList.add('w-1/2', 'inline', 'bg-gray-300', 'text-black', 'dark:bg-gray-700', 'dark:text-white', 'rounded-lg', 'p-2', 'mb-2');
+		submit.classList.add('w-1/2', 'inline', 'bg-gray-400', 'text-black', 'rounded-lg', 'p-2', 'mb-2');
 		submit.setAttribute('type', 'submit');
 
 		// Cancel button for the comment
 		const cancel = document.createElement('button');
 		cancel.textContent = "Cancel";
-		cancel.classList.add('w-1/2', 'inline', 'bg-gray-300', 'text-black', 'dark:bg-gray-700', 'dark:text-white', 'rounded-lg', 'p-2', 'mb-2');
+		cancel.classList.add('w-1/2', 'inline', 'bg-gray-400', 'text-black', 'rounded-lg', 'p-2', 'mb-2');
 		cancel.setAttribute('type', 'button');
 
 		// Add the form elements to document
@@ -64,21 +109,25 @@ import Lock from '@icons/Lock.astro';
 			})
 		})
 
+		// Add event listener to the cancel button
+		cancel.addEventListener('click', () => {
+			textarea.value = '';
+		})
+
 		// Create a list for the comments
 		const list = document.createElement('ul');
 		list.classList.add('w-full', 'bg-slate-600', 'rounded-lg', 'p-4', 'mt-4');
 		comments.appendChild(list);
 
+		// TODO: Add comments
+		list.style.display = 'none';
 		// Get the comments
-
-
-
 	}
 
 	const createLoggedOffComments = () => {
         const message = document.createElement('p');
         message.textContent = "You need to be logged in to comment";
-        message.classList.add('py-4', 'text-center', 'text-white', 'text-xl', 'm-0');
+        message.classList.add('py-4', 'text-center', 'text-black', 'text-xl', 'm-0');
         comments.appendChild(message);
 	}
 
@@ -91,14 +140,13 @@ import Lock from '@icons/Lock.astro';
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-				'Authorization': `Bearer ${import.meta.env.PUBLIC_OPENAI}`
 			},
 			body: JSON.stringify({ token }),
 		});
 		await req.json().then((res) => {
 			if (res.status === 'success') {
-				createLoggedInComments();
-                console.log("User connected as", res.user.username);
+				const username = res.user.username;
+				createLoggedInComments(username);
 			} else {
 				createLoggedOffComments();
                 console.log("User not connected");

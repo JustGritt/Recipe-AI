@@ -3,8 +3,9 @@ import type { CollectionEntry } from 'astro:content';
 import BaseHead from '@components/BaseHead.astro';
 import Header from '@components/Header.astro';
 import Footer from '@components/Footer.astro';
-import FormattedDate from '@components/FormattedDate.astro';
 import Chat from '@components/Chat.astro';
+import FormattedDate from '@components/FormattedDate.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
 type Props = CollectionEntry<'recipe'>['data'];
 
@@ -13,37 +14,37 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 
 <html lang="en">
 	<head>
-		<BaseHead title={title} description={description} />
-
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
 
 	<body>
-		<Header />
-		<main class="bg-white dark:bg-gray-800 relative w-full min-h-[calc(100vh-310px)] text-black dark:text-white">
-			<article class="text-black dark:text-white">
-				<div class="hero-image">
-					{heroImage && <img width={1020} height={510} src={heroImage} alt="" />}
-				</div>
-				<div class="prose">
-					<div class="title">
-						<div class="date">
-							<FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
-						</div>
-						<h1>{title}</h1>
-						<hr />
+		<Header title={SITE_TITLE} />
+		<main id="home" class="w-full bg-white dark:bg-gray-800 transition-all duration-300 ease-in-out m-0 max-w-full min-h-[calc(100vh-310px)] py-20 h-full">
+			<section class="max-w-[70vw] m-auto mt-20">
+				<article class="text-black dark:text-white">
+					<div class="hero-image">
+						{heroImage && <img width={1020} height={510} src={heroImage} alt="" />}
 					</div>
-					<slot />
-				</div>
-			</article>
+					<div class="prose">
+						<div class="title">
+							<div class="date">
+								<FormattedDate date={pubDate} />
+								{
+									updatedDate && (
+										<div class="last-updated-on">
+											Last updated on <FormattedDate date={updatedDate} />
+										</div>
+									)
+								}
+							</div>
+							<h1>{title}</h1>
+							<hr />
+						</div>
+						<slot />
+					</div>
+				</article>
+			</section>
 
-			<!-- Reco -->
 			<Chat />
 		</main>
 		<Footer />
