@@ -5,48 +5,11 @@ const isActive = href === pathname || pathname.startsWith(href + '/');
 ---
 
 <a href={href} class:list={[className, { active: isActive }]} {...props}
-<<<<<<< Updated upstream
-	class="relative inline-flex justify-center items-center my-0 py-2 mx-2 px-4 rounded-lg transition-colors bg-transparent hover:bg-gray-200 h-10 text-black">
-||||||| Stash base
-	class="relative inline-flex justify-center items-center my-0 py-2 mx-2 px-4 rounded-lg transition-colors hover:bg-gray-200">
-=======
 	class="relative max-h-[40px] inline-flex justify-center items-center my-0 py-2 mx-2 px-4 rounded-lg transition-colors hover:bg-gray-200">
->>>>>>> Stashed changes
 	<slot />
 </a>
 
 <style lang="scss" scoped>
-<<<<<<< Updated upstream
-	a {
-		color: inherit;
-	}
-
-	.active {
-		position: relative;
-		font-weight: 600;
-		&::after {
-			content: '';
-			position: absolute;
-			bottom: 0;
-			width: 75%;
-			height: 4px;
-			border-radius: 4px;
-			background: currentColor;
-			transition: all 0.2s ease-in-out;
-||||||| Stash base
-	a.active {
-		position: relative;
-		font-weight: 600;
-		color: #60739e;
-		&::after {
-			content: '';
-			position: absolute;
-			bottom: 4px;
-			width: 50%;
-			height: 4px;
-			border-radius: 4px;
-			background: #60739e;
-=======
 	a {
 		max-height: 40px;
 		height: 100%;
@@ -62,7 +25,6 @@ const isActive = href === pathname || pathname.startsWith(href + '/');
 				border-radius: 8px;
 				background: #60739e;
 			}
->>>>>>> Stashed changes
 		}
 	}
 </style>
