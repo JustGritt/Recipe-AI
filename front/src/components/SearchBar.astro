@@ -1,57 +1,110 @@
 ---
+
 ---
 
-
-<main>
-    <section>
-
-        <div class="flex items-center">
-            <label for="search" class="sr-only">Search</label>
-            <div class="relative w-full">
-                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 21 21">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.15 5.6h.01m3.337 1.913h.01m-6.979 0h.01M5.541 11h.01M15 15h2.706a1.957 1.957 0 0 0 1.883-1.325A9 9 0 1 0 2.043 11.89 9.1 9.1 0 0 0 7.2 19.1a8.62 8.62 0 0 0 3.769.9A2.013 2.013 0 0 0 13 18v-.857A2.034 2.034 0 0 1 15 15Z"/>
-                    </svg>
-                </div>
-                <input type="text" id="searchbar" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search recipes" required>
-
-
-                    <button type="button" class="absolute inset-y-0 end-0 flex items-center pe-3">
-                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 20">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7v3a5.006 5.006 0 0 1-5 5H6a5.006 5.006 0 0 1-5-5V7m7 9v3m-3 0h6M7 1h2a3 3 0 0 1 3 3v5a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V4a3 3 0 0 1 3-3Z"/>
-                        </svg>
-                    </button>
-                </div>
-                <button type="button" id="search" name="search" class="text-white bg-blue-700  hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 ml-2 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+<section>
+    <div class="flex items-center">
+        <label for="search" class="sr-only">Search</label>
+        <div class="relative w-full">
+            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 21 21">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.15 5.6h.01m3.337 1.913h.01m-6.979 0h.01M5.541 11h.01M15 15h2.706a1.957 1.957 0 0 0 1.883-1.325A9 9 0 1 0 2.043 11.89 9.1 9.1 0 0 0 7.2 19.1a8.62 8.62 0 0 0 3.769.9A2.013 2.013 0 0 0 13 18v-.857A2.034 2.034 0 0 1 15 15Z"/>
+                </svg>
+            </div>
+            <input type="text" id="recipe-searchbar" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Roasted lemon chicken" required value="Fried Chicken">
+                <button type="button" class="absolute inset-y-0 end-0 flex items-center pe-3">
+                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7v3a5.006 5.006 0 0 1-5 5H6a5.006 5.006 0 0 1-5-5V7m7 9v3m-3 0h6M7 1h2a3 3 0 0 1 3 3v5a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V4a3 3 0 0 1 3-3Z"/>
                     </svg>
                 </button>
+            </div>
+            <button type="button" id="search" name="search" class="text-white bg-blue-700  hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 ml-2 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                </svg>
+            </button>
+    </div>
+
+    <section id="recipe" class="w-full mt-10 hidden">
+        <h2 id="recipe-name" class="text-slate-900 text-center mb-4 mt-2">
+            <!-- {name} -->
+        </h2>
+        <!-- <img src={picture} alt={name} class="rounded-lg mx-auto my-8 w-4/5 lg:w-4/5" /> -->
+
+        <div id="recipe-tags" class="w-full mx-auto flex gap-4 flex-wrap lg:w-4/5 mb-4">
+            <!-- Tags -->
         </div>
 
+        <div class="w-full mx-auto p-4 border-t-4 flex justify-items-center lg:justify-around flex-col lg:w-4/5 lg:flex-row">
+            <div class="flex gap-4 my-2">
+                <span class="text-slate-900 font-bold">Difficulty:</span>
+                <span id="recipe-difficulty" class="text-slate-900"></span>
+            </div>
 
-        <p class="search-output">aaa</p>
+            <div class="flex gap-4 my-2">
+                <span class="text-slate-900 font-bold">Time:</span>
+                <span id="recipe-time" class="text-slate-900"></span>
+            </div>
+
+            <div class="flex gap-4 my-2">
+                <span class="text-slate-900 font-bold">Calories:</span>
+                <span id="recipe-calories" class="text-slate-900"></span>
+            </div>
+        </div>
+
+        <div id="instructionSection" class="w-full lg:w-4/5 mx-auto px-4 py-8 border-y-4 relative z-0">
+            <h4 class="text-slate-900 ">List of ingredients:</h4>
+
+            <ul id="ingredients">
+                <!-- Ingredients -->
+            </ul>
+        </div>
+
+        <div class="w-full lg:w-4/5 mx-auto mt-8 p-4">
+            <h4 class="text-slate-900 ">
+                Instructions:
+            </h4>
+
+            <div id="instructions" class="flex gap-4 my-4 flex-col">
+                <!-- Instructions -->
+            </div>
+        </div>
     </section>
-</main>
+</section>
 
 <script>
     const search = document.getElementById('search') as HTMLInputElement;
 
     // Handle chat response
-    const handleResponse = async(content: string) => {
+    const handleResponse = async(userRecipeRequest: String) => {
 
         const recipeQuery = {
             role: "user",
-            content: `Ouput strictly json file for each attribute for recipe of ${content}.
-            The first json file should have the following attributes name = the name of the recipe,
-            the second json file should have the following attributes ingredients = the list of ingredients.
-            The third json file should have the following attributes instructions = a detailed list of instructions,
-            The last json file should have the following attributes difficulty = the difficulty of the recipe, calories = the number of calories, time = the cooking time.`
+            content: `Provide a recipe for ${userRecipeRequest} in a valid json object and nothing else.
+            You have to strictly follow the following format and make sure to use double quotes and not single quote: \n
+            {
+                "name": "...",
+                "difficulty": "...",
+                "time": "... minutes",
+                "calories": "... calories",
+                "ingredients":[
+                    "...",
+                    "...",
+                    "..."
+                ],
+                "instructions":[
+                    "...",
+                    "...",
+                    "..."
+                ],
+                "tags":[
+                    "...",
+                    "...",
+                    "..."
+                ]
+            }`
         }
 
-        console.log(recipeQuery);
-
-        // Stream response from API
         const response = await fetch(import.meta.env.PUBLIC_OPENAI_COMPLETION_URL, {
             method: 'POST',
             headers: {
@@ -63,41 +116,61 @@
                 messages: [
                     {
                         role: 'system',
-                        content: 'You are now to act as an expert chef with 10 years of experience. Output only what is asked of you'
+                        content: 'You are now to act as an expert chef with 10 years of experience. You are to provide a recipe asked by the user and nothing else.'
                     },
                     recipeQuery
                 ],
                 max_tokens: 5000,
-                temperature: 0.9,
-                top_p: 1,
-                presence_penalty: 0.6,
-                frequency_penalty: 0.6,
                 stop: ['[DONE]'],
             })
         });
 
+        // Create a message div
         const message = document.createElement('div');
         message.classList.add('flex', 'gap-4', 'my-4');
 
-        //hqndle the onpenqi response
-        const data = await response.json();
-        //parse the data
-        const parsedData = data.choices[0].message.content;
-        JSON.stringify(parsedData);
-
-        return parsedData;
+        // Get the response from the API
+        const res = await response.json();
+        const data = res.choices[0].message.content;
+        const sanitizedData = data.replaceAll("'s", 's').replaceAll("'", '"').replaceAll('""', ''); // TODO: Replace later if needed
+        console.log(sanitizedData);
+        return sanitizedData;
     }
 
     search.addEventListener('click', async() => {
-        const searchbar = document.getElementById('searchbar') as HTMLInputElement;
-        const search = document.querySelector('.search-output') as HTMLParagraphElement;
-        if(searchbar.value) {
-            search.innerText = searchbar.value;
-            console.log(searchbar.value)
-            const data = await handleResponse(searchbar.value)
-            console.log(data)
-            // Remove trailing comma using a regular expression
+        const recipesearchbar = document.getElementById('recipe-searchbar') as HTMLInputElement;
+        const recipe = document.getElementById('recipe') as HTMLDivElement;
+        const recipeValue = recipesearchbar.value;
 
+        if(recipeValue && recipeValue !== '') {
+            const data = await handleResponse(recipeValue);
+            try {
+                const parsedData = JSON.parse(data);
+
+                const recipeName = document.getElementById('recipe-name') as HTMLHeadingElement;
+                const recipeDifficulty = document.getElementById('recipe-difficulty') as HTMLSpanElement;
+                const recipeTime = document.getElementById('recipe-time') as HTMLSpanElement;
+                const recipeCalories = document.getElementById('recipe-calories') as HTMLSpanElement;
+                const recipeTags = document.getElementById('recipe-tags') as HTMLDivElement;
+                const recipeIngredients = document.getElementById('ingredients') as HTMLUListElement;
+                const recipeInstructions = document.getElementById('instructions') as HTMLDivElement;
+
+
+                parsedData.name ? recipeName.innerText = parsedData.name : recipeName.innerText = 'No name provided';
+                parsedData.difficulty ? recipeDifficulty.innerText = parsedData.difficulty : recipeDifficulty.innerText = 'No difficulty provided';
+                parsedData.time ? recipeTime.innerText = parsedData.time : recipeTime.innerText = 'No time provided';
+                parsedData.calories ? recipeCalories.innerText = parsedData.calories : recipeCalories.innerText = 'No calories provided';
+                parsedData.tags ? recipeTags.innerHTML = parsedData.tags.map((tag: String) => `<span class="bg-gray-200 text-black rounded-full px-4 py-2 capitalize">${tag}</span>`).join('') : recipeTags.innerHTML = '<span class="text-slate-900 bg-slate-100 rounded-lg px-2 py-1">No tags provided</span>';
+                parsedData.ingredients ? recipeIngredients.innerHTML = parsedData.ingredients.map((ingredient: String) => `<li class="text-slate-900">${ingredient}</li>`).join('') : recipeIngredients.innerHTML = '<li class="text-slate-900">No ingredients provided</li>';
+                parsedData.instructions ? recipeInstructions.innerHTML = parsedData.instructions.map((instruction: String) => `<div class="flex gap-4"><span class="text-slate-900 font-bold">${parsedData.instructions.indexOf(instruction) + 1})</span><span class="text-slate-900">${instruction}</span></div>`).join('') : recipeInstructions.innerHTML = '<div class="flex gap-4 my-4"><span class="text-slate-900 font-bold">No instructions provided</span></div>';
+
+                // Show the recipe section
+                recipe.classList.remove('hidden');
+            } catch (error) {
+                console.log(error);
+                recipe.classList.remove('hidden');
+                recipe.innerHTML = `<div class="flex gap-4 my-4"><span class="text-red-700 font-bold">Seems like there was an issue while generating a recipe for ${recipeValue}, try again in a few seconds</span></div>`;
+            }
         }
     })
 </script>
