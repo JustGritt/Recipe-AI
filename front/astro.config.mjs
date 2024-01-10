@@ -8,7 +8,6 @@ export default defineConfig({
   site: 'https://example.com',
   integrations: [ tailwind()],
 
-  output: "server",
 });
 
 
