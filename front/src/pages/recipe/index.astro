@@ -1,8 +1,11 @@
 ---
+import ImgCard from '@components/ImgCard.astro';
+
 import BaseHead from '@components/BaseHead.astro';
 import Header from '@components/Header.astro';
 import Footer from '@components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '@consts';
+import { imageConfig } from 'astro:assets';
 
 const recipes = await fetch(`${import.meta.env.PUBLIC_API_URL}/api/recipes/`).then((res) => res.json());
 ---
@@ -26,7 +29,15 @@ const recipes = await fetch(`${import.meta.env.PUBLIC_API_URL}/api/recipes/`).th
 						recipes.recipes.map((recipe: any) => (
 							<li class="w-[calc(50%-1rem)] ">
 								<a href={`/recipe/${recipe._id}`} class="block">
-									<img src={recipe.picture} alt={recipe.name} class="w-full h-auto rounded-lg" />
+
+
+									{
+									recipe.picture ?
+										<img src={recipe.picture} alt={recipe.name} class="w-full h-auto rounded-lg" /> :
+										<img src="https://images.unsplash.com/photo-1466637574441-749b8f19452f?q=80&w=2428&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt={recipe.name} class="w-full h-auto rounded-lg" />
+									}
+
+
 									<h2 class="text-2xl font-bold mt-4 text-slate-900">{recipe.name}</h2>
 									<p class="text-sm text-gray-500">
 										Recette {recipe.difficulty} - {recipe.calories} cal.

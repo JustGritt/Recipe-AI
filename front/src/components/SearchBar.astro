@@ -1,0 +1,327 @@
+---
+// Icons
+import Copy from '@icons/Copy.astro';
+import Mail from '@icons/Mail.astro';
+import Bolt from '@icons/Bolt.astro';
+import VoiceInput from '@components/VoiceInput.astro';
+
+---
+
+<section>
+    <div class="flex items-center">
+        <label for="search" class="sr-only">Search</label>
+    <div class="relative w-full">
+            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 21 21">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.15 5.6h.01m3.337 1.913h.01m-6.979 0h.01M5.541 11h.01M15 15h2.706a1.957 1.957 0 0 0 1.883-1.325A9 9 0 1 0 2.043 11.89 9.1 9.1 0 0 0 7.2 19.1a8.62 8.62 0 0 0 3.769.9A2.013 2.013 0 0 0 13 18v-.857A2.034 2.034 0 0 1 15 15Z"/>
+                </svg>
+            </div>
+            <input type="text" id="recipe-searchbar" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Roasted lemon chicken" required value="Fried Chicken">
+    </div>
+            <button type="button" id="search" name="search" class="text-white bg-blue-700  hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 ml-2 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                </svg>
+            </button>
+
+
+    </div>
+
+    <section id="recipe" class="w-full mt-10 hidden">
+        <h2 id="recipe-name" class="text-slate-900 text-center mb-4 mt-2">
+            <!-- {name} -->
+        </h2>
+        <!-- <img src={picture} alt={name} class="rounded-lg mx-auto my-8 w-4/5 lg:w-4/5" /> -->
+
+        <div id="recipe-tags" class="w-full mx-auto flex gap-4 flex-wrap lg:w-4/5 mb-4">
+            <!-- Tags -->
+        </div>
+
+        <div class="w-full mx-auto p-4 border-t-4 flex justify-items-center lg:justify-around flex-col lg:w-4/5 lg:flex-row">
+            <div class="flex gap-4 my-2">
+                <span class="text-slate-900 font-bold">Difficulty:</span>
+                <span id="recipe-difficulty" class="text-slate-900"></span>
+            </div>
+
+            <div class="flex gap-4 my-2">
+                <span class="text-slate-900 font-bold">Time:</span>
+                <span id="recipe-time" class="text-slate-900"></span>
+            </div>
+
+            <div class="flex gap-4 my-2">
+                <span class="text-slate-900 font-bold">Calories:</span>
+                <span id="recipe-calories" class="text-slate-900"></span>
+            </div>
+        </div>
+
+        <div id="instructionSection" class="w-full lg:w-4/5 mx-auto px-4 py-8 border-y-4 relative z-0">
+            <h4 class="text-slate-900 ">List of ingredients:</h4>
+
+            <ul id="ingredients">
+                <!-- Ingredients -->
+            </ul>
+        </div>
+
+        <div class="w-full lg:w-4/5 mx-auto mt-8 p-4">
+            <h4 class="text-slate-900 ">
+                Instructions:
+            </h4>
+
+            <div id="instructions" class="flex gap-4 my-4 flex-col">
+                <!-- Instructions -->
+            </div>
+        </div>
+
+        <section class="w-4/5 lg:w-3/5 mx-auto px-4 py-8 border-y-4 relative">
+            <h5 class="text-slate-900 ">
+                Need a recommendation?
+            </h5>
+
+            <p>
+                If you want to pair this recipe with a wine, a dessert or cheese, we recommend you to use our pair recommendation tool.
+            </p>
+
+            <button id="recoButton" type="button" class="text-zinc-50 bg-slate-700 hover:bg-slate-600 focus:outline-none focus:ring-4 focus:ring-slate-300 font-medium rounded-full text-m px-5 py-2.5 text-center mr-2 mb-2 flex items-center justify-center">
+                <Bolt />
+                <span class="ml-2">Show recommendation</span>
+            </button>
+
+            <div id="recoContainer"></div>
+        </section>
+    </section>
+</section>
+
+<script>
+    const search = document.getElementById('search') as HTMLInputElement;
+
+    // Handle chat response
+    const handleResponse = async(userRecipeRequest: String) => {
+
+        const recipeQuery = {
+            role: "user",
+            content: `Provide a recipe for ${userRecipeRequest} in a valid json object and nothing else.
+            You have to strictly follow the following format and make sure to use double quotes and not single quote: \n
+            {
+                "name": "...",
+                "difficulty": "...",
+                "time": "... minutes",
+                "calories": "... calories",
+                "ingredients":[
+                    "...",
+                    "...",
+                    "..."
+                ],
+                "instructions":[
+                    "...",
+                    "...",
+                    "..."
+                ],
+                "tags":[
+                    "...",
+                    "...",
+                    "..."
+                ]
+            }`
+        }
+
+        const response = await fetch(import.meta.env.PUBLIC_OPENAI_COMPLETION_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${import.meta.env.PUBLIC_OPENAI}`
+            },
+            body: JSON.stringify({
+                model: 'gpt-4',
+                messages: [
+                    {
+                        role: 'system',
+                        content: 'You are now to act as an expert chef with 10 years of experience. You are to provide a recipe asked by the user and nothing else.'
+                    },
+                    recipeQuery
+                ],
+                max_tokens: 5000,
+                stop: ['[DONE]'],
+            })
+        });
+
+        // Create a message div
+        const message = document.createElement('div');
+        message.classList.add('flex', 'gap-4', 'my-4');
+
+        // Get the response from the API
+        const res = await response.json();
+        const data = res.choices[0].message.content;
+        const sanitizedData = data.replaceAll("'s", 's').replaceAll("'", '"').replaceAll('""', ''); // TODO: Replace later if needed
+        console.log(sanitizedData);
+        return sanitizedData;
+    }
+
+    search.addEventListener('click', async() => {
+        const recipesearchbar = document.getElementById('recipe-searchbar') as HTMLInputElement;
+        const recipe = document.getElementById('recipe') as HTMLDivElement;
+        const recipeValue = recipesearchbar.value;
+
+        const search = document.getElementById('search') as HTMLInputElement;
+        search.disabled = true;
+        search.innerHTML = `
+<svg aria-hidden="true" role="status" class="inline w-5 h-5 text-white animate-spin" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="#E5E7EB"/>
+<path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentColor"/>
+</svg>`;
+
+
+        if(recipeValue && recipeValue !== '') {
+            const recipeExists = await fetch(import.meta.env.PUBLIC_API_URL+`/api/recipes/name/${recipeValue}`);
+            const recipeExistsData = await recipeExists.json();
+            if (recipeExistsData.recipes.length > 0) {
+                window.location.href = `/recipe/${recipeExistsData.recipes[0]._id}`;
+            }
+            const data = await handleResponse(recipeValue);
+            try {
+                const parsedData = JSON.parse(data);
+
+                const recipeName = document.getElementById('recipe-name') as HTMLHeadingElement;
+                const recipeDifficulty = document.getElementById('recipe-difficulty') as HTMLSpanElement;
+                const recipeTime = document.getElementById('recipe-time') as HTMLSpanElement;
+                const recipeCalories = document.getElementById('recipe-calories') as HTMLSpanElement;
+                const recipeTags = document.getElementById('recipe-tags') as HTMLDivElement;
+                const recipeIngredients = document.getElementById('ingredients') as HTMLUListElement;
+                const recipeInstructions = document.getElementById('instructions') as HTMLDivElement;
+
+
+                parsedData.name ? recipeName.innerText = parsedData.name : recipeName.innerText = 'No name provided';
+                parsedData.difficulty ? recipeDifficulty.innerText = parsedData.difficulty : recipeDifficulty.innerText = 'No difficulty provided';
+                parsedData.time ? recipeTime.innerText = parsedData.time : recipeTime.innerText = 'No time provided';
+                parsedData.calories ? recipeCalories.innerText = parsedData.calories : recipeCalories.innerText = 'No calories provided';
+                parsedData.tags ? recipeTags.innerHTML = parsedData.tags.map((tag: String) => `<span class="bg-gray-200 text-black rounded-full px-4 py-2 capitalize">${tag}</span>`).join('') : recipeTags.innerHTML = '<span class="text-slate-900 bg-slate-100 rounded-lg px-2 py-1">No tags provided</span>';
+                parsedData.ingredients ? recipeIngredients.innerHTML = parsedData.ingredients.map((ingredient: String) => `<li class="text-slate-900">${ingredient}</li>`).join('') : recipeIngredients.innerHTML = '<li class="text-slate-900">No ingredients provided</li>';
+                parsedData.instructions ? recipeInstructions.innerHTML = parsedData.instructions.map((instruction: String) => `<div class="flex gap-4"><span class="text-slate-900 font-bold">${parsedData.instructions.indexOf(instruction) + 1})</span><span class="text-slate-900">${instruction}</span></div>`).join('') : recipeInstructions.innerHTML = '<div class="flex gap-4 my-4"><span class="text-slate-900 font-bold">No instructions provided</span></div>';
+
+                // Show the recipe section
+                recipe.classList.remove('hidden');
+                search.disabled = false;
+                search.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                </svg>`;
+
+                //check if the recipe is already in the database
+
+                const newRecipe = JSON.stringify({
+                    name: parsedData.name,
+                    difficulty: parsedData.difficulty,
+                    time: parsedData.time,
+                    calories: parsedData.calories,
+                    ingredients: parsedData.ingredients,
+                    instructions: parsedData.instructions,
+                    tags: parsedData.tags
+                });
+                // Add the recipe to the database
+                await fetch(import.meta.env.PUBLIC_API_URL+'/api/recipes', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: newRecipe
+                });
+
+
+            } catch (error) {
+                console.log(error);
+                recipe.classList.remove('hidden');
+                recipe.innerHTML = `<div class="flex gap-4 my-4"><span class="text-red-700 font-bold">Seems like there was an issue while generating a recipe for ${recipeValue}, try again in a few seconds</span></div>`;
+            }
+        }
+    })
+
+
+    const recoButton = document.getElementById('recoButton') as HTMLButtonElement;
+    const instructionsList = document.getElementById('instructionSection') as HTMLUListElement;
+    const recoContainer = document.getElementById('recoContainer') as HTMLDivElement;
+
+    // Handle chat response
+    const handleReco = async() => {
+
+        if(recoContainer.childElementCount > 0) {
+            console.log("Quick exit");
+            recoContainer.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" });
+            return;
+        }
+
+        // Disable the button until the response is received
+        recoButton.disabled = true;
+        recoButton.classList.add('opacity-50', 'cursor-not-allowed');
+
+        // Get all messages in history
+        const instructionItems = Array.from(instructionsList.querySelectorAll('li')).map((ingredient) => {
+            return {
+                role: 'user',
+                content: ingredient.innerText
+            }
+        });
+
+        // Stream response from API
+        const response = await fetch(import.meta.env.PUBLIC_OPENAI_COMPLETION_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${import.meta.env.PUBLIC_OPENAI}`
+            },
+            body: JSON.stringify({
+                model: 'gpt-3.5-turbo',
+                messages: [
+                    {
+                        role: 'system',
+                        content: 'You are now to act as an expert chef with 10 years of experience. Your goal is to help me pair my current recipe with a selection of wine, cheese or dessert that would fit the best. Suggest a low calorie and vegan alternative if and recommend seasonal products if possible.'
+                    },
+                    ...instructionItems
+                ],
+                max_tokens: 1000,
+                temperature: 0.9,
+                top_p: 1,
+                presence_penalty: 0.6,
+                frequency_penalty: 0.6,
+                stop: ['[DONE]'],
+                stream: true
+            })
+        });
+
+        const reader = response.body?.getReader() as ReadableStreamDefaultReader;
+        const message = document.createElement('div');
+        message.classList.add('flex', 'gap-4', 'my-4');
+
+        while (true) {
+            const { done, value } = await reader?.read();
+            if (done) {
+                break;
+            }
+
+            const decoder = new TextDecoder('utf-8').decode(value);
+            const sentence = decoder.split('\n');
+            const parsedSentence = sentence.map(line =>
+                line.replace(/data: /, '').trim())
+                .filter(line => line.length > 0 && !line.includes('[DONE]'))
+                .map(line => JSON.parse(line))
+
+            // Extract delta from parsed sentence
+            for(const word of parsedSentence) {
+                const { choices } = word;
+                const { delta } = choices[0];
+                const { content } = delta;
+                if(content) {
+                    message.innerText += content;
+                    recoContainer.appendChild(message);
+                }
+            }
+        }
+
+        // Enable the button again
+        recoButton.disabled = false;
+        recoButton.classList.remove('opacity-50', 'cursor-not-allowed');
+
+        return message;
+    }
+
+    recoButton?.addEventListener('click', () => {
+        handleReco();
+    });
+</script>

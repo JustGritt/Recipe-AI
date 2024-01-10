@@ -1,0 +1,7 @@
+---
+const { picture, name} = Astro.params;
+const livePicture = await fetch(`https://source.unsplash.com/800x600/?${name}`).then(res => res.url);
+---
+
+<img src={picture ?? livePicture} alt={name} />
+<!-- "rounded-lg mx-auto my-8 w-4/5 lg:w-3/5" -->

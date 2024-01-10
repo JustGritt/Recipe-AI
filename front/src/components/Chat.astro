@@ -1,14 +1,14 @@
 ---
 import "@styles/chat.css"
-import Chat from "@icons/Chat.astro";
+import ChatIcon from "@icons/Chat.astro";
 import VoiceInput from "./VoiceInput.astro";
 ---
 
 <button id="chat-toggle" class="fixed right-0 bottom-0 w-10 h-10 lg:w-16 lg:h-16 rounded-full bg-[#60739f] dark:bg-slate-600 shadow-lg flex items-center justify-center text-white font-bold cursor-pointer transition-all duration-300 ease-in-out">
-    <Chat />
+    <ChatIcon />
 </button>
 
-<section id="chat" class="fixed bottom-0 right-0 w-full lg:min-w-[420px] lg:w-[33vw] rounded-[1rem] bg-[#4b5563] dark:bg-slate-600 shadow-lg overflow-hidden transition-all duration-300 ease-in-out" data-active="false">
+<section id="chat" class="fixed bottom-0 right-0 min-w-[90vw] lg:min-w-[420px] lg:w-[33vw] rounded-[1rem] bg-[#4b5563] dark:bg-slate-600 shadow-lg overflow-hidden transition-all duration-300 ease-in-out" data-active="false">
 
     <header class="p-4 bg-[#60739f] dark:bg-gray-800 border-b border-[#60739f] dark:border-gray-800 text-white text-center py-4 px-0">
         <h2 class="text-xl text-white font-bold m-0">Recipe Assistant</h2>
@@ -22,7 +22,7 @@ import VoiceInput from "./VoiceInput.astro";
             </li>
         </ul>
 
-        
+
         <div id="chat-window-input" class="flex items-center">
             <input type="text" class="p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1  block w-full mr-4 text-base dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-600 dark:focus:border-gray-400" placeholder="Type a message..." />
             <VoiceInput />
@@ -37,7 +37,6 @@ import VoiceInput from "./VoiceInput.astro";
 </section>
 
 <style lang="scss" scoped>
-
     #chat {
         bottom: calc(2rem + 60px);
         right: 1rem;
@@ -75,7 +74,6 @@ import VoiceInput from "./VoiceInput.astro";
             }
         }
     }
-
 </style>
 
 <script>

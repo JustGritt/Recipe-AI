@@ -1,10 +1,23 @@
-const Rating = require('../models/rating.model.js');
+const Rating = require('../models/rating.model.js')
+const jwt = require('jsonwebtoken');
+const User = require('../models/user.model.js');
+
 
 // Create a new rating for a recipe
 exports.createRating = async (req, res) => {
     try {
-        const { recipeId, userId, rating, comment } = req.body;
-        const newRating = new Rating({ recipeId, userId, rating, comment });
+        const { recipeId, token, rating, comment } = req.body;
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const userId = await User.findById(decoded.id);
+        const username = userId.username;
+
+        if(!recipeId || !rating || !comment || !token) {
+            return res.status(400).json({
+                error: 'Missing required fields.'
+            });
+        }
+
+        const newRating = new Rating({ recipeId, userId, rating, comment, username});
         await newRating.save();
         res.status(201).json(newRating);
     } catch (error) {
@@ -26,3 +39,4 @@ exports.getRatingsForRecipe = async (req, res) => {
         });
     }
 };
+
