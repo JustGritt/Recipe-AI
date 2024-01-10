@@ -1,18 +1,15 @@
 ---
 import Lock from '@icons/Lock.astro';
 
-const { recipeId } = Astro.props;
-const ratings = await fetch(`${import.meta.env.PUBLIC_API_URL}/api/ratings/${recipeId}`).then(res => res.json());
+const { _id } = Astro.props;
+const ratings = await fetch(`${import.meta.env.PUBLIC_API_URL}/api/ratings/${_id}`).then(res => res.json());
+console.log(ratings);
 ---
 
 <section class="relative w-full py-0 bg-gray-200 text-black rounded-md">
     <div id="comments" class="flex flex-col items-center justify-center w-full p-4">
 
 	</div>
-
-
-
-
 </section>
 
 <section id="ratings" class="flex w-full p-4">
