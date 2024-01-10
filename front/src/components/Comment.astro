@@ -20,11 +20,27 @@ const ratings = await fetch(`${import.meta.env.PUBLIC_API_URL}/api/ratings/${rec
 	<ul class="w-full">
 		{
 			ratings.map((rating: any) => (
-				<li class="mt-4 p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-					<p>User ID: {rating.userId}</p>
-					<p>Rating: {rating.rating}</p>
-					<p>Comment: {rating.comment}</p>
-					<p>Username: {rating.username}</p>
+				<li class="relative mt-4 p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+					<p>{rating.username}</p>
+					<div class="absolute top-6 right-6">
+						{
+							rating.rating === 1 ? (
+								<p><span class="text-red-500">★</span>☆☆☆☆</p>
+							) : rating.rating === 2 ? (
+								<p><span class="text-red-500">★★</span>☆☆☆</p>
+							) : rating.rating === 3 ? (
+								<p><span class="text-red-500">★★★</span>☆☆</p>
+							) : rating.rating === 4 ? (
+								<p><span class="text-red-500">★★★★</span>☆☆</p>
+							) : rating.rating === 5 ? (
+								<p><span class="text-red-500">★★★★★</span></p>
+							) : (
+								<p><span class="text-red-500">☆☆☆☆☆</span></p>
+							)
+						}
+					</div>
+					<p>{rating.comment}</p>
+
 				</li>
 			))
 		}
@@ -70,13 +86,6 @@ const ratings = await fetch(`${import.meta.env.PUBLIC_API_URL}/api/ratings/${rec
 			star.addEventListener('click', () => {
 				const starValue = parseInt(star.value);
 				// If the star value is above 1, change the background color of the previous stars
-				if (starValue > 1) {
-					for (let j = 0; j < starValue - 1; j++) {
-						// rating.children[j].classList.add('bg-yellow-400');
-						console.log(rating.children[j]);
-					}
-				}
-				console.log(star.value);
 				starCount = star.value;
 			})
 
@@ -118,7 +127,6 @@ const ratings = await fetch(`${import.meta.env.PUBLIC_API_URL}/api/ratings/${rec
 		// Add event listener to the form
 		form.addEventListener('submit', async (e) => {
 			e.preventDefault();
-			console.log("form", e);
 			const comment = textarea.value;
 			const token = localStorage.getItem('jwt') || null;
 			const rating = starCount;
@@ -130,13 +138,7 @@ const ratings = await fetch(`${import.meta.env.PUBLIC_API_URL}/api/ratings/${rec
 				body: JSON.stringify({ comment, token, rating, recipeId }),
 			});
 			await req.json().then((res) => {
-				console.log(res);
-				if (res.status === 'success') {
-					textarea.value = '';
-					console.log("Comment posted");
-				} else {
-					console.log("Comment not posted");
-				}
+				return window.location.reload();
 			})
 		})
 
@@ -180,11 +182,9 @@ const ratings = await fetch(`${import.meta.env.PUBLIC_API_URL}/api/ratings/${rec
 				createLoggedInComments(username);
 			} else {
 				createLoggedOffComments();
-                console.log("User not connected");
 			}
 		})
 	} else {
 		createLoggedOffComments();
-        console.log("User not connected end");
 	}
 </script>

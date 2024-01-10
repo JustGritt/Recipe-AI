@@ -5,6 +5,7 @@ const Recipe = require('../models/recipe.model.js');
 // =======================================
 
 exports.create = async (req, res) => {
+    console.log(req.body);
     const recipe = new Recipe({
         name: req.body.name,
         ingredients: req.body.ingredients,
@@ -68,6 +69,21 @@ exports.findOne = async (req, res) => {
             return res.status(404).send({ message: 'Recipe not found.' });
         }
         res.status(200).send({ recipe });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ message: 'An error occurred while finding the recipe.' });
+    }
+};
+
+// find by name
+exports.findByName = async (req, res) => {
+    try {
+        //name should be case insensitive
+        const recipes = await Recipe.find({ name: { $regex: new RegExp(req.params.name, 'i') } });
+        if (!recipes) {
+            return res.status(404).send({ message: 'Recipe not found.' });
+        }
+        res.status(200).send({ recipes });
     } catch (error) {
         console.error(error);
         res.status(500).send({ message: 'An error occurred while finding the recipe.' });

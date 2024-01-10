@@ -1,5 +1,6 @@
 ---
 import Comment from '@components/Comment.astro';
+import ImgCard from '@components/ImgCard.astro';
 
 // Icons
 import Copy from '@icons/Copy.astro';
@@ -7,13 +8,14 @@ import Mail from '@icons/Mail.astro';
 import Bolt from '@icons/Bolt.astro';
 
 const { name, ingredients, instructions, difficulty, picture, calories, tags, time, recipeId } = Astro.props;
+const livePicture = await fetch(`https://source.unsplash.com/800x600/?${name}`).then(res => res.url);
 ---
 
 <main>
     <section class="w-scren py-8 mt-20">
         <h2 class="text-slate-900 text-center"> {name} </h2>
-        <img src={picture} alt={name} class="rounded-lg mx-auto my-8 w-4/5 lg:w-3/5" />
-
+        <img src={picture ?? livePicture} alt={name} class="rounded-lg mx-auto my-8 w-4/5 lg:w-3/5" />
+        <!-- <ImgCard {picture} {name}/> -->
         <div class="w-4/5 mx-auto flex gap-4 flex-wrap lg:w-3/5">
             {
                 (tags as string[]).map(tag => (

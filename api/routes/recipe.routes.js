@@ -12,4 +12,5 @@ module.exports = (app) => {
     // GET routes
     app.get('/api/recipes', jsonParser, Recipe.findAll);
     app.get('/api/recipes/:id', jsonParser, Recipe.findOne);
+    app.get('/api/recipes/name/:name', jsonParser, Recipe.findByName);
 };
