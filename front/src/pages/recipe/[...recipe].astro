@@ -13,25 +13,79 @@ import Bolt from '@icons/Bolt.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '@consts';
 import RecipeCard from '@components/RecipeCard.astro';
 
-export async function getStaticPaths() {
-    const recipes = await fetch(`${import.meta.env.PUBLIC_API_URL}/api/recipes/`).then(res => res.json());
-    return recipes.recipes.map((recipe:any) => ({
-        params: { recipe: recipe._id },
-        props: {
-            recipeId: recipe._id,
-            name: recipe.name,
-            ingredients: recipe.ingredients,
-            instructions: recipe.instructions,
-            difficulty: recipe.difficulty,
-            picture: recipe.picture,
-            calories: recipe.calories,
-            tags: recipe.tags,
-            time: recipe.tags.find((tag:string) => tag.includes('minutes'))
-        }
-    }));
+
+// Get all links id
+export async function getRecipes() {
+    const recipes: any[] = []
+    const req = await fetch(`${import.meta.env.PUBLIC_API_URL}/api/recipes/`).then(res => res.json());
+
+    // Add all links id to array
+    req.recipes.forEach((recipe: { _id: any; }) => {
+        recipes.push(recipe._id as string)
+    });
 }
 
-const { name, ingredients, instructions, difficulty, picture, calories, tags, time, recipeId } = Astro.props;
+export async function getRecette(recipeId: any) {
+    const req = await fetch(`${import.meta.env.PUBLIC_API_URL}/api/recipes/${recipeId}`).then(res => res.json());
+    return req;
+}
+
+// export async function getRecipeProps() {
+//     const recipes = await fetch(`${import.meta.env.PUBLIC_API_URL}/api/recipes/`).then(res => res.json());
+//     return recipes.recipes.map((recipe:any) => ({
+//         props: {
+//             recipeId: recipe._id,
+//             name: recipe.name,
+//             ingredients: recipe.ingredients,
+//             instructions: recipe.instructions,
+//             difficulty: recipe.difficulty,
+//             picture: recipe.picture,
+//             calories: recipe.calories,
+//             tags: recipe.tags,
+//             time: recipe.tags.find((tag:string) => tag.includes('minutes'))
+//         }
+//     }));
+// }
+
+// export async function getStaticPaths() {
+//     const recipes = await fetch(`${import.meta.env.PUBLIC_API_URL}/api/recipes/`).then(res => res.json());
+//     return recipes.recipes.map((recipe:any) => ({
+//         params: { recipe: recipe._id },
+//         props: {
+//             recipeId: recipe._id,
+//             name: recipe.name,
+//             ingredients: recipe.ingredients,
+//             instructions: recipe.instructions,
+//             difficulty: recipe.difficulty,
+//             picture: recipe.picture,
+//             calories: recipe.calories,
+//             tags: recipe.tags,
+//             time: recipe.tags.find((tag:string) => tag.includes('minutes'))
+//         }
+//     }));
+// }
+
+const test = await getRecette(Astro.params.recipe);
+
+const { name,
+ingredients,
+instructions,
+difficulty,
+picture,
+calories,
+tags,
+time,
+_id } = test.recipe;
+
+console.log(name,
+ingredients,
+instructions,
+difficulty,
+picture,
+calories,
+tags,
+time,
+_id);
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -48,7 +102,7 @@ const { name, ingredients, instructions, difficulty, picture, calories, tags, ti
                 Comments
             </h5>
 
-            <Comment {recipeId} />
+            <Comment {_id} />
         </section>
 
         <Chat />
