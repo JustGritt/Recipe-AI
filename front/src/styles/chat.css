@@ -1,3 +1,4 @@
+/* Existing chat.css styles */
 #chat li {
     list-style: none;
     margin: 1rem 0;
@@ -44,7 +45,7 @@
 
 @media screen and (max-width: 768px) {
     #chat-window-history::-webkit-scrollbar {
-        display:none;
+        display: none;
     }
 }
 
@@ -61,7 +62,6 @@
         max-width: 80%;
         margin-left: auto;
         margin-right: 0.5rem;
-        color: white;
     }
 
     #chat .message-bot {
@@ -86,14 +86,13 @@
     }
 }
 
-/* Create an animation for loading dots */
+/* Animation for loading dots */
 .loading-dot {
-    width: .5rem;
-    height: .5rem;
+    width: 0.5rem;
+    height: 0.5rem;
     background: #60739f;
     border-radius: 50%;
     display: inline-block;
-
     animation: loading 1.5s infinite;
     animation-delay: 0.1s;
 }
@@ -106,15 +105,53 @@
     animation-delay: 0.3s;
 }
 
-/* Animation of loading dots */
 @keyframes loading {
-    0% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-0.5rem);
-    }
-    100% {
-        transform: translateY(0);
-    }
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-0.5rem); }
+    100% { transform: translateY(0); }
+}
+
+/* Added from Chat.astro inline SCSS */
+
+/* Chat container positioning and visibility */
+#chat {
+    bottom: calc(2rem + 60px);
+    right: 1rem;
+}
+
+#chat[data-active="false"] {
+    transform: translateY(100%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+#chat[data-active="true"] {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Toggle button */
+#chat-toggle {
+    bottom: 1rem;
+    right: 1rem;
+}
+
+#chat-toggle:hover {
+    opacity: 0.8;
+}
+
+/* Chat window height and chat history style */
+#chat-window {
+    height: calc(80vh - 4rem);
+}
+
+#chat-window-history {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    height: calc(100% - 3.75rem);
+    border-radius: 0.5rem;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
 }

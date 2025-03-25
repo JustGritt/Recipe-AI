@@ -308,6 +308,10 @@ body {
     background-color: rgb(31 41 55 / var(--tw-bg-opacity));
 }
 
+.dark .bg-slate-50 {
+    background-color: #1e293b; /* a dark slate background */
+}
+
 .dark .bg-gray-50 {
     background-color: #4b5563;
 }
@@ -330,6 +334,10 @@ body {
 
 .dark .bg-gray-800 {
     background-color: #fff;
+}
+
+.dark .bg-black {
+    background-color: #F1F1F1;
 }
 
 .dark .hover\:bg-gray-200:hover {

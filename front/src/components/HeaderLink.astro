@@ -5,11 +5,11 @@ const isActive = href === pathname || pathname.startsWith(href + '/');
 ---
 
 <a href={href} class:list={[className, { active: isActive }]} {...props}
-	class="relative max-h-[40px] inline-flex justify-center items-center my-0 py-2 mx-2 px-4 rounded-lg transition-colors hover:bg-gray-200">
+	class="relative max-h-[40px] inline-flex justify-center items-center my-0 py-2 mx-2 px-4 rounded-lg transition-colors duration-300 hover:bg-gray-200">
 	<slot />
 </a>
 
-<style lang="scss" scoped>
+<style scoped>
 	a {
 		max-height: 40px;
 		height: 100%;

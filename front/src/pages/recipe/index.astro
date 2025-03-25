@@ -1,7 +1,5 @@
 ---
-
 import ImgCard from '@components/ImgCard.astro';
-
 import BaseHead from '@components/BaseHead.astro';
 import Header from '@components/Header.astro';
 import Footer from '@components/Footer.astro';
@@ -16,27 +14,22 @@ const recipes = await fetch(`${import.meta.env.PUBLIC_API_URL}/api/recipes/`).th
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
-	<body class="w-full transition-all ease-in-out bg-white">
-		<header>
-			<Header />
-		</header>
+	<body class="min-h-screen flex flex-col bg-white transition-all duration-300 ease-in-out">
+		<Header />
 
-		<main id="recipes" class="w-full mt-20 mx-auto max-w-screen-xl">
-			<h2 class="text-slate-900">Discover new recipes</h2>
-
-
+		<main id="recipes" class="flex-grow w-full bg-white transition-all duration-300 ease-in-out m-0 max-w-screen-xl py-20 mx-auto">
+			<h2 class="text-2xl font-bold text-slate-900 mb-8">Discover new recipes</h2>
 			<section>
-				<ul id="recipeList" class="flex flex-wrap gap-8 list-none m-0 p-0 w-full mt-8">
+				<ul id="recipeList" class="flex flex-wrap gap-8 list-none m-0 p-0 w-full">
 					{
 						recipes.recipes.map((recipe: any) => (
-							<li class="w-[calc(50%-1rem)] ">
+							<li class="w-[calc(50%-1rem)]">
 								<a href={`/recipe/${recipe._id}`} class="block">
 									{
-									recipe.picture ?
+										recipe.picture ?
 										<img src={recipe.picture} alt={recipe.name} class="w-full h-auto rounded-lg" /> :
 										<img src="https://images.unsplash.com/photo-1466637574441-749b8f19452f?q=80&w=2428&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt={recipe.name} class="w-full h-auto rounded-lg" />
 									}
-
 									<h2 class="text-2xl font-bold mt-4 text-slate-900">{recipe.name}</h2>
 									<p class="text-sm text-gray-500">
 										Recette {recipe.difficulty} - {recipe.calories} cal.
@@ -48,7 +41,7 @@ const recipes = await fetch(`${import.meta.env.PUBLIC_API_URL}/api/recipes/`).th
 				</ul>
 			</section>
 		</main>
+
 		<Footer />
 	</body>
 </html>
-

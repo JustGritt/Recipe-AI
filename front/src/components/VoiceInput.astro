@@ -1,5 +1,5 @@
 ---
-
+import Microphone from "@icons/Microphone.astro"
 ---
 <script>
     type MessageRole = 'user' | 'assistant';
@@ -15,32 +15,25 @@
 
     let recognition: SpeechRecognition | undefined;
 
-    /*
-    function addToConversation(text: string, role: MessageRole): void {
-      const userMessage: ConversationMessage = { role, content: text };
-      conversation.push(userMessage);
-      renderConversation();
-    }*/
-
     function renderConversation(): void {
       const conversationElement = document.getElementById('conversation');
       if (conversationElement) {
         conversationElement.innerHTML = '';
         conversation.forEach((message, index) => {
-        const div = document.createElement('div');
-        div.classList.add(message.role === 'user' ? 'user-message' : 'assistant-message');
-        div.innerHTML = `<p>${message.content}</p>`;
-        
-        if (message.role === 'user') {
-        const deleteButton = document.createElement('button');
-        deleteButton.textContent = 'Delete';
-        deleteButton.addEventListener('click', () => handleDelete(index));
-        div.appendChild(deleteButton);
-        }
+          const div = document.createElement('div');
+          div.classList.add(message.role === 'user' ? 'user-message' : 'assistant-message');
+          div.innerHTML = `<p>${message.content}</p>`;
 
-        conversationElement.appendChild(div);
-    });
-    }
+          if (message.role === 'user') {
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.addEventListener('click', () => handleDelete(index));
+            div.appendChild(deleteButton);
+          }
+
+          conversationElement.appendChild(div);
+        });
+      }
     }
 
     function handleDelete(index: number): void {
@@ -56,64 +49,71 @@
     }
 
     function startListening(): void {
-      const startListeningBtn = document.getElementById('start-listening');
-      const chatWindowInputText = document.querySelector('#chat-window-input input') as HTMLInputElement;
-      if (window.SpeechRecognition || (window as any).webkitSpeechRecognition) {
-        recognition = new (window.SpeechRecognition || (window as any).webkitSpeechRecognition)();
-        
-        recognition.onstart = () => {
-          isListening = true;
-          startListeningBtn!.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#BC4949" viewBox="0 0 256 256">
-            <path d="M213.92,210.62l-160-176A8,8,0,1,0,42.08,45.38L80,87.09V128a48,48,0,0,0,73.91,40.4l10.88,12A64,64,0,0,1,64,128a8,8,0,0,0-16,0,80.11,80.11,0,0,0,72,79.6V232a8,8,0,0,0,16,0V207.59a79.74,79.74,0,0,0,39.62-15.31l26.46,29.1a8,8,0,1,0,11.84-10.76ZM128,160a32,32,0,0,1-32-32V104.69l46.92,51.62A32,32,0,0,1,128,160ZM87.16,38.78A48,48,0,0,1,176,64v60.43a8,8,0,0,1-16,0V64a32,32,0,0,0-59.24-16.81,8,8,0,1,1-13.6-8.41ZM187.64,151.27A63.71,63.71,0,0,0,192,128a8,8,0,0,1,16,0,79.62,79.62,0,0,1-5.46,29.09,8,8,0,1,1-14.9-5.82Z">
-            </path>
-          </svg>`
-        };
+  const startListeningBtn = document.getElementById('start-listening');
+  const chatWindowInputText = document.querySelector('#chat-window-input input') as HTMLInputElement;
+  if (window.SpeechRecognition || (window as any).webkitSpeechRecognition) {
+    recognition = new (window.SpeechRecognition || (window as any).webkitSpeechRecognition)();
 
-        recognition.onresult = (event: SpeechRecognitionEvent) => {
-          const lastResultIndex = event.results.length - 1;
-          const recognizedText = event.results[lastResultIndex][0].transcript;
-          transcript = recognizedText;
-          //document.getElementById('transcript')!.textContent = transcript;
-          chatWindowInputText!.value = transcript;
-          //addToConversation(recognizedText, 'user');
-        };
+    recognition.onstart = () => {
+      isListening = true;
+      // Set Pause icon when listening starts
+      startListeningBtn!.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+          <path fill-rule="evenodd" d="M6.75 5.25a.75.75 0 01.75-.75H9a.75.75 0 01.75.75v13.5a.75.75 0 01-.75.75H7.5a.75.75 0 01-.75-.75V5.25zM14.25 5.25a.75.75 0 01.75-.75H17a.75.75 0 01.75.75v13.5a.75.75 0 01-.75.75h-1.5a.75.75 0 01-.75-.75V5.25z" clip-rule="evenodd" />
+        </svg>`;
+    };
 
-        recognition.onend = () => {
-          isListening = false;
-          startListeningBtn!.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#000000" viewBox="0 0 256 256"><path d="M128,176a48.05,48.05,0,0,0,48-48V64a48,48,0,0,0-96,0v64A48.05,48.05,0,0,0,128,176ZM96,64a32,32,0,0,1,64,0v64a32,32,0,0,1-64,0Zm40,143.6V232a8,8,0,0,1-16,0V207.6A80.11,80.11,0,0,1,48,128a8,8,0,0,1,16,0,64,64,0,0,0,128,0,8,8,0,0,1,16,0A80.11,80.11,0,0,1,136,207.6Z"></path></svg> `
-        };
+    recognition.onresult = (event: SpeechRecognitionEvent) => {
+      const lastResultIndex = event.results.length - 1;
+      const recognizedText = event.results[lastResultIndex][0].transcript;
+      transcript = recognizedText;
+      chatWindowInputText!.value = transcript;
+    };
 
-        recognition.onerror = (event: SpeechRecognitionError) => {
-          isListening = false;
-          startListeningBtn!.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#d72b2b" viewBox="0 0 256 256">
-            <path d="M213.92,210.62l-160-176A8,8,0,1,0,42.08,45.38L80,87.09V128a48,48,0,0,0,73.91,40.4l10.88,12A64,64,0,0,1,64,128a8,8,0,0,0-16,0,80.11,80.11,0,0,0,72,79.6V232a8,8,0,0,0,16,0V207.59a79.74,79.74,0,0,0,39.62-15.31l26.46,29.1a8,8,0,1,0,11.84-10.76ZM128,160a32,32,0,0,1-32-32V104.69l46.92,51.62A32,32,0,0,1,128,160ZM87.16,38.78A48,48,0,0,1,176,64v60.43a8,8,0,0,1-16,0V64a32,32,0,0,0-59.24-16.81,8,8,0,1,1-13.6-8.41ZM187.64,151.27A63.71,63.71,0,0,0,192,128a8,8,0,0,1,16,0,79.62,79.62,0,0,1-5.46,29.09,8,8,0,1,1-14.9-5.82Z">
-            </path>
-          </svg>`
-          console.error('Speech recognition error:', event.error);
-        };
+    recognition.onend = () => {
+      isListening = false;
+      // Set Microphone icon when listening ends
+      startListeningBtn!.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+          <path d="M8.25 4.5a3.75 3.75 0 1 1 7.5 0v8.25a3.75 3.75 0 1 1-7.5 0V4.5Z" />
+          <path d="M6 10.5a.75.75 0 0 1 .75.75v1.5a5.25 5.25 0 1 0 10.5 0v-1.5a.75.75 0 0 1 1.5 0v1.5a6.751 6.751 0 0 1-6 6.709v2.291h3a.75.75 0 0 1 0 1.5h-7.5a.75.75 0 0 1 0-1.5h3v-2.291a6.751 6.751 0 0 1-6-6.709v-1.5A.75.75 0 0 1 6 10.5Z" />
+        </svg>`;
+    };
 
-        recognition.start();
-      }else {
-        startListeningBtn!.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" fill="#BC4949" viewBox="0 0 256 256">
-            <path d="M213.92,210.62l-160-176A8,8,0,1,0,42.08,45.38L80,87.09V128a48,48,0,0,0,73.91,40.4l10.88,12A64,64,0,0,1,64,128a8,8,0,0,0-16,0,80.11,80.11,0,0,0,72,79.6V232a8,8,0,0,0,16,0V207.59a79.74,79.74,0,0,0,39.62-15.31l26.46,29.1a8,8,0,1,0,11.84-10.76ZM128,160a32,32,0,0,1-32-32V104.69l46.92,51.62A32,32,0,0,1,128,160ZM87.16,38.78A48,48,0,0,1,176,64v60.43a8,8,0,0,1-16,0V64a32,32,0,0,0-59.24-16.81,8,8,0,1,1-13.6-8.41ZM187.64,151.27A63.71,63.71,0,0,0,192,128a8,8,0,0,1,16,0,79.62,79.62,0,0,1-5.46,29.09,8,8,0,1,1-14.9-5.82Z">
-            </path>
-          </svg>`
-      }
-    }
+    recognition.onerror = (event: SpeechRecognitionError) => {
+      isListening = false;
+      // Set Play icon on error for visibility
+      startListeningBtn!.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-red-600">
+          <path fill-rule="evenodd" d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653z" clip-rule="evenodd" />
+        </svg>`;
+      console.error('Speech recognition error:', event.error);
+    };
 
-    document.getElementById('start-listening')!.addEventListener('click', () => {
-      if (isListening) {
-        recognition?.stop();
-      } else {
-        startListening();
-      }
-    });
-    
+    recognition.start();
+  } else {
+    // Fallback: set Play icon with slightly larger size for visibility
+    startListeningBtn!.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-red-500">
+        <path fill-rule="evenodd" d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653z" clip-rule="evenodd" />
+      </svg>`;
+  }
+}
+
+document.getElementById('start-listening')!.addEventListener('click', () => {
+  if (isListening) {
+    recognition?.stop();
+  } else {
+    startListening();
+  }
+});
+
+
   </script>
 
-<section id="voice-input" class="flex items-center p-1">
-  <button id="start-listening">
-    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#000000" viewBox="0 0 256 256"><path d="M128,176a48.05,48.05,0,0,0,48-48V64a48,48,0,0,0-96,0v64A48.05,48.05,0,0,0,128,176ZM96,64a32,32,0,0,1,64,0v64a32,32,0,0,1-64,0Zm40,143.6V232a8,8,0,0,1-16,0V207.6A80.11,80.11,0,0,1,48,128a8,8,0,0,1,16,0,64,64,0,0,0,128,0,8,8,0,0,1,16,0A80.11,80.11,0,0,1,136,207.6Z"></path></svg> 
+<section id="voice-input" class="absolute top-0 right-0 flex items-center p-1">
+  <button id="start-listening" class="flex items-center justify-center w-8 h-8 hover:bg-gray-100 transition-colors duration-300 ease-in-out rounded-full">
+    <Microphone />
   </button>
 </section>
 

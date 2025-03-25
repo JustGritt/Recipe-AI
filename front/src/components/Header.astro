@@ -1,11 +1,10 @@
 ---
 import HeaderLink from './HeaderLink.astro';
-import Menu from '@icons/Menu.astro'
 import DarkModeToggle from './DarkModeToggle.astro';
 import { SITE_TITLE } from '@consts';
 ---
 
-<header class="fixed min-w-[calc(100vw-8px)] m-0 px-4 py-0 backdrop-filter backdrop-blur-sm bg-opacity-60 h-20 transition-colors shadow bg-white text-black z-10">
+<header class="fixed w-screen bg-white text-black m-0 px-4 py-0 h-20 transition-colors duration-300 shadow z-10">
 	<nav class="relative flex justify-end items-center h-20 lg:justify-between">
 		<!-- Logo -->
 		<a href="/" class="no-underline border-md p-4 hidden text-base m-0 rounded-m h-10 items-center justify-center overflow-hidden lg:flex bg-slate-950 text-zinc-50 hover:text-white ">{SITE_TITLE}</a>
@@ -40,7 +39,7 @@ import { SITE_TITLE } from '@consts';
 		registerLink.textContent = 'Register';
 
 		const loginLink = document.createElement('a');
-		loginLink.classList.add('relative', 'max-h-[40px]', 'inline-flex', 'justify-center', 'items-center', 'my-0', 'py-2', 'px-4', 'rounded-lg', 'transition-all', 'hover:bg-gray-200', 'dark:hover:bg-slate-700');
+		loginLink.classList.add('relative', 'max-h-[40px]', 'inline-flex', 'justify-center', 'items-center', 'my-0', 'py-2', 'px-4', 'rounded-lg', 'transition-all', 'hover:bg-gray-200');
 		loginLink.href = '/login';
 		loginLink.textContent = 'Login';
 

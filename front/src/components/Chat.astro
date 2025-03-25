@@ -2,221 +2,138 @@
 import "@styles/chat.css"
 import ChatIcon from "@icons/Chat.astro";
 import VoiceInput from "./VoiceInput.astro";
+import Send from "@icons/Send.astro";
 ---
 
-<button id="chat-toggle" class="fixed right-0 bottom-0 w-10 h-10 lg:w-16 lg:h-16 rounded-full bg-[#60739f] dark:bg-slate-600 shadow-lg flex items-center justify-center text-white font-bold cursor-pointer transition-all duration-300 ease-in-out">
+<button id="chat-toggle"
+    class="fixed right-0 bottom-0 w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-black hover:bg-slate-500 shadow-lg flex items-center justify-center text-white font-bold cursor-pointer transition-all duration-300 ease-in-out">
     <ChatIcon />
 </button>
 
-<section id="chat" class="fixed bottom-0 right-0 min-w-[90vw] lg:min-w-[420px] lg:w-[33vw] rounded-[1rem] bg-[#4b5563] dark:bg-slate-600 shadow-lg overflow-hidden transition-all duration-300 ease-in-out" data-active="false">
-
-    <header class="p-4 bg-[#60739f] dark:bg-gray-800 border-b border-[#60739f] dark:border-gray-800 text-white text-center py-4 px-0">
-        <h2 class="text-xl text-white font-bold m-0">Recipe Assistant</h2>
+<section id="chat"
+    class="fixed bottom-0 right-0 min-w-[90vw] lg:min-w-[420px] lg:w-[33vw] rounded-lg bg-white border-2 border-slate-600 shadow-lg overflow-hidden transition-all duration-300 ease-in-out"
+    data-active="false">
+    <header class="p-4 bg-slate-700 border-b border-slate-600 text-center py-4 px-0">
+        <h2 class="text-xl font-bold m-0 text-slate-100">Recipe Assistant</h2>
     </header>
-
-    <div id="chat-window" class="flex flex-col justify-between p-4 bg-white dark:bg-slate-600">
+    <div id="chat-window" class="flex flex-col justify-between p-4 bg-white">
         <ul id="chat-window-history">
-            <!-- Fill -->
-            <li class="message-bot">
-                Hello, I'm your recipe assistant. How can I help you?
-            </li>
+            <li class="message-bot">Hello, I'm your recipe assistant. How can I help you?</li>
         </ul>
-
-
-        <div id="chat-window-input" class="flex items-center">
-            <input type="text" class="p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1  block w-full mr-4 text-base dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-600 dark:focus:border-gray-400" placeholder="Type a message..." />
-            <VoiceInput />
-            <button id="chat-window-send" class="p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none block sm:text-sm bg-[#60739f] text-white dark:bg-gray-800 dark:text-white dark:border-gray-800">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
-                </svg>
+        <div id="chat-window-input" class="flex items-center gap-2">
+            <div class="h-full flex-1 relative">
+                <input type="text"
+                    class="absolute top-0 left-0 p-2 border-2 border-gray-300 rounded-md shadow-sm block w-full"
+                    placeholder="Type a message..." />
+                <VoiceInput />
+            </div>
+            <button id="chat-window-send"
+                class="p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none block sm:text-sm bg-black hover:bg-slate-500 text-white">
+                <Send />
             </button>
         </div>
     </div>
-
 </section>
 
-<style lang="scss" scoped>
-    #chat {
-        bottom: calc(2rem + 60px);
-        right: 1rem;
-
-        &[data-active="false"] {
-            transform: translateY(100%);
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        &[data-active="true"] {
-            transform: translateY(0);
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        &-toggle {
-            bottom: 1rem;
-            right: 1rem;
-            &:hover {
-                opacity: 0.8;
-            }
-        }
-
-        &-window {
-            height: calc(80vh - 4rem);
-            &-history {
-                list-style: none;
-                padding: 0;
-                margin: 0;
-                height: calc(100% - 3.75rem);
-                border-radius: 0.5rem;
-                overflow-y: scroll;
-                scroll-behavior: smooth;
-            }
-        }
-    }
-</style>
-
 <script>
-    const chat = document.querySelector('#chat') as HTMLDivElement;
-    const chatToggle = document.querySelector('#chat-toggle') as HTMLButtonElement;
-    const chatWindow = document.querySelector('#chat-window') as HTMLDivElement;
-    const chatWindowHistory = document.querySelector('#chat-window-history') as HTMLUListElement;
-    const chatWindowInput = document.querySelector('#chat-window-input') as HTMLDivElement;
-    const chatWindowSend = document.querySelector('#chat-window-send') as HTMLButtonElement;
-    const chatWindowInputText = document.querySelector('#chat-window-input input') as HTMLInputElement;
+    const chat = document.querySelector('#chat');
+    const chatToggle = document.querySelector('#chat-toggle');
+    const chatWindow = document.querySelector('#chat-window');
+    const chatWindowHistory = document.querySelector('#chat-window-history');
+    const chatWindowInput = document.querySelector('#chat-window-input');
+    const chatWindowSend = document.querySelector('#chat-window-send');
+    const chatWindowInputText = document.querySelector('#chat-window-input input');
 
-    // Create message
-    const createMessage = (role: string, content: string) => {
-        const message = document.createElement('li');
-        message.classList.add(`message-${role}`);
-        message.innerText = content;
-        return message;
-    }
+    const createMessage = (role, content) => {
+        const m = document.createElement('li');
+        m.classList.add(`message-${role}`);
+        m.innerText = content;
+        return m;
+    };
 
-    // Create loading message
     const loadMessage = () => {
-        const loadingMessage = document.createElement('li');
-        loadingMessage.classList.add('message-bot');
-        loadingMessage.innerHTML = `
-            <div class="loading">
-                <div class="loading-dot"></div>
-                <div class="loading-dot"></div>
-                <div class="loading-dot"></div>
-            </div>
-        `;
-        return loadingMessage;
-    }
+        const lm = document.createElement('li');
+        lm.classList.add('message-bot');
+        lm.innerHTML = `<div class="loading">
+            <div class="loading-dot"></div>
+            <div class="loading-dot"></div>
+            <div class="loading-dot"></div>
+        </div>`;
+        return lm;
+    };
 
-    // Handle send message
-    const handleSendMessage = async() => {
-        const message = chatWindowInputText.value;
-        if (message) {
-
-            // Add message to history
-            chatWindowHistory.appendChild(createMessage('user', message));
+    const handleSendMessage = async () => {
+        const msg = chatWindowInputText.value;
+        if (msg) {
+            chatWindowHistory.appendChild(createMessage('user', msg));
             chatWindowInputText.value = '';
             chatWindowInputText.setAttribute('disabled', 'true');
-
-            // Create a loading message
-            const loadingMessage = loadMessage();
-            chatWindowHistory.appendChild(loadingMessage);
-
-            // Replace loading message with response
-            await handleResponse(loadingMessage);
+            const loadingMsg = loadMessage();
+            chatWindowHistory.appendChild(loadingMsg);
+            await handleResponse(loadingMsg);
             chatWindowInputText.removeAttribute('disabled');
             chatWindowHistory.scrollTop = chatWindowHistory.scrollHeight;
         }
-    }
+    };
 
-    // Handle chat response
-    const handleResponse = async(loadingMessage: HTMLLIElement) => {
-
-        // Get all messages in history
-        const messagesList = Array.from(chatWindowHistory.querySelectorAll('li')).map((message) => {
-            return {
-                role: message.classList.contains('message-user') ? 'user' : 'assistant',
-                content: message.innerText
-            }
-        });
-
-        // Stream response from API
+    const handleResponse = async (loadingMsg) => {
+        const messagesList = Array.from(chatWindowHistory.querySelectorAll('li')).map(m => ({
+            role: m.classList.contains('message-user') ? 'user' : 'assistant',
+            content: m.innerText
+        }));
         const response = await fetch(import.meta.env.PUBLIC_OPENAI_COMPLETION_URL, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${import.meta.env.PUBLIC_OPENAI}`
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${import.meta.env.PUBLIC_OPENAI}`
             },
             body: JSON.stringify({
-                model: 'gpt-3.5-turbo',
-                // model: 'gpt-4',
-                messages: [
-                    {
-                        role: 'system',
-                        content: 'The following is a conversation with an AI assistant. The assistant is an expert cook with 15 years of experience and won multiple awards internationally. The assistant is helpful, creative, clever, and very friendly.The assistant will evaluate the question of the user and check if it is related to the scope of cooking, the assistant will not be able to answer to any other questions that is not related to cooking.'
-                    },
-                    ...messagesList
-                ],
-                max_tokens: 300,
-                temperature: 0.9,
-                top_p: 1,
-                presence_penalty: 0.6,
-                frequency_penalty: 0.6,
-                stop: ['[DONE]'],
-                stream: true
+            model: 'gpt-3.5-turbo',
+            messages: [
+                {
+                role: 'system',
+                content: 'The following is a conversation with an AI assistant. The assistant is an expert cook with 15 years of experience and won multiple awards internationally. The assistant is helpful, creative, clever, and very friendly. It will answer only cooking related queries.'
+                },
+                ...messagesList
+            ],
+            max_tokens: 300,
+            temperature: 0.9,
+            top_p: 1,
+            presence_penalty: 0.6,
+            frequency_penalty: 0.6,
+            stop: ['[DONE]'],
+            stream: true
             })
         });
-
-        const reader = response.body?.getReader() as ReadableStreamDefaultReader;
-        const message = createMessage('bot', '');
-        chatWindowHistory.replaceChild(message, loadingMessage);
-
+        const reader = response.body?.getReader();
+        const m = createMessage('bot', '');
+        chatWindowHistory.replaceChild(m, loadingMsg);
         while (true) {
-            const { done, value } = await reader?.read();
-            if (done) {
-                break;
-            }
-
-            const decoder = new TextDecoder('utf-8').decode(value);
-            const sentence = decoder.split('\n');
-            const parsedSentence = sentence.map(line =>
-                line.replace(/data: /, '').trim())
-                .filter(line => line.length > 0 && !line.includes('[DONE]'))
-                .map(line => JSON.parse(line))
-
-            // Extract delta from parsed sentence
-            for(const word of parsedSentence) {
-                const { choices } = word;
-                const { delta } = choices[0];
-                const { content } = delta;
-                if(content) {
-                    message.innerText += content;
-                }
-            }
+            const { done, value } = await reader.read();
+            if (done) break;
+            const decoded = new TextDecoder('utf-8').decode(value);
+            const sentences = decoded.split('\n').map(l => l.replace(/data: /, '').trim()).filter(line => line.length && !line.includes('[DONE]')).map(line => JSON.parse(line));
+            sentences.forEach(word => {
+            const { choices } = word;
+            const { delta } = choices[0];
+            const { content } = delta;
+            if(content) m.innerText += content;
+            });
         }
+        return m;
+    };
 
-        return message;
-    }
-
-    // Handle toggle chat
     if(chatToggle && chat) {
         chatToggle.addEventListener('click', () => {
             const active = chat.getAttribute('data-active');
-            active === 'true' ? chat.setAttribute('data-active', 'false') : chat.setAttribute('data-active', 'true');
+            chat.setAttribute('data-active', active === 'true' ? 'false' : 'true');
         });
     }
 
-    // Handle send message
     if(chatWindowSend && chatWindowInputText && chatWindowHistory) {
-        chatWindowSend.addEventListener('click', () => {
-            handleSendMessage();
-        });
-
-        chatWindowInputText.addEventListener('keyup', (e) => {
-            if (e.key === 'Enter') {
-                handleSendMessage();
-            }
+        chatWindowSend.addEventListener('click', handleSendMessage);
+        chatWindowInputText.addEventListener('keyup', e => {
+            if(e.key === 'Enter') handleSendMessage();
         });
     }
-
 </script>
-
