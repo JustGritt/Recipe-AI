@@ -1,29 +1,95 @@
 ---
-import Layout from '@layouts/RecipePost.astro';
+import Layout from '@layouts/LegalPage.astro';
 import { SITE_TITLE } from '../consts';
 ---
 
 <Layout
     title="Privacy Policy"
-    description="Privacy Policy"
-    pubDate={new Date('March 25 2025')}
-    heroImage="/blog-placeholder-about.jpg"
+    description="Learn how Recipe AI collects, uses, and protects your personal information"
+    lastUpdated={new Date('January 18, 2026')}
 >
-    <section class="px-4 py-8 space-y-6 text-slate-900">
-        <p>
-            Your privacy is important to us. It is {SITE_TITLE}'s policy to respect your privacy regarding any information we may collect from you across our website. We only request personal information when it is truly needed to provide you with our services. This information is collected by fair and lawful means, with your knowledge and consent, and you will always be informed why and how it is used.
+    <div class="bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl p-8 md:p-10 mb-12 shadow-sm">
+        <p class="text-lg mb-0">
+            At {SITE_TITLE}, your privacy is important to us. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website.
         </p>
+    </div>
 
+    <section>
+        <h2>Information We Collect</h2>
+        <p>
+            We may collect information about you in a variety of ways. The information we may collect includes:
+        </p>
+        <ul>
+            <li><strong>Personal Data:</strong> When you register on our site, we may collect personally identifiable information such as your name, email address, and username.</li>
+            <li><strong>Usage Data:</strong> We automatically collect certain information about your device and how you interact with our services, including your IP address, browser type, and pages visited.</li>
+            <li><strong>AI-Generated Content:</strong> Recipe searches and AI chat conversations may be stored to improve our services.</li>
+        </ul>
+
+        <h2>How We Use Your Information</h2>
+        <p>
+            We use the information we collect in the following ways:
+        </p>
+        <ul>
+            <li>To create and manage your account</li>
+            <li>To provide personalized recipe recommendations</li>
+            <li>To improve our AI-powered features and user experience</li>
+            <li>To send you updates, notifications, and promotional content (with your consent)</li>
+            <li>To respond to your inquiries and provide customer support</li>
+            <li>To monitor and analyze usage patterns and trends</li>
+        </ul>
+
+        <h2>Data Storage and Security</h2>
+        <p>
+            We implement appropriate technical and organizational security measures to protect your personal information. However, please note that no method of transmission over the internet is 100% secure.
+        </p>
         <p>
             We retain personal data only for as long as necessary to provide you with your requested service. All data we store is protected by commercially acceptable means to prevent loss, theft, or unauthorized access, disclosure, copying, or modification.
         </p>
 
+        <h2>Third-Party Services</h2>
         <p>
-            We do not share any personally identifying information publicly or with third-parties, except when required by law.
+            Our website uses third-party services, including:
+        </p>
+        <ul>
+            <li><strong>OpenAI:</strong> We use OpenAI's API to generate recipes and provide chat assistance. Your queries may be processed by OpenAI according to their privacy policy.</li>
+            <li><strong>MongoDB:</strong> User data is stored securely in MongoDB databases.</li>
+        </ul>
+
+        <h2>Cookies and Tracking</h2>
+        <p>
+            We use local storage to maintain your authentication session. We do not use third-party tracking cookies for advertising purposes.
         </p>
 
+        <h2>Your Rights</h2>
+        <p>
+            Depending on your location, you may have the following rights:
+        </p>
+        <ul>
+            <li>Access the personal data we hold about you</li>
+            <li>Request correction of inaccurate data</li>
+            <li>Request deletion of your personal data</li>
+            <li>Object to processing of your data</li>
+            <li>Request data portability</li>
+        </ul>
+
+        <h2>Children's Privacy</h2>
+        <p>
+            Our service is not intended for children under 13 years of age. We do not knowingly collect personal information from children under 13.
+        </p>
+
+        <h2>External Links</h2>
         <p>
             Our website may contain links to external sites not operated by us. Please note that we have no control over the content or practices of these sites and cannot be held responsible for their respective privacy policies.
+        </p>
+
+        <h2>Changes to This Policy</h2>
+        <p>
+            We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last updated" date.
+        </p>
+
+        <h2>Contact Us</h2>
+        <p>
+            If you have questions about this Privacy Policy, please contact us through our GitHub repository.
         </p>
     </section>
 </Layout>

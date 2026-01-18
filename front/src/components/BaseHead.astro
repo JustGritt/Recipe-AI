@@ -46,7 +46,8 @@ const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
 
 <script is:inline>
 	const colorTheme = localStorage.getItem('color-theme');
-	const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-	const isDark = (colorTheme === 'dark') || (!colorTheme && prefersDark);
-	document.documentElement.classList.toggle('dark', isDark);
+	const isDark = colorTheme === 'dark';
+	if (isDark) {
+		document.documentElement.classList.add('dark');
+	}
 </script>

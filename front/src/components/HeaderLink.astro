@@ -5,27 +5,19 @@ const isActive = href === pathname || pathname.startsWith(href + '/');
 ---
 
 <a href={href} class:list={[className, { active: isActive }]} {...props}
-	class="relative max-h-[40px] inline-flex justify-center items-center my-0 py-2 mx-2 px-4 rounded-lg transition-colors duration-300 hover:bg-gray-200">
+	class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors px-4 py-2 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800">
 	<slot />
 </a>
 
 <style scoped>
-	a {
-		max-height: 40px;
-		height: 100%;
-		&.active {
-			position: relative;
-			color: #60739e;
-			&::after {
-				content: '';
-				position: absolute;
-				bottom: 4px;
-				width: 70%;
-				height: 4px;
-				border-radius: 8px;
-				background: #60739e;
-			}
-		}
+	a.active {
+		color: #111827;
+		font-weight: 600;
+	}
+
+	.dark a.active {
+		color: #ffffff;
+		font-weight: 600;
 	}
 </style>
 

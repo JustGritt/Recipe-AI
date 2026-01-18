@@ -9,20 +9,27 @@ import VoiceInput from '@components/VoiceInput.astro';
 ---
 
 <section>
-    <div class="flex items-center justify-center w-full">
-        <label for="search" class="sr-only">Search</label>
-        <div class="relative w-full">
-            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 21 21">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.15 5.6h.01m3.337 1.913h.01m-6.979 0h.01M5.541 11h.01M15 15h2.706a1.957 1.957 0 0 0 1.883-1.325A9 9 0 1 0 2.043 11.89 9.1 9.1 0 0 0 7.2 19.1a8.62 8.62 0 0 0 3.769.9A2.013 2.013 0 0 0 13 18v-.857A2.034 2.034 0 0 1 15 15Z"/>
-                </svg>
+    <div class="max-w-3xl mx-auto">
+        <label for="search" class="sr-only">Search for recipes</label>
+        <div class="flex items-center gap-3 !bg-white dark:bg-gray-800 rounded-2xl shadow-lg border-2 !border-gray-200 dark:border-gray-700 p-2 transition-all hover:shadow-xl hover:border-gray-300 focus-within:shadow-xl focus-within:border-gray-400 dark:focus-within:border-gray-600">
+            <div class="relative flex-1">
+                <div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
+                    <svg class="w-5 h-5 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                </div>
+                <input type="text" id="recipe-searchbar"
+                    class="bg-transparent border-0 text-gray-900 dark:text-white text-base w-full pl-12 pr-4 py-3 focus:outline-none focus:ring-0 placeholder-gray-500 dark:placeholder-gray-500"
+                    placeholder="Try 'spicy pasta' or 'chocolate cake'..."
+                    required
+                    value="">
             </div>
-            <input type="text" id="recipe-searchbar" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full ps-10 py-2" placeholder="Roasted lemon chicken" required value="Fried Chicken">
-        </div>
 
-        <button type="button" id="search" name="search" class="text-white bg-slate-600 hover:bg-slate-700 font-medium border border-gray-300 rounded-lg px-4 py-2 ml-2 focus:outline-none">
-            <Search />
-        </button>
+            <button type="button" id="search" name="search"
+                class="!bg-gray-900 dark:bg-white hover:bg-gray-700 dark:hover:bg-gray-200 !text-white dark:text-gray-900 font-medium rounded-xl px-6 py-3 transition-all shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-white focus:ring-offset-2 flex-shrink-0">
+                Generate Recipe
+            </button>
+        </div>
     </div>
 
     <section id="recipe" class="w-full mt-10 hidden">

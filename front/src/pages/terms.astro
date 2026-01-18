@@ -1,48 +1,143 @@
 ---
-import Layout from '@layouts/RecipePost.astro';
+import Layout from '@layouts/LegalPage.astro';
+import { SITE_TITLE } from '../consts';
 ---
 
 <Layout
     title="Terms & Conditions"
-    description="Terms & Conditions"
-    pubDate={new Date('March 25 2025')}
-    heroImage="/blog-placeholder-about.jpg"
+    description="Terms of service for using Recipe AI"
+    lastUpdated={new Date('January 18, 2026')}
 >
+    <div class="bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl p-8 md:p-10 mb-12 shadow-sm">
+        <p class="text-lg mb-0">
+            Welcome to {SITE_TITLE}. By accessing and using this website, you agree to be bound by the following terms and conditions. Please read them carefully before using our service.
+        </p>
+    </div>
+
     <section>
-        <p class="mb-8">
-            Welcome to Recipe AI. By accessing and using this website, you agree to be bound by the following terms and conditions. Please read them carefully.
-        </p>
-
-        <h3 class="text-xl text-gray-900 font-semibold mb-2">1. Acceptance of Terms</h3>
-        <p class="mb-8">
-            By using this site, you acknowledge that you have read, understood, and agree to be bound by these Terms & Conditions, as well as any other policies or guidelines posted on the site.
-        </p>
-
-        <h3 class="text-xl text-gray-900 font-semibold mb-2">2. Use of the Site</h3>
-        <p class="mb-8">
-            You agree to use Recipe AI only for lawful purposes and in a way that does not infringe the rights of, restrict or inhibit anyone else's use and enjoyment of the site. Prohibited behavior includes harassing or causing distress or inconvenience to any person, transmitting obscene or offensive content, or disrupting the normal flow of dialogue within the site.
-        </p>
-
-        <h3 class="text-xl text-gray-900 font-semibold mb-2">3. Content Disclaimer</h3>
-        <p class="mb-8">
-            Recipes and content provided on this site are for informational and entertainment purposes only. While we strive for accuracy, Recipe AI does not guarantee the completeness or reliability of any recipe or advice provided. Users are responsible for verifying details before use.
-        </p>
-
-        <h3 class="text-xl text-gray-900 font-semibold mb-2">4. Intellectual Property</h3>
-        <p class="mb-8">
-            All content featured on Recipe AI, including text, graphics, and images, is the property of its respective owners or licensed for use by Recipe AI. No material from the site may be reproduced, distributed, or transmitted without prior written permission.
-        </p>
-
-        <h3 class="text-xl text-gray-900 font-semibold mb-2">5. Limitation of Liability</h3>
-        <p class="mb-8">
-            Recipe AI shall not be liable for any damages arising from the use or inability to use the site, including, without limitation, any direct, indirect, incidental, punitive, or consequential damages.
-        </p>
-        <h3 class="text-xl text-gray-900 font-semibold mb-2">6. Changes to Terms</h3>
-        <p class="mb-8">
-            We reserve the right to modify these Terms & Conditions at any time. Continued use of the site after any changes constitutes acceptance of the new terms.
-        </p>
+        <h2>1. Acceptance of Terms</h2>
         <p>
-            If you have any questions about these Terms & Conditions, please contact us.
+            By accessing or using {SITE_TITLE}, you agree to comply with and be bound by these Terms & Conditions, as well as our Privacy Policy. If you do not agree with any part of these terms, you should not use our service.
+        </p>
+
+        <h2>2. Description of Service</h2>
+        <p>
+            {SITE_TITLE} is an AI-powered recipe generation and discovery platform that provides:
+        </p>
+        <ul>
+            <li>AI-generated recipe recommendations based on user input</li>
+            <li>Recipe search and browsing functionality</li>
+            <li>User accounts for saving favorites and preferences</li>
+            <li>AI chat assistant for cooking-related questions</li>
+            <li>Community features including ratings and comments</li>
+        </ul>
+
+        <h2>3. User Accounts</h2>
+        <p>
+            To access certain features, you may need to create an account. You agree to:
+        </p>
+        <ul>
+            <li>Provide accurate and complete information during registration</li>
+            <li>Maintain the security of your password and account</li>
+            <li>Notify us immediately of any unauthorized use of your account</li>
+            <li>Be responsible for all activities that occur under your account</li>
+        </ul>
+
+        <h2>4. Acceptable Use</h2>
+        <p>
+            You agree to use {SITE_TITLE} only for lawful purposes. Prohibited activities include:
+        </p>
+        <ul>
+            <li>Violating any applicable laws or regulations</li>
+            <li>Harassing, threatening, or defaming other users</li>
+            <li>Attempting to gain unauthorized access to our systems</li>
+            <li>Interfering with or disrupting the service</li>
+            <li>Using automated systems to access the service without permission</li>
+            <li>Submitting false, misleading, or inappropriate content</li>
+        </ul>
+
+        <h2>5. AI-Generated Content</h2>
+        <p>
+            Our service uses artificial intelligence to generate recipes and provide assistance. You acknowledge that:
+        </p>
+        <ul>
+            <li>AI-generated content may not always be accurate or suitable for your needs</li>
+            <li>You are responsible for verifying recipe instructions, ingredient measurements, and cooking methods</li>
+            <li>We are not responsible for any adverse outcomes from following AI-generated recipes</li>
+            <li>Dietary restrictions, allergies, and health conditions should be independently verified</li>
+        </ul>
+
+        <h2>6. Content Disclaimer</h2>
+        <p>
+            Recipes and content provided on this site are for informational and entertainment purposes only. While we strive for accuracy, {SITE_TITLE} does not guarantee the completeness, reliability, or safety of any recipe or advice provided. Always exercise caution and common sense when preparing food.
+        </p>
+
+        <h2>7. User-Generated Content</h2>
+        <p>
+            When you submit comments, ratings, or other content to {SITE_TITLE}, you:
+        </p>
+        <ul>
+            <li>Grant us a non-exclusive, worldwide, royalty-free license to use, display, and distribute your content</li>
+            <li>Confirm that you own the rights to the content you submit</li>
+            <li>Agree that your content does not violate any third-party rights</li>
+            <li>Understand that we may remove content at our discretion</li>
+        </ul>
+
+        <h2>8. Intellectual Property</h2>
+        <p>
+            All content featured on {SITE_TITLE}, including but not limited to text, graphics, logos, and software, is the property of {SITE_TITLE} or its content suppliers and is protected by copyright and intellectual property laws. You may not reproduce, distribute, or create derivative works without our express written permission.
+        </p>
+
+        <h2>9. Third-Party Services</h2>
+        <p>
+            Our service integrates with third-party services, including OpenAI for AI functionality. Your use of these integrated services is subject to their respective terms of service and privacy policies.
+        </p>
+
+        <h2>10. Limitation of Liability</h2>
+        <p>
+            To the fullest extent permitted by law, {SITE_TITLE} and its affiliates shall not be liable for:
+        </p>
+        <ul>
+            <li>Any indirect, incidental, special, consequential, or punitive damages</li>
+            <li>Loss of profits, data, use, goodwill, or other intangible losses</li>
+            <li>Damages resulting from unauthorized access to or use of our servers</li>
+            <li>Any errors or omissions in content or recipes</li>
+            <li>Any personal injury or property damage resulting from use of our service</li>
+        </ul>
+
+        <h2>11. Disclaimer of Warranties</h2>
+        <p>
+            The service is provided "as is" and "as available" without warranties of any kind, either express or implied, including but not limited to warranties of merchantability, fitness for a particular purpose, or non-infringement.
+        </p>
+
+        <h2>12. Indemnification</h2>
+        <p>
+            You agree to indemnify and hold harmless {SITE_TITLE}, its affiliates, and their respective officers, directors, and employees from any claims, damages, losses, liabilities, and expenses arising from your use of the service or violation of these terms.
+        </p>
+
+        <h2>13. Modifications to Service</h2>
+        <p>
+            We reserve the right to modify, suspend, or discontinue any aspect of the service at any time without notice. We shall not be liable to you or any third party for any modification, suspension, or discontinuance of the service.
+        </p>
+
+        <h2>14. Changes to Terms</h2>
+        <p>
+            We reserve the right to modify these Terms & Conditions at any time. Changes will be effective immediately upon posting to the website. Your continued use of the service after any changes constitutes acceptance of the new terms.
+        </p>
+
+        <h2>15. Governing Law</h2>
+        <p>
+            These Terms & Conditions shall be governed by and construed in accordance with applicable laws, without regard to conflict of law provisions.
+        </p>
+
+        <h2>16. Termination</h2>
+        <p>
+            We may terminate or suspend your account and access to the service immediately, without prior notice, for any reason, including if you breach these Terms & Conditions.
+        </p>
+
+        <h2>17. Contact Information</h2>
+        <p>
+            If you have any questions about these Terms & Conditions, please contact us through our GitHub repository or via the contact information provided on our website.
         </p>
     </section>
 </Layout>

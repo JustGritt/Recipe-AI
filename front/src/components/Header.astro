@@ -4,68 +4,63 @@ import DarkModeToggle from './DarkModeToggle.astro';
 import { SITE_TITLE } from '@consts';
 ---
 
-<header class="fixed w-screen bg-white text-black m-0 px-4 py-0 h-20 transition-colors duration-300 shadow z-10">
-	<nav class="relative flex justify-end items-center h-20 lg:justify-between">
+<header class="fixed w-full bg-white/80 dark:bg-gray-900/95 backdrop-blur-md border-b border-gray-100 dark:border-gray-800 z-50 transition-colors">
+	<nav class="max-w-7xl mx-auto px-6 lg:px-8 h-16 flex items-center justify-between">
 		<!-- Logo -->
-		<a href="/" class="no-underline border-md p-4 hidden text-base m-0 rounded-m h-10 items-center justify-center overflow-hidden lg:flex bg-slate-950 text-zinc-50 hover:text-white ">{SITE_TITLE}</a>
+		<a href="/" class="text-xl font-semibold text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors">{SITE_TITLE}</a>
 
 		<!-- Main nav -->
-		<div class="hidden md:block md:absolute md:left-2 lg:left-1/2 lg:-translate-x-1/2">
+		<div class="hidden md:flex items-center gap-8">
 			<HeaderLink href="/">Home</HeaderLink>
-			<HeaderLink href="/recipe">Recipe</HeaderLink>
+			<HeaderLink href="/recipe">Recipes</HeaderLink>
 			<HeaderLink href="/about">About</HeaderLink>
 		</div>
 
 		<!-- Side links -->
-		<div id="sideLinks" class="flex justify-center items-center flex-row-reverse h-10">
+		<div id="sideLinks" class="flex items-center gap-3">
 			<DarkModeToggle />
 		</div>
-
 	</nav>
 </header>
 
 <!-- Mobile nav -->
-<div class="w-full h-16 fixed bottom-1 left-0 flex justify-left items-center md:hidden">
-	<HeaderLink href="/">Home</HeaderLink>
-	<HeaderLink href="/recipe">Recipe</HeaderLink>
-	<HeaderLink href="/about">About</HeaderLink>
+<div class="fixed bottom-0 left-0 w-full bg-white/95 dark:bg-gray-900/98 backdrop-blur-md border-t border-gray-200 dark:border-gray-800 md:hidden z-40 transition-colors">
+	<div class="flex justify-around items-center h-16 px-4">
+		<HeaderLink href="/">Home</HeaderLink>
+		<HeaderLink href="/recipe">Recipes</HeaderLink>
+		<HeaderLink href="/about">About</HeaderLink>
+	</div>
 </div>
 
 <script>
 	const createLoggedOffMenu = () => {
-		const registerLink = document.createElement('a');
-		registerLink.classList.add('relative', 'max-h-[40px]', 'inline-flex', 'justify-center', 'items-center', 'my-0', 'py-2', 'mx-2', 'px-4', 'rounded-lg', 'transition-all', 'hover:bg-gray-200');
-		registerLink.href = '/register';
-		registerLink.textContent = 'Register';
-
 		const loginLink = document.createElement('a');
-		loginLink.classList.add('relative', 'max-h-[40px]', 'inline-flex', 'justify-center', 'items-center', 'my-0', 'py-2', 'px-4', 'rounded-lg', 'transition-all', 'hover:bg-gray-200');
+		loginLink.classList.add('text-sm', 'font-medium', 'text-gray-600', 'dark:text-gray-300', 'hover:text-gray-900', 'dark:hover:text-white', 'transition-colors', 'px-4', 'py-2', 'rounded-xl', 'hover:bg-gray-100', 'dark:hover:bg-gray-800');
 		loginLink.href = '/login';
-		loginLink.textContent = 'Login';
+		loginLink.textContent = 'Sign in';
 
-		sideLinks.appendChild(registerLink);
+		const registerLink = document.createElement('a');
+		registerLink.classList.add('text-sm', 'font-medium', 'bg-gray-900', 'dark:bg-white', 'text-white', 'dark:text-gray-900', 'hover:bg-gray-700', 'dark:hover:bg-gray-200', 'transition-colors', 'px-4', 'py-2', 'rounded-xl', 'hover:text-white');
+		registerLink.href = '/register';
+		registerLink.textContent = 'Get Started';
+
 		sideLinks.appendChild(loginLink);
+		sideLinks.appendChild(registerLink);
 	}
 
 	const createLoggedInMenu = () => {
-		// Create a container for the links
-		const linksContainer = document.createElement('div');
-		linksContainer.classList.add('flex', 'items-center', 'justify-center', 'flex-row-reverse', 'h-20');
-
 		const dashboardLink = document.createElement('a');
-		dashboardLink.classList.add('relative', 'inline-flex', 'justify-center', 'items-center', 'my-0', 'py-2', 'mx-2', 'px-4', 'rounded-lg', 'transition-all', 'hover:bg-gray-200', 'text-black');
+		dashboardLink.classList.add('text-sm', 'font-medium', 'text-gray-600', 'dark:text-gray-300', 'hover:text-gray-900', 'dark:hover:text-white', 'transition-colors', 'px-4', 'py-2', 'rounded-xl', 'hover:bg-gray-100', 'dark:hover:bg-gray-800');
 		dashboardLink.href = '/dashboard';
 		dashboardLink.textContent = 'Dashboard';
 
 		const logoutLink = document.createElement('a');
-		logoutLink.classList.add('relative', 'inline-flex', 'justify-center', 'items-center', 'my-0', 'py-2', 'mx-2', 'px-4', 'rounded-lg', 'transition-all', 'hover:bg-gray-200', 'text-black');
+		logoutLink.classList.add('text-sm', 'font-medium', 'text-gray-600', 'dark:text-gray-300', 'hover:text-gray-900', 'dark:hover:text-white', 'transition-colors', 'px-4', 'py-2', 'rounded-xl', 'hover:bg-gray-100', 'dark:hover:bg-gray-800');
 		logoutLink.href = '/logout';
-		logoutLink.textContent = 'Logout';
+		logoutLink.textContent = 'Sign out';
 
-		// Append the links to the container
-		linksContainer.appendChild(logoutLink);
-		linksContainer.appendChild(dashboardLink);
-		sideLinks.appendChild(linksContainer);
+		sideLinks.appendChild(dashboardLink);
+		sideLinks.appendChild(logoutLink);
 	}
 
 	const token = localStorage.getItem('jwt') || null;

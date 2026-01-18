@@ -6,7 +6,20 @@ import Footer from '@components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '@consts';
 import { imageConfig } from 'astro:assets';
 
-const recipes = await fetch(`${import.meta.env.PUBLIC_API_URL}/api/recipes/`).then((res) => res.json());
+let recipes = { recipes: [] };
+let fetchError = false;
+
+try {
+	const response = await fetch(`${import.meta.env.PUBLIC_API_URL}/api/recipes/`);
+	if (response.ok) {
+		recipes = await response.json();
+	} else {
+		fetchError = true;
+	}
+} catch (error) {
+	console.error('Failed to fetch recipes:', error);
+	fetchError = true;
+}
 ---
 
 <!DOCTYPE html>
@@ -14,32 +27,63 @@ const recipes = await fetch(`${import.meta.env.PUBLIC_API_URL}/api/recipes/`).th
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
-	<body class="min-h-screen flex flex-col bg-white transition-all duration-300 ease-in-out">
+	<body class="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900 transition-colors">
 		<Header />
 
-		<main id="recipes" class="flex-grow w-full bg-white transition-all duration-300 ease-in-out m-0 max-w-screen-xl py-20 mx-auto">
-			<h2 class="text-2xl font-bold text-slate-900 mb-8">Discover new recipes</h2>
-			<section>
-				<ul id="recipeList" class="flex flex-wrap gap-8 list-none m-0 p-0 w-full">
-					{
-						recipes.recipes.map((recipe: any) => (
-							<li class="w-[calc(50%-1rem)]">
-								<a href={`/recipe/${recipe._id}`} class="block">
-									{
-										recipe.picture ?
-										<img src={recipe.picture} alt={recipe.name} class="w-full h-auto rounded-lg" /> :
-										<img src="https://images.unsplash.com/photo-1466637574441-749b8f19452f?q=80&w=2428&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt={recipe.name} class="w-full h-auto rounded-lg" />
-									}
-									<h2 class="text-2xl font-bold mt-4 text-slate-900">{recipe.name}</h2>
-									<p class="text-sm text-gray-500">
-										Recette {recipe.difficulty} - {recipe.calories} cal.
-									</p>
-								</a>
-							</li>
-						))
-					}
-				</ul>
-			</section>
+		<main id="recipes" class="flex-grow w-full bg-white dark:bg-gray-900 transition-colors m-0 max-w-screen-xl py-20 mx-auto px-6">
+			<h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-8">Discover new recipes</h2>
+
+			{fetchError ? (
+				<div class="bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-8 text-center">
+					<svg class="w-16 h-16 text-gray-400 dark:text-gray-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+					</svg>
+					<h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Unable to load recipes</h3>
+					<p class="text-gray-600 dark:text-gray-400 mb-6">The recipe API is currently unavailable. Please make sure the backend server is running.</p>
+					<div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-4 text-left">
+						<p class="text-sm text-gray-700 dark:text-gray-300 font-mono mb-2">To start the backend:</p>
+						<code class="block bg-gray-50 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-3 py-2 rounded text-sm">
+							cd api && npm install && npm run dev
+						</code>
+					</div>
+					<a href="/" class="inline-block mt-6 bg-gray-900 dark:bg-white hover:bg-gray-700 dark:hover:bg-gray-200 text-white dark:text-gray-900 hover:text-white font-medium rounded-xl px-6 py-3 transition-all">
+						Go back home
+					</a>
+				</div>
+			) : recipes.recipes.length === 0 ? (
+				<div class="bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-8 text-center">
+					<svg class="w-16 h-16 text-gray-400 dark:text-gray-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+					</svg>
+					<h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">No recipes yet</h3>
+					<p class="text-gray-600 dark:text-gray-400 mb-6">Start by generating your first recipe!</p>
+					<a href="/" class="inline-block bg-gray-900 dark:bg-white hover:bg-gray-700 dark:hover:bg-gray-200 text-white dark:text-gray-900 font-medium rounded-xl px-6 py-3 transition-all">
+						Generate a recipe
+					</a>
+				</div>
+			) : (
+				<section>
+					<ul id="recipeList" class="flex flex-wrap gap-8 list-none m-0 p-0 w-full">
+						{
+							recipes.recipes.map((recipe: any) => (
+								<li class="w-[calc(50%-1rem)]">
+									<a href={`/recipe/${recipe._id}`} class="block group">
+										{
+											recipe.picture ?
+											<img src={recipe.picture} alt={recipe.name} class="w-full h-auto rounded-lg transition-transform group-hover:scale-105" /> :
+											<img src="https://images.unsplash.com/photo-1466637574441-749b8f19452f?q=80&w=2428&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt={recipe.name} class="w-full h-auto rounded-lg transition-transform group-hover:scale-105" />
+										}
+										<h2 class="text-2xl font-bold mt-4 text-gray-900 dark:text-white">{recipe.name}</h2>
+										<p class="text-sm text-gray-600 dark:text-gray-400">
+											Recette {recipe.difficulty} - {recipe.calories} cal.
+										</p>
+									</a>
+								</li>
+							))
+						}
+					</ul>
+				</section>
+			)}
 		</main>
 
 		<Footer />

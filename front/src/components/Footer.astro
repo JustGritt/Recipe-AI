@@ -5,22 +5,24 @@ import Github from "@icons/Github.astro";
 const today = new Date();
 ---
 
-<footer class="m-0 h-60 w-full bg-white flex items-center justify-center flex-col transition-colors ease-in-out duration-300">
+<footer class="w-full bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 py-8 md:py-12 transition-colors">
+	<div class="max-w-7xl mx-auto px-6 lg:px-8">
+		<div class="flex flex-col items-center gap-6">
+			<a href="https://github.com/JustGritt/Recipe-AI" target="_blank"
+				class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
+				<span class="sr-only">Go to Recipe AI's GitHub repo</span>
+				<Github />
+			</a>
 
-	<div class="flex items-center justify-center my-4">
-		<a href="https://github.com/JustGritt/Recipe-AI" target="_blank">
-			<span class="sr-only">Go to Recipe AI's GitHub repo</span>
-			<Github
-		</a>
+			<div class="flex items-center gap-6 text-sm">
+				<a href="/terms" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">Terms</a>
+				<span class="text-gray-300 dark:text-gray-600">·</span>
+				<a href="/privacy" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">Privacy</a>
+			</div>
+
+			<p class="text-gray-500 dark:text-gray-500 text-sm">
+				&copy; {today.getFullYear()} Recipe AI. All rights reserved.
+			</p>
+		</div>
 	</div>
-
-	<div class="flex items-center justify-center gap-4">
-		<a href="/terms">Terms & Conditions</a>
-		<a href="/privacy">Privacy Policy</a>
-	</div>
-
-	<p class="text-slate-400 text-sm mt-4">
-		&copy; {today.getFullYear()} Recipe AI. All rights reserved.
-	</p>
-
 </footer>
