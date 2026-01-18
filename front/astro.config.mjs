@@ -10,7 +10,9 @@ export default defineConfig({
   integrations: [ tailwind()],
 
   output: "server",
-  adapter: vercel()
+  adapter: vercel({
+    functionRuntime: 'nodejs20.x'
+  })
 });
 
 
